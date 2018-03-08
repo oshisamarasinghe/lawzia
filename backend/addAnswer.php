@@ -2,42 +2,40 @@
 session_start();
 
 
+$username = $_SESSION['username'];
 
-$username=$_SESSION['username'];
-
-function length($inputTxt,$length)
+function length($inputTxt, $length)
 {
     $userInput = $inputTxt;
-    if(strlen($userInput) == $length )
-    {
+    if (strlen($userInput) == $length) {
         return true;
-    }
-    else
-    {
+    } else {
         return false;
     }
 }
+
 //validate data
-function test_input($data) {
+function test_input($data)
+{
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
     return $data;
 }
 
-$errors="";
+$errors = "";
 
-if(empty(test_input($_POST['answer']))){
-    $errors="error-complete all fields";
+if (empty(test_input($_POST['answer']))) {
+    $errors = "error-complete all fields";
     echo "<script> alert('error-complete all fields')</script>";
     echo "<script> window.history.go(-1);</script>";
-}else{
-    $answer=test_input($_POST['answer']);
+} else {
+    $answer = test_input($_POST['answer']);
 }
-$qId=$_POST['question_id'];
+$qId = $_POST['question_id'];
 
 
-$query="INSERT INTO answer(aDescription,aUser,aDate)VALUES('$answer','$username',now())";
+$query = "INSERT INTO answer(aDescription,aUser,aDate)VALUES('$answer','$username',now())";
 
 try {
 
@@ -46,26 +44,25 @@ try {
     mysqli_commit($connection);
 
 
-
-}catch (Exception $e) {
+} catch (Exception $e) {
     $connection->rollback();
 }
-try{
-    $answer_id="SELECT aID FROM answer ORDER BY aID DESC LIMIT 1";
-    if ($is_query_run=mysqli_query($connection ,$answer_id)){
-        while($row=mysqli_fetch_array($is_query_run,MYSQL_ASSOC)) {
-            $answerId=$row['aID'];
+try {
+    $answer_id = "SELECT aID FROM answer ORDER BY aID DESC LIMIT 1";
+    if ($is_query_run = mysqli_query($connection, $answer_id)) {
+        while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
+            $answerId = $row['aID'];
 
         }
     }
-    mysqli_autocommit($connection,false);
-    mysqli_query($connection,"INSERT INTO qa(qID,aID)VALUES('$qId','$answerId')");
+    mysqli_autocommit($connection, false);
+    mysqli_query($connection, "INSERT INTO qa(qID,aID)VALUES('$qId','$answerId')");
     mysqli_commit($connection);
     echo '<script>alert("your answer submitted successfully")</script>';
     echo "<script> window.history.go(-2);</script>";
 
 
-}catch (Exception $e) {
+} catch (Exception $e) {
     $connection->rollback();
 }
 

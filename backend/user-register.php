@@ -22,7 +22,6 @@ function test_input($data) {
 
 $errors="";
 
-
 if(empty(test_input($_POST['name']))){
     $errors="error-complete all fields";
     echo "<script> alert('error-complete all fields')</script>";
@@ -48,25 +47,36 @@ if(empty(test_input($_POST['email']))){
     echo "<script> alert('error-complete all fields')</script>";
     echo "<script> window.history.go(-1);</script>";
 }else{
-    $email=test_input($_POST['email']);
+    $checkemail=test_input($_POST['email']);
+    if(!filter_var($checkemail, FILTER_VALIDATE_EMAIL)){
+       echo"<script> alert('Invalid email ')</script>";
+    }else{
+        $email=test_input($_POST['email']);
+    }
 }
 
 if(empty(test_input($_POST['password']))){
     $errors="error-complete all fields";
     echo "<script> alert('error-complete all fields')</script>";
     echo "<script> window.history.go(-1);</script>";
-}else if(ctype_alpha(test_input($_POST['password']))== false ){
-    $errors="Invalid password";
-    echo "<script> alert('Invalid Password')</script>";
-    echo "<script> window.history.go(-1);</script>";
+
 }else{
-    $password_text=test_input($_POST['password']);
-    $password=md5($password_text);
+    $pwd=test_input($_POST['password']);
+    if (preg_match("#.*^(?=.{8,20})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$#", $pwd)){
+        echo '<script>alert("Your password is good")</script>';
+        $password_text=test_input($_POST['password']);
+        $password=md5($password_text);
+    } else {
+        echo "Your password is weak.Try another";
+    }
+
 }
 $type='gu';
 
 try{
     mysqli_autocommit($connection,FALSE);
+    //$list_of_userNames="SELECT username from userauthentication";
+
     mysqli_query($connection,"INSERT INTO userauthentication(username, password,usertype )VALUES('$username','$password','$type')");
     mysqli_query($connection,"INSERT INTO generaluser(username,email,country)
 				VALUES('$username','$email','$country')");
@@ -74,7 +84,7 @@ try{
     mysqli_commit($connection);
     session_start();
     $_SESSION['username'] = $username;
-    header("location: ../userinterface/user-profile.php");
+    header("location: ../userinterface/user/user-profile.php");
 
 }catch (Exception $e){
     $connection->rollback();

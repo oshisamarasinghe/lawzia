@@ -2,6 +2,7 @@
 session_start();
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,9 +19,14 @@ session_start();
     <link href="../../css/custom-style.css" type="text/css" rel="stylesheet" media="screen,projection">
 
     <link href="../../css/style-horizontal.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="https://cdn.datatables.net/1.10.6/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet"
+          media="screen,projection">
+
     <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
     <link href="../../css/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="../../js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet"
+          media="screen,projection">
+    <link href="../../js/plugins/data-tables/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet"
           media="screen,projection">
     <link href="../../js/plugins/chartist-js/chartist.min.css" type="text/css" rel="stylesheet"
           media="screen,projection">
@@ -30,7 +36,7 @@ session_start();
 
 <!-- Page Loading -->
 <?php include '../header-footer/loading.php';
-include '../header-footer/nav-lawyer.php'; ?>
+include '../header-footer/header-user.php'; ?>
 
 
 <!--question-->
@@ -40,7 +46,6 @@ $questionID = $_GET['question_id'];
 $question = "SELECT * FROM question WHERE qID='$questionID'";
 
 if ($is_query_run = mysqli_query($connection, $question)) {
-
     while ($qData = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
         $description = $qData['qDescription'];
         $date = $qData['qDate'];
@@ -48,16 +53,14 @@ if ($is_query_run = mysqli_query($connection, $question)) {
         $qId = $qData['qID'];
         $country = $qData['qCountry'];
         $cat = $qData['qCategory'];
-
         echo '<div class="row">
                  <div class="col s12 m12 l12 " >
-                     <ul class="collection  " >
+                     <ul class="collection">
                          <li class="collection-item avatar">
                             <div class="col s7">
                                 <img src="../../images/user-profile-pic.png" alt="" class="circle">
-                                <span class="title pink-text">' . $user . '</span>
-                                <a class="secondary-content "><i class="mdi-action-help "></i></a>
-                                <p >' . $country . '-' . $date . ' </p>
+                                <span class="title indigo-text">' . $user . '</span>
+                                <p class=" secondary-content ultra-small">' . $country . '-' . $date . ' </p>
                                 <p> ' . $description . '</p>
                             </div>
                         </li>
@@ -67,37 +70,34 @@ if ($is_query_run = mysqli_query($connection, $question)) {
     }
 }
 
-
-$answers = "SELECT * FROM answer NATURAL JOIN qa WHERE qID='$questionID'";
+$answers = "SELECT * FROM answer NATURAL JOIN qa WHERE  qID='$questionID'";//all answers to relevant question
 if ($is_inside_query_run = mysqli_query($connection, $answers)) {
-
+    echo '<div class="row">
+                 <div class="col s12 m12 l12 " >
+                     <ul class="collection">
+            
+                 ';
 
     while ($in_row = mysqli_fetch_array($is_inside_query_run, MYSQL_ASSOC)) {
         $aDescription = $in_row['aDescription'];
         $aDate = $in_row['aDate'];
         $aUser = $in_row['aUser'];
         $aId = $in_row['aID'];
-        echo '<div class="row">
-                 <div class="col s12 m12 l12 " >
-                     <ul class="collection">
-
-                        <li class="collection-item avatar">
+        echo '<li class="collection-item avatar">
                             <div class="col s7">
                                 <img src="../../images/user-profile-pic.png" alt="" class="circle">
                                 <span class="title green-text">' . $aUser . '</span>
                                 <p class=" ultra-small">' . $aDate . ' </p>
-                                <a class="secondary-content"><i class="mdi-action-thumb-up"></i>answer helpful?</a>
-                                <p class="ultra-small"> ' . $aDescription . '</p>
+                                <label> ' . $aDescription . '</label>
                             </div>
-                        </li> 
-                     </ul>
-                  </div>
-               </div>
+                        </li>           
                 ';
     }
-
+    echo '  
+                     </ul>
+                  </div>
+               </div>';
 }
-
 ?>
 
 <!-- insert footer-->
@@ -112,9 +112,10 @@ if ($is_inside_query_run = mysqli_query($connection, $answers)) {
 <script type="text/javascript" src="../../js/prism.js"></script>
 <!--scrollbar-->
 <script type="text/javascript" src="../../js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-
+<!-- data-tables -->
+<script type="text/javascript" src="../../js/plugins/data-tables/js/jquery.dataTables.min.js"></script>
+<!--script type="text/javascript" src="../js/plugins/data-tables/data-tables-script.js"></script-->
 <script type="text/javascript" src="../../js/plugins.js"></script>
-
 
 </body>
 </html>

@@ -24,13 +24,13 @@
 <?php include '../header-footer/loading.php';
 include '../header-footer/header-user.php'; ?>
 
-<!--Ask-a-Question form-->
+<!--Search a lawyer form-->
 <div class="row">
     <div class="col s12 m12 l12 ">
         <div class="card-panel z-depth-2 ">
             <h3 class="header2" align="center">SEARCH-A-LAWYER</h3>
             <div class="row">
-                <form class="col s6 offset-m3" action="../../backend/search-a-lawyer.php" method="post">
+                <form class="col s6 offset-m3" action="view-lawyer-list.php" method="post">
                     <div class="row">
                         <div class="row">
                             <h6>Select the country</h6>
@@ -369,7 +369,8 @@ include '../header-footer/header-user.php'; ?>
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <button class="btn cyan waves-effect waves-light right" type="submit" name="AdvanceSearch">
+                                <button class="btn cyan waves-effect waves-light right" type="submit"
+                                        name="AdvanceSearch">
                                     Search
                                     <i class="mdi-content-send right"></i>
                                 </button>
@@ -381,7 +382,7 @@ include '../header-footer/header-user.php'; ?>
     </div>
 
     <!-- insert footer-->
-    <?php include '../header-footer/footer.php';
+    <!--?php include '../header-footer/footer.php';
     ?>
 
     <!-- jQuery Library -->

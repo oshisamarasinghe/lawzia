@@ -19,13 +19,14 @@ include '../../backend/lawyer-profile-update.php';
     <link href="../../css/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="../../js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet"
           media="screen,projection">
-    <link href="../../js/plugins/chartist-js/chartist.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="../../js/plugins/chartist-js/chartist.min.css" type="text/css" rel="stylesheet"
+          media="screen,projection">
 </head>
 
 <body class="white">
 <!-- Page Loading -->
 <?php include '../header-footer/loading.php';
-include '../header-footer/nav-lawyer.php';?>
+include '../header-footer/nav-lawyer.php'; ?>
 
 
 <div id="profile-page" class="section">
@@ -34,7 +35,8 @@ include '../header-footer/nav-lawyer.php';?>
             <img class="activator" src="../../images/law-profile.jpg" alt="user background">
         </div>
         <figure class="card-profile-image">
-            <img src="../../images/user-profile-pic.png" alt="profile image" class="circle z-depth-2 " id="profileImage">
+            <img src="../../images/user-profile-pic.png" alt="profile image" class="circle z-depth-2 "
+                 id="profileImage">
         </figure>
         <div class="card-content">
             <div class="row">
@@ -129,7 +131,7 @@ include '../header-footer/nav-lawyer.php';?>
     </div>
 
     <!-- FOOTER -->
-    <?php include '../header-footer/footer.php';?>
+    <!--?php include '../header-footer/footer.php'; ?>
 
 
     <!-- jQuery Library -->

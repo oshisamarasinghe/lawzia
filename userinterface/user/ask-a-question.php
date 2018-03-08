@@ -32,6 +32,9 @@ include '../header-footer/header-user.php'; ?>
             <h3 class="header2" align="center">ASK-A-QUESTION</h3>
             <div class="row">
                 <form class="col s6 offset-m3" action="../../backend/ask-a-question.php" method="post">
+                    <p>Ask a Question allows you to get free answers from lawyers in your area for basic legal questions
+                        on a variety of topics, including family law, employment law, criminal law, and more.</p>
+                    <br>
                     <div class="row">
                         <div class="row">
                             <h6>Select the country</h6>
@@ -443,7 +446,7 @@ include '../header-footer/header-user.php'; ?>
 
                         <div class="row">
                             <div class="input-field col s12">
-                                <textarea id="message5" class="materialize-textarea" length="200" rows="5"
+                                <textarea id="message5" class="materialize-textarea" length="1000" rows="5"
                                           name="question"></textarea>
                                 <label for="message">Type Your Question Here</label>
                             </div>
@@ -462,7 +465,7 @@ include '../header-footer/header-user.php'; ?>
     </div>
 
     <!-- insert footer-->
-    <?php include '../header-footer/footer.php';
+    <!--?php include '../header-footer/footer.php';
     ?>
 
 

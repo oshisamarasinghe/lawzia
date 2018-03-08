@@ -1,5 +1,3 @@
-<?php
-?>
 <?php include '../../backend/connection.php';
 session_start();
 ?>
@@ -16,7 +14,7 @@ session_start();
     <link rel="stylesheet" href="../../INDEX/assets/css/navmenu/styles.css">
     <link href="../../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="../../css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
-    <!-- Custome CSS-->
+    <!-- Custom CSS-->
     <link href="../../css/custom-style.css" type="text/css" rel="stylesheet" media="screen,projection">
 
     <link href="../../css/style-horizontal.css" type="text/css" rel="stylesheet" media="screen,projection">
@@ -31,53 +29,66 @@ session_start();
 <!-- Page Loading -->
 <?php include '../header-footer/loading.php';
 include '../header-footer/header-user.php'; ?>
+    <form method="post" action="ask-a-question.php">
+        <div class="row">
+            <div class="input-field col s12">
+                <button class="btn cyan waves-effect waves-light right" type="submit" name="action">
+                    Ask new Question
+                    <i class="mdi-content-send right"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+
 
 <!--question-->
 <?php include '../../backend/connection.php';
-$questions = "SELECT * FROM question ORDER BY qID DESC ";
+    $questions = "SELECT * FROM question ORDER BY qID DESC ";
 
 
-if ($is_query_run = mysqli_query($connection, $questions)) {
-
-    while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
-        $description = $row['qDescription'];
-        $date = $row['qDate'];
-        $user = $row['qUser'];
-        $qId = $row['qID'];
-        $cat = $row['qCategory'];
-        $country = $row['qCountry'];
-
+    if ($is_query_run = mysqli_query($connection, $questions)) {
         echo '
-                
-                <div class="row">
-                    <div class="col s12 m12 l12 " >
-                        <ul class="collection">
-                         <div>
-                          <a class="collection-item active green">Category-' . $cat . '</a>
-                          
-                         </div>
-                         <li class="collection-item avatar">
-                         <div class="col s7">
-                            <img src="../../images/user-profile-pic.png" alt="" class="circle">
-                            <span class="title green-text">' . $user . '</span>
-                            <p class=" ultra-small">' . $country . '-' . $date . ' </p>
-                            <p> ' . $description . '
-                        </p></div>
-                        </li>
-                       </ul>
-                       </div>
-                 </div>
-                 ';
+        
+                    
+                    <div class="row">
+                        <div class="col s12 m12 l12 " >
+                            <ul class="collection">
+        ';
+        while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
+            $description = $row['qDescription'];
+            $date = $row['qDate'];
+            $user = $row['qUser'];
+            $qId = $row['qID'];
+            $cat = $row['qCategory'];
+            $country = $row['qCountry'];
 
+            echo '
+                     <li class="collection-item avatar">
+                             <div class="col s7">
+                                <img src="../../images/user-profile-pic.png" alt="" class="circle">
+                                <span class="title green-text">' . $user . '</span>
+                                <p class=" secondary-content ultra-small">' . $country . '-' . $date . ' </p>
+                                <p> ' . $description . '
+                             </div>
+                            </p>
+                            <p><a href="view-answers.php?question_id=' . $qId . '">view answers</a> </p>
+                          </li>
+                           
+                     ';
+
+        }
+        echo '
+                        </ul>
+                           </div>
+                     </div>';
     }
-}
 
 
 ?>
 
 
 <!--FOOTER-->
-<?php include '../header-footer/footer.php';
+<!--?php include '../header-footer/footer.php';
 ?>
 
 <!-- jQuery Library -->

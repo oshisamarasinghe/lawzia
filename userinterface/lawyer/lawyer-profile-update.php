@@ -29,7 +29,8 @@ include '../../backend/lawyer-profile-update.php';
 
     <body class="white">
     <!-- Page Loading -->
-    <?php include '../header-footer/loading.php'; include '../header-footer/nav-lawyer.php';?>
+    <?php include '../header-footer/loading.php';
+    include '../header-footer/nav-lawyer.php'; ?>
 
 
     <div id="profile-page" class="section">
@@ -910,7 +911,7 @@ include '../../backend/lawyer-profile-update.php';
     </div>
 
     <!-- insert footer-->
-    <?php include '../header-footer/footer.php';
+    <!--?php include '../header-footer/footer.php';
     ?>
 
     <!-- jQuery Library -->
@@ -923,7 +924,7 @@ include '../../backend/lawyer-profile-update.php';
     <script type="text/javascript" src="../../js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <!-- chartist -->
     <script type="text/javascript" src="../../js/plugins/chartist-js/chartist.min.js"></script>
-   <script type="text/javascript" src="../../js/plugins.js"></script>
+    <script type="text/javascript" src="../../js/plugins.js"></script>
     <script>
         $(document).ready(function () {
             $('#insert').click(function () {

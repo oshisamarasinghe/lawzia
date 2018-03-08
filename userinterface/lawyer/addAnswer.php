@@ -24,7 +24,8 @@ session_start();
     <link href="../../css/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="../../js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet"
           media="screen,projection">
-    <link href="../../js/plugins/chartist-js/chartist.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="../../js/plugins/chartist-js/chartist.min.css" type="text/css" rel="stylesheet"
+          media="screen,projection">
 </head>
 
 <body class="white">
@@ -92,7 +93,7 @@ if ($is_query_run = mysqli_query($connection, $questions)) {
 
 
 <!-- insert footer-->
-<?php include '../header-footer/footer.php';
+<!--?php include '../header-footer/footer.php';
 ?>
 
 <!-- jQuery Library -->

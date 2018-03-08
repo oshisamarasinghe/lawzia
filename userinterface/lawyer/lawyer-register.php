@@ -13,7 +13,7 @@
 
     <link href="../../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="../../css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
-    <!-- Custome CSS-->
+    <!-- Custom CSS-->
     <link href="../../css/custom-style.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="../../css/style-horizontal.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="../../css/page-center.css" type="text/css" rel="stylesheet" media="screen,projection">
@@ -26,7 +26,7 @@
 
 <body background="../../images/background-img.jpg">
 <!--Page Loading -->
-<?php include '../header-footer/nav-lawyer.php';?>
+<!--?php include '../header-footer/nav-lawyer.php'; ?-->
 
 <div id="basic-form" class="section">
     <div class="row">
@@ -418,7 +418,8 @@
                             </button>
                         </div>
                         <div class="input-field col s12">
-                            <p class="margin center medium-small sign-up">Already have an account? <a href="../login.php">Login</a>
+                            <p class="margin center medium-small sign-up">Already have an account? <a
+                                        href="../login.php">Login</a>
                             </p>
                         </div>
                     </div>
@@ -426,13 +427,7 @@
         </div>
     </div>
 
-    <!---->
-
-    <!-- ================================================
-      Scripts
-      ================================================ -->
-
-    <!-- jQuery Library -->
+<!-- jQuery Library -->
     <script type="text/javascript" src="../../js/jquery-1.11.2.min.js"></script>
     <!--materialize js-->
     <script type="text/javascript" src="../../js/materialize.js"></script>

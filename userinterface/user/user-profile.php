@@ -49,7 +49,7 @@ include '../header-footer/header-user.php'; ?>
 </div>
 
 <!-- insert footer-->
-<?php include '../header-footer/footer.php';
+<!--?php include '../header-footer/footer.php';
 ?>
 <!-- jQuery Library -->
 <script type="text/javascript" src="../../js/jquery-1.11.2.min.js"></script>

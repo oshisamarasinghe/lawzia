@@ -22,6 +22,20 @@
 <!-- Page Loading -->
 <?php include '../header-footer/loading.php';
 include '../header-footer/header-user.php'; ?>
+<?php include '../../backend/connection.php';
+$username=$_GET['username'];
+$query="SELECT username FROM lawyer WHERE username='.$username.'";
+if ($is_query_run = mysqli_query($connection, $query)) {
+    while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
+        $Name = $row['username'];
+        $country =$row['country'];
+        $email = $row['email'];
+
+    }
+}
+
+
+?>
 
 
 <div id="profile-page" class="section">
@@ -36,19 +50,19 @@ include '../header-footer/header-user.php'; ?>
                                      class="circle z-depth-1 " id="profileImage">
                             </figure>
                             <p class="collections-title"><i
-                                        class="mdi-action-perm-identity cyan-text text-darken-2"></i>Name </p>
+                                        class="mdi-action-perm-identity cyan-text text-darken-2"></i>Name  </p>
                             <p class="collections-title"><i
                                         class="mdi-action-wallet-travel cyan-text text-darken-2"></i>work experience
                             </p>
                             <p class="collections-title"><i class="mdi-action-assessment cyan-text text-darken-2"></i>Areas
                                 of practise </p>
                             <p class="collections-title"><i
-                                        class="mdi-social-location-city cyan-text text-darken-2"></i>Country </p>
+                                        class="mdi-social-location-city cyan-text text-darken-2"></i>Country</p>
                             <p class="collections-title"><i class="mdi-communication-email cyan-text text-darken-2"></i>Email
                                 Address </p>
                             <p class="collections-title"><i
                                         class="mdi-action-account-balance-wallet cyan-text text-darken-2"></i>Work
-                                Palace</p>
+                                Place</p>
                         </li>
 
                     </ul>
@@ -60,7 +74,7 @@ include '../header-footer/header-user.php'; ?>
 
 
 <!-- insert footer-->
-<?php include '../header-footer/footer.php';
+<!--?php include '../header-footer/footer.php';
 ?>
 
 <!-- jQuery Library -->
