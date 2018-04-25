@@ -34,10 +34,41 @@ include '../header-footer/nav-lawyer.php'; ?>
         <div class="card-image waves-effect waves-block waves-light">
             <img class="activator" src="../../images/law-profile.jpg" alt="user background">
         </div>
-        <figure class="card-profile-image">
-            <img src="../../images/user-profile-pic.png" alt="profile image" class="circle z-depth-2 "
+
+        <?php
+        $profileImage = "SELECT Image FROM lawyerimage WHERE username='" . $username . "'";
+        if($is_query_run = mysqli_query($connection, $profileImage)) {
+            while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
+                $pImage = $row['Image'];
+
+            }
+            if (empty($pImage)) {
+                echo '
+                 <figure class="card-profile-image">
+                  <img src="../../images/user-profile-pic.png"alt="profile image" class="circle z-depth-2 "
                  id="profileImage">
-        </figure>
+                 </figure>
+                
+                 ';
+
+
+            } else {
+
+
+                echo '
+                 <figure class="card-profile-image">
+                  <img src="data:image/jpeg;base64,' . base64_encode($pImage) . '" height="130" width="130" alt="profile image" class="circle z-depth-2 "
+                 id="profileImage">
+                 </figure>
+                
+                 ';
+
+            }
+        }
+
+        ?>
+
+
         <div class="card-content">
             <div class="row">
                 <div class="col s3 offset-s2">

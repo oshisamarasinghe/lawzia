@@ -34,14 +34,13 @@ include '../../backend/lawyer-profile-update.php';
 
 
     <div id="profile-page" class="section">
-        <
         <div id="profile-page-content" class="row">
             <!-- profile-page-sidebar-->
             <div class="row">
                 <div id="profile-page-sidebar" class="col s12 m4">
                     <div id="profile-card" class="card">
                         <div class="card-image waves-effect waves-block waves-light">
-                            <img class="activator" src="../../images/background-img.jpg" alt="user background">
+                            <img class="activator" src="../../images/user-profile-bg.jpg" alt="user background">
                         </div>
                         <div class="card-content">
                             <img name="profileImage" class="circle responsive-img activator card-profile-image">
@@ -61,14 +60,16 @@ include '../../backend/lawyer-profile-update.php';
                             <p class="task-card-date"></p>
                         </li>
                         <li class="collection-item dismissable">
-                            <form action="../../backend/upload.php" enctype="multipart/form-data" method="post">
-                                <input name="image" id="image" type="file"/>
+                            <form action="" enctype="multipart/form-data" method="post">
+                                <input name="image" id="image" type="file" />
                                 <div id="raised-buttons" class="section">
-                                    <button type="submit" class="waves-light waves-effect" name="insert" id="insert">
+                                    <button type="submit" class="waves-light waves-effect" name="insert" >
                                         Upload
                                     </button>
                                 </div>
                             </form>
+
+
 
 
                         </li>
@@ -88,7 +89,7 @@ include '../../backend/lawyer-profile-update.php';
                                 </div>
                             </div>
                             <div class="tab-content col s12  grey lighten-4">
-                                <form class="col s12" method="post" action="../../backend/lawyer-update-regProfile.php">
+                                <form class="col s12" method="post" action="../../backend/lawyer-set-update.php">
                                     <h5 class="waves-light">Personal Info</h5>
                                     <div class="row">
                                         <div class="input-field col s3">
@@ -934,7 +935,7 @@ include '../../backend/lawyer-profile-update.php';
                     return false;
                 } else {
                     var image_extention = image_name.split('.').pop().toLowerCase();
-                    if (JQuery.inArray(image_extention, ['gif', 'png', 'jpg', 'jpeg']) === -1) {
+                    if (JQuery.inArray(image_extention, ['png', 'jpg', 'jpeg']) === -1) {
                         alert('Invalid type');
                         $('#image').val('');
                         return false;
@@ -949,14 +950,53 @@ include '../../backend/lawyer-profile-update.php';
     </body>
     </html>
 <?php include '../../backend/connection.php';
+$username = $_SESSION['username'];
+
 
 if (isset($_POST['insert'])) {
-    echo "<script>alert('successful')</script>";
+    $file = $_FILES['image'];
+    $fileName = $_FILES['image']['name'];
+    $fileTmpName = $_FILES['image']['tmp_name'];
+    $fileSize = $_FILES['image']['size'];
+    $fileError = $_FILES['image']['error'];
+    $fileType = $_FILES['image']['type'];
+
+    $fileExt = explode('.', $fileName);
+    $actExt = strtolower(end($fileExt));
+
+    $allowed = array('jpg', 'jpeg', 'png');
+    if (in_array($actExt, $allowed)) {
+        if ($fileError === 0) {
+            if ($fileSize < 1000000) {
+                $image = addslashes(file_get_contents($fileTmpName));
+                $query = "INSERT INTO lawyerimage(username,image) VALUES('$username','$image') ";
+                try {
+
+                    mysqli_autocommit($connection, FALSE);
+                    mysqli_query($connection, $query);
+                    mysqli_commit($connection);
+                    echo "<script>alert('upload successful')</script>";
+
+                } catch (Exception $e) {
+                    $connection->rollback();
+                }
+            } else {
+                echo "<script>alert('Your file is too large')</script>";
+            }
+
+        } else {
+            echo "<script>alert('Error uploading the file')</script>";
+        }
+    } else {
+        echo "<script>alert('You cant upload file of this type')</script>";
+    }
+
+    /**echo "<script>alert('successful')</script>";
     $image = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
     $query = "INSERT INTO image(image) VALUES('$image') ";
     if ($is_query_run = mysqli_query($connection, $query)) {
-        echo "<script>alert('successful')</script>";
+        echo "<script>alert('upload successful')</script>";
 
-    }
+    }*/
 }
 ?>

@@ -63,6 +63,8 @@ if ($is_query_run = mysqli_query($connection, $results_in_this_page)) {
         $cat = $row['qCategory'];
         $country = $row['qCountry'];
 
+
+
         echo '
                
                          <li class="collection-item avatar">
