@@ -21,6 +21,12 @@ body {
 #main,
 footer {
   padding-left: 240px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  text-align: center;
 }
 
 #input-select .input-field label {

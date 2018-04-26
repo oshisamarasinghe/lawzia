@@ -3,7 +3,7 @@
         <div class="nav-wrapper">
             <ul id="nav-mobile" class="left hide-on-med-and-down">
                 <li>
-                    <a href="" class="white-text" >
+                    <a href="../home.php" class="white-text" >
                         Home
 
                     </a>

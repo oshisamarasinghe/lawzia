@@ -24,7 +24,7 @@
 include '../header-footer/header-user.php'; ?>
 <?php include '../../backend/connection.php';
 $username=$_GET['username'];
-$query="SELECT username FROM lawyer WHERE username='.$username.'";
+$query="SELECT * FROM lawyer WHERE username='".$username."'";
 if ($is_query_run = mysqli_query($connection, $query)) {
     while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
         $Name = $row['username'];
@@ -33,9 +33,16 @@ if ($is_query_run = mysqli_query($connection, $query)) {
 
     }
 }
+        $profileImage = "SELECT Image FROM lawyerimage WHERE username='" . $username . "'";
+        if($is_query_run = mysqli_query($connection, $profileImage)) {
+            while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
+                $pImage = $row['Image'];
 
+            }
 
+        }
 ?>
+
 
 
 <div id="profile-page" class="section">
@@ -43,23 +50,44 @@ if ($is_query_run = mysqli_query($connection, $query)) {
         <div class="row">
             <div class="col s12 m12">
                 <div id="profile-page-wall-share" class="row">
-                    <ul id="projects-collection" class="collection">
+                    <ul id="projects-collection" class="collection style" >
                         <li class="collection-item">
+                            <?php
+                            if (empty($pImage)) {
+                            echo '
                             <figure class="card-profile-image">
-                                <img src="../../images/user-profile-pic.png" alt="profile image"
-                                     class="circle z-depth-1 " id="profileImage">
+                                <img src="../../images/user-profile-pic.png"alt="profile image" class="circle z-depth-2 "
+                                     id="profileImage">
                             </figure>
+
+                            ';
+
+
+                            } else {
+
+
+                            echo '
+                            <figure class="card-profile-image">
+                                <img src="data:image/jpeg;base64,' . base64_encode($pImage) . '" height="130" width="130" alt="profile image" class="circle z-depth-2 "
+                                     id="profileImage">
+                            </figure>
+
+                            ';
+
+                            }
+                            ?>
+
                             <p class="collections-title"><i
-                                        class="mdi-action-perm-identity cyan-text text-darken-2"></i>Name  </p>
+                                        class="mdi-action-perm-identity cyan-text text-darken-2"></i>Name : <?= $Name ?> </p>
                             <p class="collections-title"><i
                                         class="mdi-action-wallet-travel cyan-text text-darken-2"></i>work experience
                             </p>
                             <p class="collections-title"><i class="mdi-action-assessment cyan-text text-darken-2"></i>Areas
                                 of practise </p>
                             <p class="collections-title"><i
-                                        class="mdi-social-location-city cyan-text text-darken-2"></i>Country</p>
+                                        class="mdi-social-location-city cyan-text text-darken-2"></i>Country :<?= $country ?></p>
                             <p class="collections-title"><i class="mdi-communication-email cyan-text text-darken-2"></i>Email
-                                Address </p>
+                                Address : <?= $email ?></p>
                             <p class="collections-title"><i
                                         class="mdi-action-account-balance-wallet cyan-text text-darken-2"></i>Work
                                 Place</p>

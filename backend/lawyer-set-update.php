@@ -129,8 +129,7 @@ if (empty(test_input($_POST['summary']))) {
 try{
     mysqli_autocommit($connection,FALSE);
     mysqli_query($connection, "UPDATE lawyer SET 'email'='$email','fName'='$fname','lName'='$lname','country'='$country',
-'contact'='$contact','title'='$title'");
-
+  'contact'='$contact','title'='$title'");
     mysqli_query($connection,"INSERT INTO lawyerpractisearea(username,area)VALUES('$username','$areas')");
     mysqli_commit($connection);
 
