@@ -2189,11 +2189,10 @@ ul.staggered-list li {
     text-align: center; } }
 
 footer.page-footer {
-  background-color: #00bcd4; }
+  }
   footer.page-footer .footer-copyright {
     overflow: hidden;
     line-height: 50px;
-    position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;

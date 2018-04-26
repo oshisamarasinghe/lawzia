@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>User Profile Page | LAWZIA</title>
+    <title>Home Page | LAWZIA</title>
 
     <link rel="icon" href="../images/lawzia-logo.jpg" sizes="32x32">
 
@@ -18,7 +18,7 @@
 
 </head>
 
-<body background="../images/background-img.jpg">
+<body background="../images/dubai_court.jpg">
 <header id="header" class="page-topbar">
     <nav class="brown darken-1 hide-on-med-and-down">
         <div class="nav-wrapper">
@@ -26,11 +26,6 @@
                 <li>
                     <a href="../user/user-profile.php" class="white-text">
                         About Us
-                    </a>
-                </li>
-                <li>
-                    <a href="../user/user-profile.php" class="white-text">
-                        Contact
                     </a>
                 </li>
                 <li>
@@ -66,8 +61,8 @@
                 </div>
 
                 <div class="card-content white-text center-align">
-                    <p class="card-title"><i class="mdi-social-group"></i>WELCOME TO LAWZIA LEGAL ASSISTANT SERVICE  </p>
-                    <p>Experience Better Legal Services</p>
+                    <p class="card-title">WELCOME TO LAWZIA LEGAL ASSISTANT SERVICE  </p>
+                    <p>Experience A  Better and Trustworthy Legal Services</p>
                 </div>
             </div>
         </div>
@@ -75,13 +70,20 @@
 </div>
 
 <footer class="page-footer">
-    <div class="footer-copyright brown">
+    <div class="footer-copyright ">
 
-            <span>Copyright © 2018 <a class="grey-text text-lighten-4"
-                                      target="_blank">osh</a> All rights reserved.</span>
-            <span class="right"> Contact <a class="grey-text text-lighten-4">0719138045</a></span>
+
+            <span class="center-align "> <a class="black-text text-lighten-5">LAWZIA  is a place where you can ask any legal question.
+                                Legal Experts from our network are ready to help you.
+                                Join our network today resolve you legal issues free.</a></span>
             <br>
-            <span class="right"> Address <a class="grey-text text-lighten-4">Colombo,SriLanka</a></span>
+        <span class="center-align">  <a class="black-text text-lighten-2"><b>OUR SERVICES TO YOU</b><br>
+                <ul>
+                    <li>ASK- A- LAWYER</li>
+                    <li>SEARCH- A- LAWYER</li>
+                    <li>ANSWER- A- QUESTION</li>
+
+                </ul></a></span>
         </div>
     
 </footer>
@@ -100,6 +102,19 @@
 
 <script type="text/javascript" src="../js/plugins.js"></script>
 
+<!-- Toast Notification -->
+<script type="text/javascript">
+    // Toast Notification
+    $(window).load(function() {
+        setTimeout(function() {
+            Materialize.toast('<span>WELCOME LAWZIA</span>', 1500);
+        }, 2000);
+        setTimeout(function() {
+            Materialize.toast('<span>NOT A MEMBER ? REGISTER NOW!</span>', 3000);
+        }, 5000);
+
+    });
+    </script>
 
 </body>
 </html>

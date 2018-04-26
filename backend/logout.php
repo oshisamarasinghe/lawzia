@@ -1,4 +1,4 @@
 <?php include 'connection.php';
 
 session_abort();
-header("location: ../INDEX/index.html");
+header("location: ../userinterface/home.php");

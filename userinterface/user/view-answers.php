@@ -83,7 +83,16 @@ if ($is_inside_query_run = mysqli_query($connection, $answers)) {
         $aDate = $in_row['aDate'];
         $aUser = $in_row['aUser'];
         $aId = $in_row['aID'];
-        echo '<li class="collection-item avatar">
+
+        $relevant_Lawyer_image = "SELECT Image FROM lawyerimage WHERE username='" . $aUser . "' ";
+        if($is_query_run = mysqli_query($connection, $relevant_Lawyer_image)) {
+            while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
+                $data = $row['Image'];
+
+            }
+        }
+        if (empty($data)) {
+            echo '<li class="collection-item avatar">
                             <div class="col s7">
                                 <img src="../../images/user-profile-pic.png" alt="" class="circle">
                                 <span class="title green-text">' . $aUser . '</span>
@@ -92,6 +101,19 @@ if ($is_inside_query_run = mysqli_query($connection, $answers)) {
                             </div>
                         </li>           
                 ';
+        } else {
+            echo '<li class="collection-item avatar">
+                            <div class="col s7">
+                                <img src="data:image/jpeg;base64,' . base64_encode($data) . '" height="130" width="130" alt="profile image" class="circle z-depth-2 "
+                 id="profileImage">
+                                <span class="title green-text">' . $aUser . '</span>
+                                <p class=" ultra-small">' . $aDate . ' </p>
+                                <label> ' . $aDescription . '</label>
+                            </div>
+                        </li>           
+                ';
+        }
+
     }
     echo '  
                      </ul>

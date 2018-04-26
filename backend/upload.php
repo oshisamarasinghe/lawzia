@@ -15,15 +15,38 @@ if (isset($_POST['insert'])) {
     $actExt = strtolower(end($fileExt));
 
     $allowed = array('jpg', 'jpeg', 'png');
+
+    //checking whether profile is updated already
+
+    $profileImage = "SELECT Image FROM lawyerimage WHERE username='" . $username . "'";
+    if($is_query_run = mysqli_query($connection, $profileImage)) {
+        while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
+            $pImage = $row['Image'];
+
+        }
+    }
+
+
     if (in_array($actExt, $allowed)) {
         if ($fileError === 0) {
             if ($fileSize < 1000000) {
                 $image = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
-                $query = "INSERT INTO lawyerimage(username,image) VALUES('$username','$image') ";
-                if ($is_query_run = mysqli_query($connection, $query)) {
-                    echo "<script>alert('successful')</script>";
 
+                //update or insert
+                if(empty($pImage)){
+                    $query = "INSERT INTO lawyerimage(username,Image) VALUES('$username','$image') ";
+                    if ($is_query_run = mysqli_query($connection, $query)) {
+                        echo "<script>alert('insert successful')</script>";
+
+                    }
+                }else{
+                    $query="UPDATE lawyerimage SET Image='".$image."' WHERE username='".$username."'";
+                    if ($is_query_run = mysqli_query($connection, $query)) {
+                        echo "<script>alert('update successful')</script>";
+
+                    }
                 }
+
 
             } else {
                 echo "<script>alert('Your file is too large')</script>";

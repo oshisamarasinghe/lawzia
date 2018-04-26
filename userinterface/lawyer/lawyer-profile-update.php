@@ -40,7 +40,7 @@ include '../../backend/lawyer-profile-update.php';
                 <div id="profile-page-sidebar" class="col s12 m4">
                     <div id="profile-card" class="card">
                         <div class="card-image waves-effect waves-block waves-light">
-                            <img class="activator" src="../../images/user-profile-bg.jpg" alt="user background">
+                            <img class="activator" src="../../images/background-img.jpg" alt="user background">
                         </div>
                         <div class="card-content">
                             <img name="profileImage" class="circle responsive-img activator card-profile-image">
@@ -965,11 +965,33 @@ if (isset($_POST['insert'])) {
     $actExt = strtolower(end($fileExt));
 
     $allowed = array('jpg', 'jpeg', 'png');
+
+    $profileImage = "SELECT Image FROM lawyerimage WHERE username='" . $username . "'";
+    if($is_query_run = mysqli_query($connection, $profileImage)) {
+        while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
+            $pImage = $row['Image'];
+
+        }
+    }
+
     if (in_array($actExt, $allowed)) {
         if ($fileError === 0) {
             if ($fileSize < 1000000) {
                 $image = addslashes(file_get_contents($fileTmpName));
-                $query = "INSERT INTO lawyerimage(username,image) VALUES('$username','$image') ";
+                //update or insert
+                if(empty($pImage)){
+                    $query = "INSERT INTO lawyerimage(username,Image) VALUES('$username','$image') ";
+                    /**if ($is_query_run = mysqli_query($connection, $query)) {
+                        echo "<script>alert('insert successful')</script>";
+
+                    }*/
+                }else{
+                    $query="UPDATE lawyerimage SET Image='".$image."' WHERE username='".$username."'";
+                    /**if ($is_query_run = mysqli_query($connection, $query)) {
+                        echo "<script>alert('update successful')</script>";
+
+                    }**/
+                }
                 try {
 
                     mysqli_autocommit($connection, FALSE);
