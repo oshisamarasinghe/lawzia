@@ -36,37 +36,44 @@
 
 <div id="login-page" class="row">
     <div class="col s12 z-depth-4 card-panel">
-        <form class="login-form">
-            <div class="row">
+        <form class="login-form" method="post" action="../backend/password-change.php">
+            <div class="row" >
                 <div class="input-field col s12 center">
-                    <h4>Change Password</h4>
+                    <h5>Change Password</h5>
                     <p class="center">You can change your password</p>
                 </div>
             </div>
             <div class="row margin">
                 <div class="input-field col s12">
                     <i class="mdi-social-person-outline prefix"></i>
-                    <input id="username" type="text">
+                    <input id="username" type="text" name="username">
                     <label for="username" class="center-align">Username</label>
                 </div>
             </div>
             <div class="row margin">
                 <div class="input-field col s12">
                     <i class="mdi-action-lock-outline prefix"></i>
-                    <input id="password" type="password">
-                    <label for="password">Password</label>
+                    <input id="old_password" type="password" name="old_password">
+                    <label for="old_password">Current Password</label>
                 </div>
             </div>
             <div class="row margin">
                 <div class="input-field col s12">
                     <i class="mdi-action-lock-outline prefix"></i>
-                    <input id="c_password" type="password">
-                    <label for="c_password">Retype Password</label>
+                    <input id="new_password" type="password" name="new_password">
+                    <label for="new_password">New Password</label>
+                </div>
+            </div>
+            <div class="row margin">
+                <div class="input-field col s12">
+                    <i class="mdi-action-lock-outline prefix"></i>
+                    <input id="retype_password" type="password" name="retype_password">
+                    <label for="retype_password">Retype New Password</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <a href="" class="btn waves-effect waves-light col s12">Reset Password</a>
+                    <button class="btn waves-effect waves-light col s12" type="submit">Reset Password</button>
                 </div>
 
             </div>

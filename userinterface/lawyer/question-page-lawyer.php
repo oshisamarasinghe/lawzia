@@ -77,7 +77,17 @@ if ($is_inside_query_run = mysqli_query($connection, $answers)) {
         $aDate = $in_row['aDate'];
         $aUser = $in_row['aUser'];
         $aId = $in_row['aID'];
-        echo '<div class="row">
+
+        //relevant lawyer profile image
+        $relevant_Lawyer_image = "SELECT Image FROM lawyerimage WHERE username='" . $aUser . "' ";
+        if ($is_query_run = mysqli_query($connection, $relevant_Lawyer_image)) {
+            while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
+                $data = $row['Image'];
+
+            }
+        }
+        if (empty($data)) {
+            echo '<div class="row">
                  <div class="col s12 m12 l12 " >
                      <ul class="collection">
 
@@ -86,14 +96,35 @@ if ($is_inside_query_run = mysqli_query($connection, $answers)) {
                                 <img src="../../images/user-profile-pic.png" alt="" class="circle">
                                 <span class="title green-text">' . $aUser . '</span>
                                 <p class=" ultra-small">' . $aDate . ' </p>
-                                <a class="secondary-content"><i class="mdi-action-thumb-up"></i>answer helpful?</a>
+                                
                                 <p class="ultra-small"> ' . $aDescription . '</p>
+                               
                             </div>
                         </li> 
                      </ul>
                   </div>
                </div>
                 ';
+        } else {
+            echo '<div class="row">
+                 <div class="col s12 m12 l12 " >
+                     <ul class="collection">
+
+                        <li class="collection-item avatar">
+                            <div class="col s7">
+                               <img src="data:image/jpeg;base64,' . base64_encode($data) . '" height="130" width="130" alt="profile image" class="circle z-depth-2 "
+                 id="profileImage">
+                                <span class="title green-text">' . $aUser . '</span>
+                                <p class="ultra-small">' . $aDate . ' </p>
+                                <p class="small"> ' . $aDescription . '</p>
+                                 <p class="ultra-small"><i class="mdi-action-thumb-up ultra-small"></i>answer helpful?</a>
+                            </div>
+                        </li> 
+                     </ul>
+                  </div>
+               </div>
+                ';
+        }
     }
 
 }

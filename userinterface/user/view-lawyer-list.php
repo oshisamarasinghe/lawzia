@@ -4,7 +4,7 @@ $country = $_POST['country'];; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Question Page | LAWZIA</title>
+    <title>Lawyer List | LAWZIA</title>
 
     <link rel="icon" href="../../images/lawzia-logo.jpg" sizes="32x32">
     <!-- CORE CSS-->
@@ -41,32 +41,58 @@ if ($is_query_run = mysqli_query($connection, $lawyer_country)) {
     echo '<div class="row">
                  <div class="col s12 m12 l12 " >
                      <ul class="collection">
-                     <div>
-                          <a class="collection-item active cyan">Lawyers-' . $country . '</a>
-                          
-                    </div>
+                         <div>
+                              <a class="collection-item active cyan">Lawyers-' . $country . '</a>
+                         </div>
             
-                 ';
+         ';
     while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
         $username = $row['username'];
         $fName = $row['fName'];
         $lName = $row['lName'];
         $email = $row['email'];
-        $contact = $row['contact'];
-        echo '
+
+        //relevant lawyer profile image
+        $relevant_Lawyer_image = "SELECT Image FROM lawyerimage WHERE username='" . $username . "' ";
+        if ($is_inside_query_run = mysqli_query($connection, $relevant_Lawyer_image)) {
+            while ($inside_row = mysqli_fetch_array($is_inside_query_run, MYSQL_ASSOC)) {
+                $data = $inside_row['Image'];
+
+            }
+        }
+        if(empty($data)){
+            echo '
                  <li class="collection-item avatar">
                             
                          <div class="col s7">
                             <img src="../../images/user-profile-pic.png" alt="" class="circle">
-                            <span class="title green-text">' . $fName . '</span>
+                            <span class="title green-text">' .($fName) . " " . ($lName).'</span>
                             <a href="view-lawyer-profile.php?username=' . $username . '" class="secondary-content"><i class="mdi-social-person"></i>view profile</a> 
                             <p >' . $email . ' </p>
-                            <p> ' . $contact . '</p>
+                            
                         
                         </div>
                       </li>
                        
                  ';
+        }else{
+            echo '
+                 <li class="collection-item avatar">
+                            
+                         <div class="col s7">
+                           <img src="data:image/jpeg;base64,' . base64_encode($data) . '" height="130" width="130" alt="profile image" class="circle z-depth-2 "
+                 id="profileImage">
+                            <span class="title green-text">' .($fName) . " " . ($lName).'</span>
+                            <a href="view-lawyer-profile.php?username=' . $username . '" class="secondary-content"><i class="mdi-social-person"></i>view profile</a> 
+                            <p >' . $email . ' </p>
+                            
+                        
+                        </div>
+                      </li>
+                       
+                 ';
+        }
+
 
     }
     echo '     </ul>
