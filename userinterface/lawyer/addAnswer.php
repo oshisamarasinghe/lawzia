@@ -49,16 +49,24 @@ if ($is_query_run = mysqli_query($connection, $questions)) {
         $user = $row['qUser'];
         $qId = $row['qID'];
         $country = $row['qCountry'];
+        $cat=$row['qCategory'];
 
         echo '<div class="row">
-                 <div class="col s12 m12 l12 " >
-                     <ul class="collection">
-                         <li class="collection-item avatar">
+                 <div class="col s12 m12 l12  " >
+                     <ul class="collection grey lighten-2">
+                         <li class="collection-item avatar grey lighten-2">
                             <div class="col s7">
                                 <img src="../../images/user-profile-pic.png" alt="" class="circle">
-                                <span class="title green-text">' . $user . '</span>
-                                <p class=" ultra-small">' . $country . '-' . $date . ' </p>
+                                <span class="title black-text">' . $user . '</span>
+                                
+                                <p class=" ultra-small">' . $country . '</p>
+                                <p class="ultra-small black-text" >' . $date . ' </p>
+                                
+                                <div class="model-email-content">
+                                <p class="small teal-text darken-3">Category - '.$cat.'</p>
+                                <hr class="grey-text text-lighten-2 full-width">
                                 <p> ' . $description . '</p>
+                                </div>
                             </div>
                         </li>
                      </ul>

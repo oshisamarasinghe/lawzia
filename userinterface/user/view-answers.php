@@ -54,14 +54,21 @@ if ($is_query_run = mysqli_query($connection, $question)) {
         $country = $qData['qCountry'];
         $cat = $qData['qCategory'];
         echo '<div class="row">
-                 <div class="col s12 m12 l12 " >
-                     <ul class="collection">
-                         <li class="collection-item avatar">
+                 <div class="col s12 m12 l12  " >
+                     <ul class="collection grey lighten-2">
+                         <li class="collection-item avatar grey lighten-2">
                             <div class="col s7">
                                 <img src="../../images/user-profile-pic.png" alt="" class="circle">
-                                <span class="title indigo-text">' . $user . '</span>
-                                <p class=" secondary-content ultra-small">' . $country . '-' . $date . ' </p>
+                                <span class="title black-text">' . $user . '</span>
+                                
+                                <p class=" ultra-small">' . $country . '</p>
+                                <p class="ultra-small black-text" >' . $date . ' </p>
+                                
+                                <div class="model-email-content">
+                                <p class="small teal-text darken-3">Category - '.$cat.'</p>
+                                <hr class="grey-text text-lighten-2 full-width">
                                 <p> ' . $description . '</p>
+                                </div>
                             </div>
                         </li>
                      </ul>
@@ -72,11 +79,7 @@ if ($is_query_run = mysqli_query($connection, $question)) {
 
 $answers = "SELECT * FROM answer NATURAL JOIN qa WHERE  qID='$questionID'";//all answers to relevant question
 if ($is_inside_query_run = mysqli_query($connection, $answers)) {
-    echo '<div class="row">
-                 <div class="col s12 m12 l12 " >
-                     <ul class="collection">
-            
-                 ';
+
 
     while ($in_row = mysqli_fetch_array($is_inside_query_run, MYSQL_ASSOC)) {
         $aDescription = $in_row['aDescription'];
@@ -85,40 +88,57 @@ if ($is_inside_query_run = mysqli_query($connection, $answers)) {
         $aId = $in_row['aID'];
 
         $relevant_Lawyer_image = "SELECT Image FROM lawyerimage WHERE username='" . $aUser . "' ";
-        if($is_query_run = mysqli_query($connection, $relevant_Lawyer_image)) {
+        if ($is_query_run = mysqli_query($connection, $relevant_Lawyer_image)) {
             while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
                 $data = $row['Image'];
 
             }
         }
         if (empty($data)) {
-            echo '<li class="collection-item avatar">
+            echo '<div class="row">
+                    <div class="col s12 m12 l12 " >
+                     <ul class="collection teal lighten-4">
+                        <li class="collection-item avatar teal lighten-4">
                             <div class="col s7">
                                 <img src="../../images/user-profile-pic.png" alt="" class="circle">
-                                <span class="title green-text">' . $aUser . '</span>
+                                <span class="title black-text"><b>' . $aUser . '</b></span>
                                 <p class=" ultra-small">' . $aDate . ' </p>
-                                <label> ' . $aDescription . '</label>
+                                
+                                <div class="model-email-content">
+                                <p class="small"> ' . $aDescription . '</p>
+                                
                             </div>
-                        </li>           
+                        </li> 
+                      </ul>
+                     </div>
+                   </div>
                 ';
         } else {
-            echo '<li class="collection-item avatar">
+            echo '<div class="row">
+                    <div class="col s12 m12 l12 " >
+                     <ul class="collection teal lighten-4">
+                        <li class="collection-item avatar teal lighten-4">
+                        
                             <div class="col s7">
                                 <img src="data:image/jpeg;base64,' . base64_encode($data) . '" height="130" width="130" alt="profile image" class="circle z-depth-2 "
                  id="profileImage">
-                                <span class="title green-text">' . $aUser . '</span>
+                                <span class="title black-text"><b>' . $aUser . '</b></span>
                                 <p class=" ultra-small">' . $aDate . ' </p>
-                                <label> ' . $aDescription . '</label>
+                                <p class="secondary-content teal-text darken-3"><i class="mdi-action-thumb-up"></i> </p>
+                               
+                                <div class="model-email-content">
+                                <p class="small"> ' . $aDescription . '</p>
+                                
                             </div>
-                        </li>           
+                        </li>   
+                       </ul>
+                      </div>
+                     </div>
                 ';
         }
 
     }
-    echo '  
-                     </ul>
-                  </div>
-               </div>';
+
 }
 ?>
 

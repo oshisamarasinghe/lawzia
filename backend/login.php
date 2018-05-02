@@ -19,7 +19,7 @@ if ((isset($_POST["username"])) && (isset($_POST["password"]))) {
 
     if ($is_query_run = mysqli_query($connection, $query)) {
 
-        while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
+        while ($row = mysqli_fetch_array($is_query_run, MYSQLI_ASSOC)) {
             if ($password == $row['password']) {
                 $user_type = $row['usertype'];
                 if ($user_type == 'gu') {

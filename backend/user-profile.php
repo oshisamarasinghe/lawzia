@@ -11,3 +11,7 @@ if ($is_query_run = mysqli_query($connection, $user_details)) {
         $email = $row['email'];
     }
 }
+
+
+$no_of_ques=mysqli_query($connection,"SELECT count(qID) as queCount FROM question WHERE qUser='".$username."'");
+$data=mysqli_fetch_assoc($no_of_ques);

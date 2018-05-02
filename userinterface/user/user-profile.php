@@ -25,73 +25,155 @@ include '../../backend/user-profile.php';
 <!-- Page Loading -->
 <?php include '../header-footer/loading.php';
 include '../header-footer/header-user.php'; ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Profile Page - User | LAWZIA</title>
+
+    <link rel="icon" href="../../images/lawzia-logo.jpg" sizes="32x32">
+
+    <!-- CORE CSS-->
+    <link rel="stylesheet" href="../../INDEX/assets/css/navmenu/styles.css">
+    <link href="../../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="../../css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="../../css/custom-style.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="../../css/style-horizontal.css" type="text/css" rel="stylesheet" media="screen,projection">
+
+    <link href="../../css/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="../../js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet"
+          media="screen,projection">
+    <link href="../../js/plugins/chartist-js/chartist.min.css" type="text/css" rel="stylesheet"
+          media="screen,projection">
+</head>
+
+<body class="white">
+<!-- Page Loading -->
+<?php include '../header-footer/loading.php';
+include '../header-footer/header-user.php'; ?>
+
 
 <div id="profile-page" class="section">
-    <div id="profile-page-content" class="row">
-        <div class="row">
-            <div class="card amber darken-2 col s12 ">
-                <div class="card-content white-text center-align">
-                    <p class="card-title"><i class="mdi-social-group"></i> HI <?= strtoupper($username) ?>, </p>
-                    <p>WELCOME TO LAWZIA LEGAL ASSISTANT SERVICE</p>
-                    <p>Experience Better Legal Services</p>
+    <div id="profile-page-header" class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+            <img class="activator" src="../../images/home-law.jpg" alt="user background">
+        </div>
+
+        <?php
+        $profileImage = "SELECT Image FROM lawyerimage WHERE username='" . $username . "'";
+        if($is_query_run = mysqli_query($connection, $profileImage)) {
+            while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
+                $pImage = $row['Image'];
+
+            }
+            if (empty($pImage)) {
+                echo '
+                 <figure class="card-profile-image">
+                  <img src="../../images/user-profile-pic.png"alt="profile image" class="circle z-depth-2 "
+                 id="profileImage">
+                 </figure>
+                
+                 ';
+
+
+            } else {
+
+
+                echo '
+                 <figure class="card-profile-image">
+                  <img src="data:image/jpeg;base64,' . base64_encode($pImage) . '" height="130" width="130" alt="profile image" class="circle z-depth-2 "
+                 id="profileImage">
+                 </figure>
+                
+                 ';
+
+            }
+        }
+
+        ?>
+
+
+        <div class="card-content">
+            <div class="row">
+                <div class="col s3 offset-s2">
+                    <h4 class="card-title grey-text text-darken-4"><?= $username ?></h4>
+                    <p class="medium-small grey-text"><?= $country ?></p>
                 </div>
+
             </div>
         </div>
-        <div class="row">
-            <div id="profile-page-sidebar" class="col s12 m4">
-                <div id="profile-card" class="card">
-                    <div class="card-content">
-                        <div class="tabs tab-profile z-depth-1 light-blue">
-                            <div class="col s12">
-                                <p class="white-text waves-effect waves-light">PERSONAL PROFILE</p>
-                            </div>
-                        </div>
-                        <P><i class="mdi-social-person cyan-text text-darken-2"></i> <?= $username?></P>
-                        <p><i class="mdi-social-location-city cyan-text text-darken-2"></i> <?= $country ?></p>
-                        <p><i class="mdi-communication-email cyan-text text-darken-2"></i> <?= $email ?></p>
+    </div>
 
-                    </div>
-                </div>
-            </div>
+    <div class="row">
 
-            <div id="profile-page-sidebar" class="col s12 m4">
-                <div id="profile-card" class="card">
-                    <div class="card-content">
-                        <div class="tabs tab-profile z-depth-1 light-blue">
-                            <div class="col s12">
-                                <p class="white-text waves-effect waves-light">YOUR QUESTIONS</p>
-                            </div>
-                        </div>
-                        <p> Haven't ask a Question yet?Ask your any legal Problem and get Answers.</p>
-                        <?php include '../../backend/connection.php';
-                        $qCount="SELECT count(qId) as QCount FROM question WHERE qUser='" .$username."'";
-                        $count = mysqli_query($connection, $qCount);
-                        $data= mysqli_fetch_assoc($count);
-                            echo  $data['QCount'];
-                        
-                        ?>
+        <div class="col s12">
 
-                    </div>
-                </div>
-            </div>
-
-
-                <div id="profile-page-sidebar" class="col s12 m4">
-                    <div id="profile-card" class="card">
-                        <div class="card-content">
-                            <div class="tabs tab-profile z-depth-1 light-blue">
-                                <div class="col s12">
-                                    <p class="white-text waves-effect waves-light">SEARCH LAWYERS</p>
+            <ul class="collapsible collapsible-accordion" data-collapsible="expandable">
+                <li>
+                    <div class="collapsible-header purple white-text active"><i class="mdi-action-account-circle"></i> Personal Profile Update</div>
+                    <div class="collapsible-body purple lighten-5">
+                        <p>It is always better to keep your profile updated<br></p>
+                        <div class="row">
+                            <div class="col s12 m12 l12">
+                                <div class="card-panel">
+                                    <div class="row">
+                                        <form class="col s12" method="post" action="../../backend/user-profile-update.php">
+                                            <h4 class="header2">Profile Forum</h4>
+                                            <div class="row">
+                                                <div class="input-field col s4" >
+                                                    <i class="mdi-action-account-circle prefix"></i>
+                                                    <input id="icon_username " type="text" value="<?= $username ?>">
+                                                    <label class="active" for="icon_username">Username</label>
+                                                </div>
+                                                <div class="input-field col s4">
+                                                    <i class="mdi-communication-email prefix"></i>
+                                                    <input id="icon_email" type="email" value="<?= $email ?>">
+                                                    <label class="active" for="icon_email">Email</label>
+                                                </div>
+                                                <div class="input-field col s4">
+                                                    <div class="input-field col s12">
+                                                        <button class="btn purple waves-effect waves-light" type="submit" name="action">Update</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                            <p>Now You can search the well known lawyers in your country.Visit Profile for more contact Information</p>
-
                         </div>
+                        <p>want to change password ? <br>
+                        <a class="purple-text" href="../change-password.php">Reset Password</a> </p>
                     </div>
+                </li>
+                <li>
+                    <div class="collapsible-header teal white-text  "><i class="mdi-action-question-answer"></i> Your Questions (<?= $data['queCount']?>)</div>
+                    <div class="collapsible-body teal lighten-5">
+                        <p>Click on the question to view details</p>
+                            <?php include '../../backend/connection.php';
+                            $question_list="SELECT * FROM question where qUser='".$username."'";
+
+                            if ($is_query_run = mysqli_query($connection, $question_list)) {
+
+                                while ($row = mysqli_fetch_array($is_query_run, MYSQLI_ASSOC)) {
+                                    $qNo = $row['qID'];
+                                    $qCat = $row['qCategory'];
+                                    $qDate = $row['qDate'];
+
+                                    echo '<a class="green-text col s12 offset-10"  href="view-answers.php?question_id=' . $qNo . '">Question No: ' . $qNo . ' asked on  :' . $qDate . '  of category  ' . $qCat . '</a><br>
+                                          
+                                    ';
+
+                                }
+                            }
+?>
+                    </div>
+                </li>
+
+            </ul>
+
         </div>
-
-
     </div>
+</div>
+
 
 
     <!-- insert footer-->

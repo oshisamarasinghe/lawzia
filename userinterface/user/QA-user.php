@@ -47,13 +47,7 @@ include '../header-footer/header-user.php'; ?>
 
 
     if ($is_query_run = mysqli_query($connection, $questions)) {
-        echo '
-        
-                    
-                    <div class="row">
-                        <div class="col s12 m12 l12 " >
-                            <ul class="collection">
-        ';
+
         while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
             $description = $row['qDescription'];
             $date = $row['qDate'];
@@ -62,25 +56,29 @@ include '../header-footer/header-user.php'; ?>
             $cat = $row['qCategory'];
             $country = $row['qCountry'];
 
-            echo '
-                     <li class="collection-item avatar">
-                             <div class="col s7">
+            echo '<div class="row">
+                        <div class="col s12 m12 l12 " >
+                            <ul class="collection grey lighten-2">
+                                <li class="collection-item avatar grey lighten-2">
+                                    <div class="col s7">
                                 <img src="../../images/user-profile-pic.png" alt="" class="circle">
-                                <span class="title green-text">' . $user . '</span>
-                                <p class=" secondary-content ultra-small">' . $country . '-' . $date . ' </p>
-                                <p> ' . $description . '
-                             </div>
-                            </p>
-                            <p><a href="view-answers.php?question_id=' . $qId . '">view answers</a> </p>
+                                <span class="title black-text">' . $user . '</span>
+                                <p class=" ultra-small">' . $country . '</p>
+                                <p class="ultra-small"> ' . $date . ' </p>
+                                <div class="model-email-content">
+                                <p><b> ' . $description . '</b></p>
+                                </div>
+                           
+                            <p><a href="view-answers.php?question_id=' . $qId . '" class="secondary-content cyan-text">view answers</a> </p>
                           </li>
+                          </ul>
+                           </div>
+                     </div>
                            
                      ';
 
         }
-        echo '
-                        </ul>
-                           </div>
-                     </div>';
+
     }
 
 

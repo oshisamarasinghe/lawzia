@@ -50,15 +50,21 @@ if ($is_query_run = mysqli_query($connection, $question)) {
         $cat = $qData['qCategory'];
 
         echo '<div class="row">
-                 <div class="col s12 m12 l12 " >
-                     <ul class="collection  " >
-                         <li class="collection-item avatar">
+                 <div class="col s12 m12 l12  " >
+                     <ul class="collection grey lighten-2">
+                         <li class="collection-item avatar grey lighten-2">
                             <div class="col s7">
                                 <img src="../../images/user-profile-pic.png" alt="" class="circle">
-                                <span class="title pink-text">' . $user . '</span>
-                                <a class="secondary-content "><i class="mdi-action-help "></i></a>
-                                <p >' . $country . '-' . $date . ' </p>
+                                <span class="title black-text">' . $user . '</span>
+                                
+                                <p class=" ultra-small">' . $country . '</p>
+                                <p class="ultra-small black-text" >' . $date . ' </p>
+                                
+                                <div class="model-email-content">
+                                <p class="small teal-text darken-3">Category - '.$cat.'</p>
+                                <hr class="grey-text text-lighten-2 full-width">
                                 <p> ' . $description . '</p>
+                                </div>
                             </div>
                         </li>
                      </ul>
@@ -88,41 +94,44 @@ if ($is_inside_query_run = mysqli_query($connection, $answers)) {
         }
         if (empty($data)) {
             echo '<div class="row">
-                 <div class="col s12 m12 l12 " >
-                     <ul class="collection">
-
-                        <li class="collection-item avatar">
+                    <div class="col s12 m12 l12 " >
+                     <ul class="collection teal lighten-4">
+                        <li class="collection-item avatar teal lighten-4">
                             <div class="col s7">
                                 <img src="../../images/user-profile-pic.png" alt="" class="circle">
-                                <span class="title green-text">' . $aUser . '</span>
+                                <span class="title black-text"><b>' . $aUser . '</b></span>
                                 <p class=" ultra-small">' . $aDate . ' </p>
                                 
-                                <p class="ultra-small"> ' . $aDescription . '</p>
-                               
+                                <div class="model-email-content">
+                                <p class="small"> ' . $aDescription . '</p>
+                                
                             </div>
                         </li> 
-                     </ul>
-                  </div>
-               </div>
+                      </ul>
+                     </div>
+                   </div>
                 ';
         } else {
             echo '<div class="row">
-                 <div class="col s12 m12 l12 " >
-                     <ul class="collection">
-
-                        <li class="collection-item avatar">
+                    <div class="col s12 m12 l12 " >
+                     <ul class="collection teal lighten-4">
+                        <li class="collection-item avatar teal lighten-4">
+                        
                             <div class="col s7">
-                               <img src="data:image/jpeg;base64,' . base64_encode($data) . '" height="130" width="130" alt="profile image" class="circle z-depth-2 "
+                                <img src="data:image/jpeg;base64,' . base64_encode($data) . '" height="130" width="130" alt="profile image" class="circle z-depth-2 "
                  id="profileImage">
-                                <span class="title green-text">' . $aUser . '</span>
-                                <p class="ultra-small">' . $aDate . ' </p>
+                                <span class="title black-text"><b>' . $aUser . '</b></span>
+                                <p class=" ultra-small">' . $aDate . ' </p>
+                                <p class="secondary-content teal-text darken-3"><i class="mdi-action-thumb-up"></i> </p>
+                               
+                                <div class="model-email-content">
                                 <p class="small"> ' . $aDescription . '</p>
-                                 <p class="ultra-small"><i class="mdi-action-thumb-up ultra-small"></i>answer helpful?</a>
+                                
                             </div>
-                        </li> 
-                     </ul>
-                  </div>
-               </div>
+                        </li>   
+                       </ul>
+                      </div>
+                     </div>
                 ';
         }
     }

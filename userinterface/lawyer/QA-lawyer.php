@@ -50,10 +50,7 @@ $this_page_first_result=($page_no-1)*$results_per_page;
 $results_in_this_page="SELECT * FROM question  ORDER BY qID DESC LIMIT ".$this_page_first_result.','.$results_per_page;
 
 if ($is_query_run = mysqli_query($connection, $results_in_this_page)) {
-    echo ' 
-                <div class="row">
-                    <div class="col s12 m12 l12 " >
-                        <ul class="collection">';
+
 
     while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
         $description = $row['qDescription'];
@@ -65,26 +62,36 @@ if ($is_query_run = mysqli_query($connection, $results_in_this_page)) {
 
 
 
-        echo '
-               
-                         <li class="collection-item avatar">
-                             <div class="col s7">
+        echo '<div class="row">
+                        <div class="col s12 m12 l12 " >
+                            <ul class="collection grey lighten-2">
+                                <li class="collection-item avatar grey lighten-2">
+                                    <div class="col s7">
                                 <img src="../../images/user-profile-pic.png" alt="" class="circle">
-                                <span class="title green-text">' . $user . '</span>
-                                <p class=" secondary-content ultra-small">' . $country . '-' . $date . ' </p>
-                                <p> ' . $description . '</p>
-                            </div>
-
-                            <p><a href="addAnswer.php?question_id=' . $qId . '">add answer</a> </p>
-                            <p><a href="question-page-lawyer.php?question_id=' . $qId . '">view answers</a> </p>
-                       </li>
+                                
+                                <span class="title black-text">' . $user . '</span>
+                                <p class=" ultra-small">' . $country . '</p>
+                                <p class="ultra-small"> ' . $date . ' </p>
+                               
+                                <div class="model-email-content">
+                                <p><b> ' . $description . '</b></p>
+                                
+                                
+                                </div>
+                            <p><a href="addAnswer.php?question_id=' . $qId . '">add answer </a> 
+                                <br><a href="question-page-lawyer.php?question_id=' . $qId . '" >view answers</a> </p>
+                       </div>
+                            </li>
+                            
+                       </ul>
+                  </div>
+                </div>
+               
                       
                  ';
 
     }
-    echo '          </ul>
-                  </div>
-                </div>';
+
 }
 echo'
   

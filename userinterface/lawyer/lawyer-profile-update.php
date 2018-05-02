@@ -38,50 +38,39 @@ include '../../backend/lawyer-profile-update.php';
             <!-- profile-page-sidebar-->
             <div class="row">
                 <div id="profile-page-sidebar" class="col s12 m4">
-                    <div id="profile-card" class="card">
-                        <div class="card-image waves-effect waves-block waves-light">
-                            <img class="activator" src="../../images/background-img.jpg" alt="user background">
-                        </div>
-                        <div class="card-content">
-                            <?php include '../../backend/connection.php';
-                            //relevant lawyer profile image
-                            $relevant_Lawyer_image = "SELECT Image FROM lawyerimage WHERE username='" . $username . "' ";
-                            if ($is_query_run = mysqli_query($connection, $relevant_Lawyer_image)) {
-                                while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
-                                    $data = $row['Image'];
 
-                                }
-                            }
-                            if(empty($data)){
-                                echo'<img  src="../../images/user-profile-pic.png" name="profileImage" class="circle responsive-img activator card-profile-image">';
-                            }else{
-                                echo'<img src="data:image/jpeg;base64,' . base64_encode($data). '" name="profileImage" class="circle responsive-img activator card-profile-image">\';
-';
-                            }
-                            ?>
-
-
-
-                            <span class="card-title activator grey-text text-darken-4"><?= $username ?></span>
-                            <p><i class="mdi-action-perm-identity cyan-text text-darken-2"></i> <?= $country ?></p>
-                            <p><i class="mdi-action-perm-phone-msg cyan-text text-darken-2"></i> <?= $contact ?></p>
-                            <p><i class="mdi-communication-email cyan-text text-darken-2"></i> <?= $email ?></p>
-
-                        </div>
-                    </div>
 
                     <!-- task-card -->
                     <ul id="task-card" class="collection with-header">
-                        <li class="collection-header cyan">
-                            <h5 class="task-card-title">Profile Settings</h5>
+                        <li class="collection-header teal">
+                            <div class="row">
+                                <div class="card amber darken-3 col s12 ">
+                                    <div class="input-field col s12 center">
+                                        <img src="../../images/lawzia-logo.jpg" alt="" class="circle responsive-img valign profile-image-login">
+                                    </div>
+
+                                    <div class="card-content white-text center-align">
+                                        <p class="card-title">HI, <?=strtoupper($username)?> </p>
+                                        <p>Strengthen Your Profile</p>
+                                        <p>Add your carrier details so that the clients all over the world can connect to you</p>
+                                    </div>
+                                </div>
+                            </div>
 
                         </li>
-                        <li class="collection-header black">
-                            <h6 class="task-card-title">Update profile Image</h6>
+                        <li class="collection-header cyan">
+                            <h6 class="task-card-title"><i class="mdi-action-face-unlock" ></i>Update profile Image</h6>
                         </li>
                         <li class="collection-item dismissable">
                             <p>Select an Image and make your profile professional</p>
                             <form action="" enctype="multipart/form-data" method="post">
+                                <!--div class="file-field input-field">
+                                    <input class="file-path validate" type="text" />
+                                    <div class="btn">
+                                        <span>File</span>
+                                        <input type="file" />
+                                    </div>
+                                </div-->
                                 <input name="image" id="image" type="file"/>
                                 <div id="raised-buttons" class="section">
                                     <button type="submit" class="waves-light waves-effect" name="insert">
@@ -90,14 +79,54 @@ include '../../backend/lawyer-profile-update.php';
                                 </div>
                             </form>
                         </li>
-                        <li class="collection-header black">
+                        <li class="collection-header cyan">
                             <h6 class="task-card-title">Security Section</h6>
 
                         </li>
                         <li class="collection-item dismissable">
                             <p class="task-card">Secure your account with a strong password </p>
-                            <a href="../change-password.php" class="task-card">Change Password</a>
 
+                            <div id="login-page" class="row">
+                                <div class="col s12 card-panel">
+                                    <form class="login-form" method="post" action="../../backend/password-change.php">
+
+                                        <div class="row margin">
+                                            <div class="input-field col s12">
+                                                <i class="mdi-social-person-outline prefix"></i>
+                                                <input id="username" type="text" name="username">
+                                                <label for="username" class="center-align">Username</label>
+                                            </div>
+                                        </div>
+                                        <div class="row margin">
+                                            <div class="input-field col s12">
+                                                <i class="mdi-action-lock-outline prefix"></i>
+                                                <input id="old_password" type="password" name="old_password">
+                                                <label for="old_password">Current Password</label>
+                                            </div>
+                                        </div>
+                                        <div class="row margin">
+                                            <div class="input-field col s12">
+                                                <i class="mdi-action-lock-outline prefix"></i>
+                                                <input id="new_password" type="password" name="new_password">
+                                                <label for="new_password">New Password</label>
+                                            </div>
+                                        </div>
+                                        <div class="row margin">
+                                            <div class="input-field col s12">
+                                                <i class="mdi-action-lock-outline prefix"></i>
+                                                <input id="retype_password" type="password" name="retype_password">
+                                                <label for="retype_password">Retype New Password</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <button class="btn waves-effect waves-light col s12" type="submit">Reset Password</button>
+                                            </div>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </li>
                     </ul>
                 </div>
