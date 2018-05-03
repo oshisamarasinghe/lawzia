@@ -1,5 +1,5 @@
 <?php
-include '../../backend/lawyer-profile-update.php';
+include '../../backend/lawyer-info.php';
 
 ?>
 <!DOCTYPE html>
@@ -102,15 +102,18 @@ include '../header-footer/nav-lawyer.php'; ?>
             <ul class="collapsible collapsible-accordion" data-collapsible="expandable">
                 <li>
                     <div class="collapsible-header cyan white-text active"><i class="mdi-action-account-circle"></i>
-                        Update Work Profile
+                        Account Settings
                     </div>
                     <div class="collapsible-body cyan lighten-5">
                         <p>It is always better to keep your professional profile updated<br>
                             Claiming your profile helps potential clients get to know you. Lawyers who have claimed
                             their profiles are also eligible to participate in the LAWZIA Legal Answers community.<br>click
                             the following link to update
-                            <br><a href="lawyer-profile-update.php" class="cyan-text">update profile now</a>
-                        </p>
+                            <br><a href="lawyer-profile-update.php" class="cyan-text">update profile >> </a></p>
+
+                        <p>want to change password ? <br>
+                            <a class="cyan-text" href="../change-password.php">Reset Password >></a></p>
+
                     </div>
                 </li>
                 <li>

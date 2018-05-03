@@ -1,5 +1,5 @@
 <?php
-include '../../backend/lawyer-profile-update.php';
+include '../../backend/lawyer-info.php';
 
 ?>
     <!DOCTYPE html>
@@ -79,55 +79,7 @@ include '../../backend/lawyer-profile-update.php';
                                 </div>
                             </form>
                         </li>
-                        <li class="collection-header cyan">
-                            <h6 class="task-card-title">Security Section</h6>
 
-                        </li>
-                        <li class="collection-item dismissable">
-                            <p class="task-card">Secure your account with a strong password </p>
-
-                            <div id="login-page" class="row">
-                                <div class="col s12 card-panel">
-                                    <form class="login-form" method="post" action="../../backend/password-change.php">
-
-                                        <div class="row margin">
-                                            <div class="input-field col s12">
-                                                <i class="mdi-social-person-outline prefix"></i>
-                                                <input id="username" type="text" name="username">
-                                                <label for="username" class="center-align">Username</label>
-                                            </div>
-                                        </div>
-                                        <div class="row margin">
-                                            <div class="input-field col s12">
-                                                <i class="mdi-action-lock-outline prefix"></i>
-                                                <input id="old_password" type="password" name="old_password">
-                                                <label for="old_password">Current Password</label>
-                                            </div>
-                                        </div>
-                                        <div class="row margin">
-                                            <div class="input-field col s12">
-                                                <i class="mdi-action-lock-outline prefix"></i>
-                                                <input id="new_password" type="password" name="new_password">
-                                                <label for="new_password">New Password</label>
-                                            </div>
-                                        </div>
-                                        <div class="row margin">
-                                            <div class="input-field col s12">
-                                                <i class="mdi-action-lock-outline prefix"></i>
-                                                <input id="retype_password" type="password" name="retype_password">
-                                                <label for="retype_password">Retype New Password</label>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="input-field col s12">
-                                                <button class="btn waves-effect waves-light col s12" type="submit">Reset Password</button>
-                                            </div>
-
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </li>
                     </ul>
                 </div>
 
@@ -147,9 +99,10 @@ include '../../backend/lawyer-profile-update.php';
                                     <div class="row">
                                         <div class="input-field col s3">
                                             <select class="browser-default" name="title">
+                                                <option value="<?=$title ?>"  selected><?=$title ?></option>
                                                 <option value="Mr.">Mr.</option>
                                                 <option value="Mrs.">Mrs.</option>
-                                                <option value="Ms.">Miss.</option>
+                                                <option value="Ms.">Ms.</option>
                                             </select>
                                         </div>
                                         <div class="input-field col s3">
@@ -164,7 +117,7 @@ include '../../backend/lawyer-profile-update.php';
                                     <div class="row">
                                         <div class="input-field col s6">
                                             <select class="browser-default" name="country">
-                                                <option value="" disabled selected>Choose your Country</option>
+                                                <option value="<?=$country ?>"  selected><?=$country ?></option>
                                                 <option value="Afghanistan" title="Afghanistan">Afghanistan</option>
                                                 <option value="Åland Islands" title="Åland Islands">Åland Islands
                                                 </option>
@@ -563,7 +516,7 @@ include '../../backend/lawyer-profile-update.php';
                                     </div>
                                     <h5 class="waves-light">Work Info</h5>
 
-                                    <h6>Practise Areas:</h6>
+                                    <!--h6>Practise Areas:</h6>
                                     <div class="row">
                                         <div class="input-field col s4">
                                             <input type="checkbox" class="filled-in" id="Admin-law" name="area_list[]"
@@ -904,12 +857,13 @@ include '../../backend/lawyer-profile-update.php';
                                             <label for="Will-law">Wills and Probate </label>
                                         </div>
                                     </div>
-                                    <br>
+                                    <br-->
                                     <br>
                                     <h6>Work Experience:</h6>
                                     <div class="row">
                                         <div class="input-field col s6">
                                             <select class="browser-default" name="exp">
+                                                <option value="<?=$experience?>" selected><?=$experience?></option>
                                                 <option value="Trainee">Trainee</option>
                                                 <option value="less than 5 years">less than 5 years</option>
                                                 <option value="less than 10 years">less than 10 years</option>
@@ -923,27 +877,28 @@ include '../../backend/lawyer-profile-update.php';
                                     <h6>Work Place Details:</h6>
                                     <div class="row">
                                         <div class="input-field col s6">
-                                            <input id="w_name" type="text" name="w_name">
-                                            <label for="w_name">Company Name</label>
+                                            <input id="w_name" type="text" name="w_name" value="<?=$company?>">
+                                            <label for="w_name" class="active">Company Name</label>
                                         </div>
                                         <div class="input-field col s6">
-                                            <input id="w_position" type="text" name="w_position" placeholder="Director/Assistant Lawyer/Trainee..">
-                                            <label for="w_position">Position</label>
+                                            <input id="w_position" type="text" name="w_position" placeholder="Director/Assistant Lawyer/Trainee.."
+                                            value="<?=$position ?>">
+                                            <label for="w_position" class="active">Position</label>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="input-field col s4">
-                                            <input id="w_street" type="text" name="w_street">
-                                            <label for="w_street">Street</label>
+                                            <input id="w_street" type="text" name="w_street" value="<?=$street?>">
+                                            <label for="w_street" class="active">Street</label>
                                         </div>
                                         <div class="input-field col s4">
-                                            <input id="w_city" type="text" name="w_city">
-                                            <label for="w_city">City</label>
+                                            <input id="w_city" type="text" name="w_city" value="<?=$city?>">
+                                            <label for="w_city" class="active">City</label>
                                         </div>
                                         <div class="input-field col s4">
                                             <div class="row">
                                                     <select class="browser-default" name="w_country">
-                                                        <option value="" disabled selected>Company Country</option>
+                                                        <option value="<?=$wCountry?>"  selected><?=$wCountry?></option>
                                                         <option value="Afghanistan" title="Afghanistan">Afghanistan</option>
                                                         <option value="Åland Islands" title="Åland Islands">Åland Islands
                                                         </option>
@@ -1332,17 +1287,14 @@ include '../../backend/lawyer-profile-update.php';
                                     </div>
                                     <div class="row">
                                         <div class="input-field col s6">
-                                            <input id="w_email" type="email" name="w_email">
-                                            <label for="w_email" >Email</label>
+                                            <input id="w_email" type="email" name="w_email" value="<?=$wEmail?>">
+                                            <label for="w_email"class="active" >Email</label>
                                         </div>
                                         <div class="input-field col s6">
-                                            <input id="w_tel" type="tel" name="w_tel">
-                                            <label for="w_tel">Contact No</label>
+                                            <input id="w_tel" type="tel" name="w_tel" value="<?=$wContact?>">
+                                            <label for="w_tel" class="active">Contact No</label>
                                         </div>
                                     </div>
-                                    <label>Summary</label>
-                                    <textarea  id="summary" name="summary" rows="10"
-                                              placeholder="Write something about you"></textarea>
 
                                     <div class="row">
                                         <div class="input-field col s12">

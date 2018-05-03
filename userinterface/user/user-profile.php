@@ -55,7 +55,7 @@ include '../header-footer/header-user.php'; ?>
 <div id="profile-page" class="section">
     <div id="profile-page-header" class="card">
         <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="../../images/home-law.jpg" alt="user background">
+            <img class="activator" src="../../images/volkov-areas-practice.jpg" alt="user background">
         </div>
 
         <?php

@@ -840,7 +840,7 @@
                         </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <button class="btn waves-effect waves-light col s12" href="lawyer-work-register.php"
+                            <button class="btn waves-effect waves-light col s12" href="lawyer-register.php"
                                     type="submit">Register Now
                             </button>
                         </div>

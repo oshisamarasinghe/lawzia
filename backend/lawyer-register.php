@@ -107,18 +107,90 @@ if (empty(test_input($_POST['password']))) {
     $password_text = test_input($_POST['password']);
     $password = md5($password_text);
 }
+
+if (empty(test_input($_POST['w_email']))) {
+    $errors = "error-complete all fields";
+    echo "<script> alert('error-complete all fields')</script>";
+    echo "<script> window.history.go(-1);</script>";
+} else {
+    $checkWemail = test_input($_POST['w_email']);
+    if (!filter_var($checkWemail, FILTER_VALIDATE_EMAIL)) {
+        echo "<script> alert('Invalid company email ')</script>";
+    } else {
+        $wEmail = test_input($_POST['w_email']);
+    }
+}
+if (empty(test_input($_POST['w_street']))) {
+    $errors = "error-complete all fields";
+    echo "<script> alert('error-complete work street address')</script>";
+    echo "<script> window.history.go(-1);</script>";
+} else {
+    $wStreet = test_input($_POST['w_street']);
+}
+
+if (empty(test_input($_POST['w_city']))) {
+    $errors = "error-complete all fields";
+    echo "<script> alert('error-complete work city address')</script>";
+    echo "<script> window.history.go(-1);</script>";
+} else {
+    $wCity = test_input($_POST['w_city']);
+}
+
+if (test_input(empty($_POST['w_country']))) {
+    $errors = "error-complete all fields";
+    echo "<script> alert('error-complete all fields')</script>";
+    echo "<script> window.history.go(-1);</script>";
+} else {
+    $wCountry = test_input($_POST['w_country']);
+}
+
+if (empty(test_input($_POST['w_name']))) {
+    $errors = "error-complete all fields";
+    echo "<script> alert('error-complete company name')</script>";
+    echo "<script> window.history.go(-1);</script>";
+} else {
+    $wName = test_input($_POST['w_name']);
+}
+
+if (empty(test_input($_POST['w_tel']))) {
+    $errors = "error-complete all fields";
+    echo "<script> alert('error-complete company contact')</script>";
+    echo "<script> window.history.go(-1);</script>";
+} else {
+    $wContact = test_input($_POST['w_tel']);
+}
+
+
+if (test_input(empty($_POST['exp']))) {
+    $errors = "error-complete all fields";
+    echo "<script> alert('error-complete all fields')</script>";
+    echo "<script> window.history.go(-1);</script>";
+} else {
+    $exp = test_input($_POST['exp']);
+}
+
+
+if (test_input(empty($_POST['w_position']))) {
+    $errors = "error-complete all fields";
+    echo "<script> alert('error-complete all fields')</script>";
+    echo "<script> window.history.go(-1);</script>";
+} else {
+    $position = test_input($_POST['w_position']);
+}
 $type = 'lu';
 
 
 try {
     mysqli_autocommit($connection, FALSE);
     mysqli_query($connection, "INSERT INTO userauthentication(username, password,usertype )VALUES('$username','$password','$type')");
-    mysqli_query($connection, "INSERT INTO lawyer(username, email, country, fName, lName, contact, title)
-				VALUES('$username','$email','$country','$fname','$lname','$contact','$title')");
+    mysqli_query($connection, "INSERT INTO lawyer(username, email, country, fName, lName, contact, title, workPosition, workCompany, workExperience, workAddStreet,
+workAddCity, workAddCountry, workEmail, workContact)
+				VALUES('$username','$email','$country','$fname','$lname','$contact','$title','$position','$wName','$exp','$wStreet','$wCity',
+				'$wCountry','$wEmail','$wContact')");
     mysqli_commit($connection);
     session_start();
     $_SESSION['username'] = $username;
-    header("location: ../userinterface/lawyer/lawyer-first-profile.php");
+    header("location: ../userinterface/lawyer/lawyer-selecting-practiseAreas.php");
 
 } catch (Exception $e) {
     $connection->rollback();
