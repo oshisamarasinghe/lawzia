@@ -1,3 +1,4 @@
+<html>
 <head>
 
     <title>Login Page | LAWZIA</title>
@@ -67,7 +68,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s6 m6 16">
-                        <p class="margin medium-small"><a href="lawyer/lawyer-register.php">Lawyer SignUp!</a></p>
+                        <p class="margin medium-small"><a href="lawyer/lawyer-register-old.php">Lawyer SignUp!</a></p>
                     </div>
                     <div class="input-field col s6 m6 16">
                         <p class="margin medium-small"><a href="user/user-register.php">User SignUp!</a></p>

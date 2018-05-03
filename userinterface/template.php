@@ -38,7 +38,7 @@
     <div class="main-nav navbar-collapse collapse">
         <div class="container">
             <ul class="nav nav-justified">
-                <li><a href="../INDEX/index.html">HOME</a></li>
+                <li><a href="../INDEX/">HOME</a></li>
             </ul>
         </div>
     </div>

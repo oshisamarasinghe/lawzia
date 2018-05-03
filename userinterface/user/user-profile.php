@@ -60,7 +60,7 @@ include '../header-footer/header-user.php'; ?>
 
         <?php
         $profileImage = "SELECT Image FROM lawyerimage WHERE username='" . $username . "'";
-        if($is_query_run = mysqli_query($connection, $profileImage)) {
+        if ($is_query_run = mysqli_query($connection, $profileImage)) {
             while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
                 $pImage = $row['Image'];
 
@@ -109,17 +109,20 @@ include '../header-footer/header-user.php'; ?>
 
             <ul class="collapsible collapsible-accordion" data-collapsible="expandable">
                 <li>
-                    <div class="collapsible-header purple white-text active"><i class="mdi-action-account-circle"></i> Personal Profile Update</div>
-                    <div class="collapsible-body purple lighten-5">
+                    <div class="collapsible-header cyan white-text active"><i class="mdi-action-account-circle"></i>
+                        Personal Profile Update
+                    </div>
+                    <div class="collapsible-body cyan lighten-5">
                         <p>It is always better to keep your profile updated<br></p>
                         <div class="row">
                             <div class="col s12 m12 l12">
                                 <div class="card-panel">
                                     <div class="row">
-                                        <form class="col s12" method="post" action="../../backend/user-profile-update.php">
+                                        <form class="col s12" method="post"
+                                              action="../../backend/user-profile-update.php">
                                             <h4 class="header2">Profile Forum</h4>
                                             <div class="row">
-                                                <div class="input-field col s4" >
+                                                <div class="input-field col s4">
                                                     <i class="mdi-action-account-circle prefix"></i>
                                                     <input id="icon_username " type="text" value="<?= $username ?>">
                                                     <label class="active" for="icon_username">Username</label>
@@ -131,7 +134,9 @@ include '../header-footer/header-user.php'; ?>
                                                 </div>
                                                 <div class="input-field col s4">
                                                     <div class="input-field col s12">
-                                                        <button class="btn purple waves-effect waves-light" type="submit" name="action">Update</button>
+                                                        <button class="btn cyan waves-effect waves-light" type="submit"
+                                                                name="action">Update
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -141,30 +146,32 @@ include '../header-footer/header-user.php'; ?>
                             </div>
                         </div>
                         <p>want to change password ? <br>
-                        <a class="purple-text" href="../change-password.php">Reset Password</a> </p>
+                            <a class="cyan-text" href="../change-password.php">Reset Password</a></p>
                     </div>
                 </li>
                 <li>
-                    <div class="collapsible-header teal white-text  "><i class="mdi-action-question-answer"></i> Your Questions (<?= $data['queCount']?>)</div>
-                    <div class="collapsible-body teal lighten-5">
+                    <div class="collapsible-header cyan white-text  "><i class="mdi-action-question-answer"></i> Your
+                        Questions (<?= $data['queCount'] ?>)
+                    </div>
+                    <div class="collapsible-body cyan lighten-5">
                         <p>Click on the question to view details</p>
-                            <?php include '../../backend/connection.php';
-                            $question_list="SELECT * FROM question where qUser='".$username."'";
+                        <?php include '../../backend/connection.php';
+                        $question_list = "SELECT * FROM question where qUser='" . $username . "'";
 
-                            if ($is_query_run = mysqli_query($connection, $question_list)) {
+                        if ($is_query_run = mysqli_query($connection, $question_list)) {
 
-                                while ($row = mysqli_fetch_array($is_query_run, MYSQLI_ASSOC)) {
-                                    $qNo = $row['qID'];
-                                    $qCat = $row['qCategory'];
-                                    $qDate = $row['qDate'];
+                            while ($row = mysqli_fetch_array($is_query_run, MYSQLI_ASSOC)) {
+                                $qNo = $row['qID'];
+                                $qCat = $row['qCategory'];
+                                $qDate = $row['qDate'];
 
-                                    echo '<a class="green-text col s12 offset-10"  href="view-answers.php?question_id=' . $qNo . '">Question No: ' . $qNo . ' asked on  :' . $qDate . '  of category  ' . $qCat . '</a><br>
+                                echo '<a class="cyan-text col s12 offset-10"  href="view-answers.php?question_id=' . $qNo . '">Question No: ' . $qNo . ' asked on  :' . $qDate . '  of category  ' . $qCat . '</a><br>
                                           
                                     ';
 
-                                }
                             }
-?>
+                        }
+                        ?>
                     </div>
                 </li>
 
@@ -175,20 +182,19 @@ include '../header-footer/header-user.php'; ?>
 </div>
 
 
+<!-- insert footer-->
+<!--?php include '../header-footer/footer.php';
+?>
+<!-- jQuery Library -->
+<script type="text/javascript" src="../../js/jquery-1.11.2.min.js"></script>
+<!--materialize js-->
+<script type="text/javascript" src="../../js/materialize.js"></script>
+<!--prism-->
+<script type="text/javascript" src="../../js/prism.js"></script>
+<!--scrollbar-->
+<script type="text/javascript" src="../../js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
-    <!-- insert footer-->
-    <!--?php include '../header-footer/footer.php';
-    ?>
-    <!-- jQuery Library -->
-    <script type="text/javascript" src="../../js/jquery-1.11.2.min.js"></script>
-    <!--materialize js-->
-    <script type="text/javascript" src="../../js/materialize.js"></script>
-    <!--prism-->
-    <script type="text/javascript" src="../../js/prism.js"></script>
-    <!--scrollbar-->
-    <script type="text/javascript" src="../../js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-
-    <script type="text/javascript" src="../../js/plugins.js"></script>
+<script type="text/javascript" src="../../js/plugins.js"></script>
 
 
 </body>

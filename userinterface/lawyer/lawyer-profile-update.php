@@ -726,7 +726,7 @@ include '../../backend/lawyer-profile-update.php';
                                         <div class="input-field col s4">
                                             <input type="checkbox" class="filled-in" id="Cult-law" name="area_list[]"
                                                    value="Cultural property Law"/>
-                                            <label for="Cultural-law">Cultural property Law</label>
+                                            <label for="Cult-law">Cultural property Law</label>
                                         </div>
                                         <div class="input-field col s4">
                                             <input type="checkbox" class="filled-in" id="custom-law" name="area_list[]"
@@ -1333,7 +1333,7 @@ include '../../backend/lawyer-profile-update.php';
                                     <div class="row">
                                         <div class="input-field col s6">
                                             <input id="w_email" type="email" name="w_email">
-                                            <label for="w_email">Email</label>
+                                            <label for="w_email" >Email</label>
                                         </div>
                                         <div class="input-field col s6">
                                             <input id="w_tel" type="tel" name="w_tel">
@@ -1341,7 +1341,7 @@ include '../../backend/lawyer-profile-update.php';
                                         </div>
                                     </div>
                                     <label>Summary</label>
-                                    <textarea name="summary" id="summary" name="summary" rows="10"
+                                    <textarea  id="summary" name="summary" rows="10"
                                               placeholder="Write something about you"></textarea>
 
                                     <div class="row">

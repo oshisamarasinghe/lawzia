@@ -24,7 +24,7 @@
         <div class="nav-wrapper">
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li>
-                    <a href="../user/user-profile.php" class="white-text">
+                    <a href=".../user/user-profile.php" class="white-text">
                         About Us
                     </a>
                 </li>

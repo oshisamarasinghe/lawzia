@@ -1,5 +1,5 @@
 <header id="header" class="page-topbar">
-    <nav class="indigo hide-on-med-and-down">
+    <nav class="cyan darken-2 hide-on-med-and-down">
         <div class="nav-wrapper">
             <ul id="nav-mobile" class="left hide-on-med-and-down">
                 <li>
