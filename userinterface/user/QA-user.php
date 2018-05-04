@@ -1,5 +1,40 @@
 <?php include '../../backend/connection.php';
 session_start();
+$username = $_SESSION['username'];
+function length($inputTxt, $length)
+{
+    $userInput = $inputTxt;
+    if (strlen($userInput) == $length) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+//validate data
+function test_input($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
+$errors = "";
+if (empty(test_input($_POST['country']))) {
+    $errors = "error-complete all fields";
+    echo "<script> alert('error-complete all fields')</script>";
+} else {
+    $qCountry = test_input($_POST['country']);
+}
+
+if (empty(test_input($_POST['category']))) {
+    $errors = "error-complete all fields";
+    echo "<script> alert('error-complete all fields')</script>";
+
+} else {
+    $qCategory = test_input($_POST['category']);
+}
 ?>
 
 
@@ -29,6 +64,11 @@ session_start();
 <!-- Page Loading -->
 <?php include '../header-footer/loading.php';
 include '../header-footer/header-user.php'; ?>
+<div class="tabs tab-profile z-depth-1 red">
+    <div class="col s12 offset-m10">
+        <p class="white-text waves-effect waves-light">  <?=$qCountry?>/<?=$qCategory?></p>
+    </div>
+</div>
     <form method="post" action="ask-a-question.php">
         <div class="row">
             <div class="input-field col s12">
@@ -43,7 +83,12 @@ include '../header-footer/header-user.php'; ?>
 
 <!--question-->
 <?php include '../../backend/connection.php';
-    $questions = "SELECT * FROM question ORDER BY qID DESC ";
+if($qCategory=="All"){
+    $questions = "SELECT * FROM question WHERE qCountry='".$qCountry." 'ORDER BY qID DESC ";
+}else{
+    $questions = "SELECT * FROM question WHERE qCountry='".$qCountry." ' AND qCategory='".$qCategory."'ORDER BY qID DESC ";
+}
+
 
 
     if ($is_query_run = mysqli_query($connection, $questions)) {
@@ -55,6 +100,7 @@ include '../header-footer/header-user.php'; ?>
             $qId = $row['qID'];
             $cat = $row['qCategory'];
             $country = $row['qCountry'];
+            $title=$row['qTitle'];
 
             echo '<div class="row">
                         <div class="col s12 m12 l12 " >
@@ -66,7 +112,9 @@ include '../header-footer/header-user.php'; ?>
                                 <p class=" ultra-small">' . $country . '</p>
                                 <p class="ultra-small"> ' . $date . ' </p>
                                 <div class="model-email-content">
-                                <p><b> ' . $description . '</b></p>
+                                <h5 class="cyan-text ">'.$title.'</h5>
+                               
+                                <p>' . $description . '</p>
                                 </div>
                            
                             <p><a href="view-answers.php?question_id=' . $qId . '" class="secondary-content cyan-text">view answers</a> </p>

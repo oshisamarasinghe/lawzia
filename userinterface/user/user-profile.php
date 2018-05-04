@@ -58,8 +58,8 @@ include '../header-footer/header-user.php'; ?>
             <img class="activator" src="../../images/volkov-areas-practice.jpg" alt="user background">
         </div>
 
-        <?php
-        $profileImage = "SELECT Image FROM lawyerimage WHERE username='" . $username . "'";
+        <?php include '../../backend/connection.php';
+        $profileImage = "SELECT Image FROM userImage WHERE username='" . $username . "'";
         if ($is_query_run = mysqli_query($connection, $profileImage)) {
             while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
                 $pImage = $row['Image'];
@@ -145,15 +145,47 @@ include '../header-footer/header-user.php'; ?>
                                 </div>
                             </div>
                         </div>
-                        <p>want to change password ? <br>
+                        <p><b>want to change password ?</b> <br>
                             <a class="cyan-text" href="../change-password.php">Reset Password</a></p>
+                        <p><b>Change profile Image</b> </p>
+                        <div class="row">
+                            <div class="col s12 m12 l12">
+                                <div class="card-panel">
+                                    <p>Select an Image </p>
+                                    <form action="" enctype="multipart/form-data" method="post">
+                                        <div class="file-field input-field">
+                                            <input class="file-path validate " type="text"/>
+                                            <div class="btn waves-light waves-effect  cyan">
+                                                <span>File</span>
+                                                <input type="file" name="image" id="image"/>
+                                            </div>
+                                        </div>
+                                        <!--input name="image" id="image" type="file"/-->
+                                        <p>Upload the Image </p>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <!--div id="raised-buttons" class="section"-->
+                                                <button type="submit" class=" btn waves-light waves-effect cyan"
+                                                        name="insert">
+                                                    Upload
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </li>
                 <li>
                     <div class="collapsible-header cyan white-text  "><i class="mdi-action-question-answer"></i> Your
                         Questions (<?= $data['queCount'] ?>)
                     </div>
+
                     <div class="collapsible-body cyan lighten-5">
+                        <div class="row">
+                            <div class="col s12 m12 l12">
+                                <div class="card-panel">
                         <p>Click on the question to view details</p>
                         <?php include '../../backend/connection.php';
                         $question_list = "SELECT * FROM question where qUser='" . $username . "'";
@@ -176,10 +208,10 @@ include '../header-footer/header-user.php'; ?>
                 </li>
 
             </ul>
-
         </div>
     </div>
 </div>
+
 
 
 <!-- insert footer-->
@@ -196,6 +228,92 @@ include '../header-footer/header-user.php'; ?>
 
 <script type="text/javascript" src="../../js/plugins.js"></script>
 
+<!--profile image upload-->
+<script>
+    $(document).ready(function () {
+        $('#insert').click(function () {
+            var image_name = $('#image').val();
+            if (image_name === '') {
+                alert('please insert a image');
+                return false;
+            } else {
+                var image_extention = image_name.split('.').pop().toLowerCase();
+                if (JQuery.inArray(image_extention, ['png', 'jpg', 'jpeg']) === -1) {
+                    alert('Invalid type');
+                    $('#image').val('');
+                    return false;
+                }
+            }
+        })
+
+    })
+</script>
 
 </body>
 </html>
+<?php include '../../backend/connection.php';
+$username = $_SESSION['username'];
+
+
+if (isset($_POST['insert'])) {
+    $file = $_FILES['image'];
+    $fileName = $_FILES['image']['name'];
+    $fileTmpName = $_FILES['image']['tmp_name'];
+    $fileSize = $_FILES['image']['size'];
+    $fileError = $_FILES['image']['error'];
+    $fileType = $_FILES['image']['type'];
+
+    $fileExt = explode('.', $fileName);
+    $actExt = strtolower(end($fileExt));
+
+    $allowed = array('jpg', 'jpeg', 'png');
+
+    $profileImage = "SELECT Image FROM userimage WHERE username='" . $username . "'";
+    if ($is_query_run = mysqli_query($connection, $profileImage)) {
+        while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
+            $pImage = $row['Image'];
+
+        }
+    }
+
+    if (in_array($actExt, $allowed)) {
+        if ($fileError === 0) {
+            if ($fileSize < 1000000) {
+                $image = addslashes(file_get_contents($fileTmpName));
+                //update or insert
+                if (empty($pImage)) {
+                    $query = "INSERT INTO userimage(username,Image) VALUES('$username','$image')";
+                    if ($is_query_run = mysqli_query($connection, $query)) {
+                     echo "<script>alert('insert successful')</script>";
+
+                     }
+                } else {
+                    $query = "UPDATE userimage SET Image='" . $image . "' WHERE username='" . $username . "'";
+                    /**if ($is_query_run = mysqli_query($connection, $query)) {
+                     * echo "<script>alert('update successful')</script>";
+                     *
+                     * }**/
+                }
+                try {
+
+                    mysqli_autocommit($connection, FALSE);
+                    mysqli_query($connection, $query);
+                    mysqli_commit($connection);
+                    echo "<script>alert('upload successful')</script>";
+                    header("location: user-profile.php");
+
+                } catch (Exception $e) {
+                    $connection->rollback();
+                }
+            } else {
+                echo "<script>alert('Your file is too large')</script>";
+            }
+
+        } else {
+            echo "<script>alert('Error uploading the file')</script>";
+        }
+    } else {
+        echo "<script>alert('You cant upload file of this type')</script>";
+    }
+}
+    ?>

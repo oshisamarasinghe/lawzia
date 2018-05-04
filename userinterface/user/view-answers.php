@@ -53,6 +53,7 @@ if ($is_query_run = mysqli_query($connection, $question)) {
         $qId = $qData['qID'];
         $country = $qData['qCountry'];
         $cat = $qData['qCategory'];
+        $title=$qData['qTitle'];
         echo '<div class="row">
                  <div class="col s12 m12 l12  " >
                      <ul class="collection grey lighten-2">
@@ -61,12 +62,13 @@ if ($is_query_run = mysqli_query($connection, $question)) {
                                 <img src="../../images/user-profile-pic.png" alt="" class="circle">
                                 <span class="title black-text">' . $user . '</span>
                                 
-                                <p class=" ultra-small">' . $country . '</p>
-                                <p class="ultra-small black-text" >' . $date . ' </p>
+                                <p class=" ultra-small">'.$cat.' for '. $country . '</p>
+                                 <p class ="ultra-small"> ' . $date . '</p>
+                               
                                 
                                 <div class="model-email-content">
-                                <p class="small teal-text darken-3">Category - '.$cat.'</p>
-                                <hr class="grey-text text-lighten-2 full-width">
+                                <h5 class=" teal-text darken-3">'.$title.'</h5>
+                               
                                 <p> ' . $description . '</p>
                                 </div>
                             </div>
@@ -87,7 +89,7 @@ if ($is_inside_query_run = mysqli_query($connection, $answers)) {
         $aUser = $in_row['aUser'];
         $aId = $in_row['aID'];
 
-        $relevant_Lawyer_image = "SELECT Image FROM lawyerimage WHERE username='" . $aUser . "' ";
+        $relevant_Lawyer_image = "SELECT Image FROM userimage WHERE username='" . $aUser . "' ";
         if ($is_query_run = mysqli_query($connection, $relevant_Lawyer_image)) {
             while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
                 $data = $row['Image'];

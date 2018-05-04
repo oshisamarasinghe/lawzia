@@ -14,7 +14,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="white-text" href="../user/QA-user.php">
+                    <a class="white-text" href="../user/question-user-direct.php">
                         <span>Question & Answer</span>
                     </a>
                 </li>

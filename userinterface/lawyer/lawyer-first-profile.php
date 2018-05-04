@@ -36,7 +36,7 @@ include '../header-footer/nav-lawyer.php'; ?>
         </div>
 
         <?php
-        $profileImage = "SELECT Image FROM lawyerimage WHERE username='" . $username . "'";
+        $profileImage = "SELECT Image FROM userimage WHERE username='" . $username . "'";
         if ($is_query_run = mysqli_query($connection, $profileImage)) {
             while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
                 $pImage = $row['Image'];

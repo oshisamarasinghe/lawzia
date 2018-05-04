@@ -1,6 +1,43 @@
 <?php include '../../backend/connection.php';
 session_start();
+$username = $_SESSION['username'];
+function length($inputTxt, $length)
+{
+    $userInput = $inputTxt;
+    if (strlen($userInput) == $length) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+//validate data
+function test_input($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
+$errors = "";
+if (empty(test_input($_POST['country']))) {
+    $errors = "error-complete all fields";
+    echo "<script> alert('error-complete all fields')</script>";
+} else {
+    $qCountry = test_input($_POST['country']);
+}
+
+if (empty(test_input($_POST['category']))) {
+    $errors = "error-complete all fields";
+    echo "<script> alert('error-complete all fields')</script>";
+
+} else {
+    $qCategory = test_input($_POST['category']);
+}
+
 ?>
+
 
 
 <!DOCTYPE html>
@@ -24,30 +61,39 @@ session_start();
           media="screen,projection">
 
 
-
 </head>
 
 <body class="white">
 <!-- Page Loading -->
 <?php include '../header-footer/loading.php';
 include '../header-footer/nav-lawyer.php'; ?>
+<div class="tabs tab-profile z-depth-1 red">
+    <div class="col s12 offset-m10">
+        <p class="white-text waves-effect waves-light">  <?= $qCountry ?>/<?= $qCategory ?></p>
+    </div>
+</div>
 
 <!--question-->
 <?php include '../../backend/connection.php';
 
-$results_per_page=6;
+$results_per_page = 5;
 $questions = "SELECT * FROM question ORDER BY qID DESC ";
-$result=mysqli_query($connection, $questions);
-$no_of_results=mysqli_num_rows($result);
-$no_of_pages=ceil($no_of_results/$results_per_page);
+$result = mysqli_query($connection, $questions);
+$no_of_results = mysqli_num_rows($result);
+$no_of_pages = ceil($no_of_results / $results_per_page);
 
-if(!isset($_GET['page'])){
-    $page_no=1;
-}else{
-    $page_no=$_GET['page'];
+if (!isset($_GET['page'])) {
+    $page_no = 1;
+} else {
+    $page_no = $_GET['page'];
 }
-$this_page_first_result=($page_no-1)*$results_per_page;
-$results_in_this_page="SELECT * FROM question  ORDER BY qID DESC LIMIT ".$this_page_first_result.','.$results_per_page;
+$this_page_first_result = ($page_no - 1) * $results_per_page;
+if ($qCategory == "All") {
+    $results_in_this_page = "SELECT * FROM question WHERE qCountry='" . $qCountry . "' ORDER BY qID DESC LIMIT " . $this_page_first_result . ',' . $results_per_page;
+} else {
+    $results_in_this_page = "SELECT * FROM question  WHERE qCountry='" . $qCountry . "' AND qCategory='" . $qCategory . "'ORDER BY qID DESC LIMIT " . $this_page_first_result . ',' . $results_per_page;
+}
+//$results_in_this_page="SELECT * FROM question  ORDER BY qID DESC LIMIT ".$this_page_first_result.','.$results_per_page;
 
 if ($is_query_run = mysqli_query($connection, $results_in_this_page)) {
 
@@ -59,10 +105,18 @@ if ($is_query_run = mysqli_query($connection, $results_in_this_page)) {
         $qId = $row['qID'];
         $cat = $row['qCategory'];
         $country = $row['qCountry'];
+        $title = $row['qTitle'];
 
+        //relevant user profile image
+        $relevant_Lawyer_image = "SELECT Image FROM userimage WHERE username='" . $user . "' ";
+        if ($is_query_run = mysqli_query($connection, $relevant_Lawyer_image)) {
+            while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
+                $data = $row['Image'];
 
-
-        echo '<div class="row">
+            }
+        }
+        if(empty($data)){
+            echo '<div class="row">
                         <div class="col s12 m12 l12 " >
                             <ul class="collection grey lighten-2">
                                 <li class="collection-item avatar grey lighten-2">
@@ -74,36 +128,64 @@ if ($is_query_run = mysqli_query($connection, $results_in_this_page)) {
                                 <p class="ultra-small"> ' . $date . ' </p>
                                
                                 <div class="model-email-content">
-                                <p><b> ' . $description . '</b></p>
+                                <h5 class="cyan-text">' . $title . '</h5>
+                                <p> ' . $description . '</p>
                                 
                                 
                                 </div>
-                            <p><a href="addAnswer.php?question_id=' . $qId . '">add answer </a> 
-                                <br><a href="question-page-lawyer.php?question_id=' . $qId . '" >view answers</a> </p>
-                       </div>
-                            </li>
-                            
-                       </ul>
-                  </div>
-                </div>
-               
                       
-                 ';
+                                <p><a href="addAnswer.php?question_id=' . $qId . '">add answer </a> 
+                                <br><a href="question-page-lawyer.php?question_id=' . $qId . '" >view answers</a> </p>
+                            </div>
+                            </li>
+                        </ul>
+                  </div>
+                </div>';
+
+        }else{
+            echo '<div class="row">
+                        <div class="col s12 m12 l12 " >
+                            <ul class="collection grey lighten-2">
+                                <li class="collection-item avatar grey lighten-2">
+                                    <div class="col s7">
+                                <img src="data:image/jpeg;base64,' . base64_encode($data) . '" height="130" width="130" alt="profile image" class="circle z-depth-2 "
+                 id="profileImage">
+                                <span class="title black-text">' . $user . '</span>
+                                <p class=" ultra-small">' . $country . '</p>
+                                <p class="ultra-small"> ' . $date . ' </p>
+                               
+                                <div class="model-email-content">
+                                <h5 class="cyan-text">' . $title . '</h5>
+                                <p> ' . $description . '</p>
+                                
+                                
+                                </div>
+                      
+                                <p><a href="addAnswer.php?question_id=' . $qId . '">add answer </a> 
+                                <br><a href="question-page-lawyer.php?question_id=' . $qId . '" >view answers</a> </p>
+                            </div>
+                            </li>
+                        </ul>
+                  </div>
+                </div>';
+
+        }
+
 
     }
 
 }
-echo'
+echo '
   
   <ul class="pagination"> ';
-for($page=1;$page<=$no_of_pages;$page++){
-    if($page==$page_no)
-        echo'<li><a class="active" href="QA-lawyer.php?page='.$page.'">'.$page .'</a></li>';
+for ($page = 1; $page <= $no_of_pages; $page++) {
+    if ($page == $page_no)
+        echo '<li><a class="active" href="QA-lawyer.php?page=' . $page . '">' . $page . '</a></li>';
     else
-        echo'<li><a href="QA-lawyer.php?page='.$page.'">'.$page .'</a></li>';
+        echo '<li><a href="QA-lawyer.php?page=' . $page . '">' . $page . '</a></li>';
 
 }
-echo'</div>';
+echo '</ul>';
 ?>
 
 
@@ -121,7 +203,6 @@ echo'</div>';
 <script type="text/javascript" src="../../js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
 <script type="text/javascript" src="../../js/plugins.js"></script>
-
 
 
 </body>

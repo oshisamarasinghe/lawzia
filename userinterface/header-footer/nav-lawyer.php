@@ -13,7 +13,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="white-text" href="../lawyer/QA-lawyer.php">
+                    <a class="white-text" href="../lawyer/question-direct.php">
                         <span>Question & Answer</span>
                     </a>
                 </li>

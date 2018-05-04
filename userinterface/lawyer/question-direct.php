@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Ask-a-Question | LAWZIA</title>
+    <title>Select-Question | LAWZIA</title>
 
     <link rel="icon" href="../../images/lawzia-logo.jpg" sizes="32x32">
 
@@ -23,16 +23,16 @@
 <body class="white">
 <!-- Page Loading -->
 <?php include '../header-footer/loading.php';
-include '../header-footer/header-user.php'; ?>
+include '../header-footer/nav-lawyer.php'; ?>
 
 <!--Ask-a-Question form-->
 <div class="row">
     <div class="col s12 m12 l12 ">
         <div class="card-panel z-depth-2 ">
-            <h3 class="header2" align="center">ASK-A-QUESTION</h3>
+            <h3 class="header2" align="center">VIEW-QUESTIONS</h3>
             <div class="row">
-                <form class="col s6 offset-m3" action="../../backend/ask-a-question.php" method="post">
-                    <p>Ask a Question allows you to get free answers from lawyers in your area for basic legal questions
+                <form class="col s6 offset-m3" action="QA-lawyer.php" method="post">
+                    <p>Select the county and category of question to view free answers from lawyers in your area for basic legal questions
                         on a variety of topics, including family law, employment law, criminal law, and more.</p>
                     <br>
                     <div class="row">
@@ -377,6 +377,7 @@ include '../header-footer/header-user.php'; ?>
                             <div class="row">
                                 <h6>Select the Category</h6>
                                 <select class="browser-default" name="category">
+                                    <option value="All">All Questions</option>
                                     <option value="Administrative Law">Administrative Law</option>
                                     <option value="Advertising Law">Advertising Law</option>
                                     <option value="Admiralty Law">Admiralty Law</option>
@@ -443,26 +444,17 @@ include '../header-footer/header-user.php'; ?>
                                 </select>
                             </div>
                         </div>
-                        <div class="input-field col s12">
-                            <input id="title" type="text"  placeholder="give a specific title" name="title">
-                            <label for="title" class="active">Question Title</label>
-                        </div>
 
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <textarea id="message5" class="materialize-textarea" length="1000" rows="5"
-                                          name="question"></textarea>
-                                <label for="message">Type Your Question Here</label>
-                            </div>
+
                             <div class="row">
                                 <div class="input-field col s12">
                                     <button class="btn cyan waves-effect waves-light right" type="submit" name="action">
-                                        Submit Your Question
+                                        View Questions
                                         <i class="mdi-content-send right"></i>
                                     </button>
                                 </div>
                             </div>
-                        </div>
+
                 </form>
             </div>
         </div>

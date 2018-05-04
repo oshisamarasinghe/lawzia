@@ -53,7 +53,7 @@ if ($is_query_run = mysqli_query($connection, $lawyer_country)) {
         $email = $row['email'];
 
         //relevant lawyer profile image
-        $relevant_Lawyer_image = "SELECT Image FROM lawyerimage WHERE username='" . $username . "' ";
+        $relevant_Lawyer_image = "SELECT Image FROM userimage WHERE username='" . $username . "' ";
         if ($is_inside_query_run = mysqli_query($connection, $relevant_Lawyer_image)) {
             while ($inside_row = mysqli_fetch_array($is_inside_query_run, MYSQL_ASSOC)) {
                 $data = $inside_row['Image'];

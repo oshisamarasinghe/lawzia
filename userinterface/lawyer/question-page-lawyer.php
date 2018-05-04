@@ -48,8 +48,19 @@ if ($is_query_run = mysqli_query($connection, $question)) {
         $qId = $qData['qID'];
         $country = $qData['qCountry'];
         $cat = $qData['qCategory'];
+        $title = $qData['qTitle'];
 
-        echo '<div class="row">
+        //relevant user profile image
+        $relevant_Lawyer_image = "SELECT Image FROM userimage WHERE username='" . $user . "' ";
+        if ($is_query_run = mysqli_query($connection, $relevant_Lawyer_image)) {
+            while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
+                $data = $row['Image'];
+
+            }
+        }
+
+        if (empty($data)) {
+            echo '<div class="row">
                  <div class="col s12 m12 l12  " >
                      <ul class="collection grey lighten-2">
                          <li class="collection-item avatar grey lighten-2">
@@ -57,12 +68,12 @@ if ($is_query_run = mysqli_query($connection, $question)) {
                                 <img src="../../images/user-profile-pic.png" alt="" class="circle">
                                 <span class="title black-text">' . $user . '</span>
                                 
-                                <p class=" ultra-small">' . $country . '</p>
+                                <p class=" ultra-small">'.$cat.' - '. $country . '</p>
                                 <p class="ultra-small black-text" >' . $date . ' </p>
                                 
                                 <div class="model-email-content">
-                                <p class="small teal-text darken-3">Category - '.$cat.'</p>
-                                <hr class="grey-text text-lighten-2 full-width">
+                                
+                                <h5 class="cyan-text">' . $title . '</h5>
                                 <p> ' . $description . '</p>
                                 </div>
                             </div>
@@ -70,6 +81,32 @@ if ($is_query_run = mysqli_query($connection, $question)) {
                      </ul>
                   </div>
                </div>';
+        } else {
+
+            echo '<div class="row">
+                 <div class="col s12 m12 l12  " >
+                     <ul class="collection grey lighten-2">
+                         <li class="collection-item avatar grey lighten-2">
+                            <div class="col s7">
+                                <img src="data:image/jpeg;base64,' . base64_encode($data) . '" height="130" width="130" alt="profile image" class="circle z-depth-2 "
+                 id="profileImage">
+                                <span class="title black-text">' . $user . '</span>
+                                
+                                <p class=" ultra-small">'.$cat.' - '. $country . '</p>
+                                <p class="ultra-small black-text" >' . $date . ' </p>
+                                
+                                <div class="model-email-content">
+                               
+                                <h5 class="cyan-text">'.$title.'</h5>
+                                <p> ' . $description . '</p>
+                                </div>
+                            </div>
+                        </li>
+                     </ul>
+                  </div>
+               </div>';
+        }
+
     }
 }
 
@@ -85,7 +122,7 @@ if ($is_inside_query_run = mysqli_query($connection, $answers)) {
         $aId = $in_row['aID'];
 
         //relevant lawyer profile image
-        $relevant_Lawyer_image = "SELECT Image FROM lawyerimage WHERE username='" . $aUser . "' ";
+        $relevant_Lawyer_image = "SELECT Image FROM userimage WHERE username='" . $aUser . "' ";
         if ($is_query_run = mysqli_query($connection, $relevant_Lawyer_image)) {
             while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
                 $data = $row['Image'];

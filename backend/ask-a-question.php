@@ -22,21 +22,29 @@ function test_input($data)
 }
 
 $errors = "";
-if (test_input(empty($_POST['country']))) {
+if (empty(test_input($_POST['country']))) {
     $errors = "error-complete all fields";
     echo "<script> alert('error-complete all fields')</script>";
 } else {
     $country = test_input($_POST['country']);
 }
 
-if (test_input(empty($_POST['category']))) {
+if (empty(test_input($_POST['category']))) {
     $errors = "error-complete all fields";
     echo "<script> alert('error-complete all fields')</script>";
 
 } else {
     $category = test_input($_POST['category']);
 }
-if (test_input(empty($_POST['question']))) {
+
+if (empty(test_input($_POST['title']))) {
+    $errors = "error-complete all fields";
+    echo "<script> alert('please enter a relevant title')</script>";
+
+} else {
+    $title = test_input($_POST['title']);
+}
+if (empty(test_input($_POST['question']))) {
     $errors = "error-complete all fields";
     echo "<script> alert('error-complete all fields')</script>";
 
@@ -47,10 +55,10 @@ if (test_input(empty($_POST['question']))) {
 
 try {
     mysqli_autocommit($connection, FALSE);
-    mysqli_query($connection, "INSERT INTO question( qDescription, qUser, qCategory, qDate,qCountry )
-				VALUES('$description','$username','$category',now(),'$country')");
+    mysqli_query($connection, "INSERT INTO question( qTitle,qDescription, qUser, qCategory, qDate,qCountry )
+				VALUES('$title','$description','$username','$category',now(),'$country')");
     mysqli_commit($connection);
-    echo "<script> alert('your question subitted sucessfully')</script>";
+    echo "<script> alert('your question submitted sucessfully')</script>";
     header("location:../userinterface/user/QA-user.php");
 
 } catch (Exception $e) {

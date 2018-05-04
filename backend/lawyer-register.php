@@ -1,6 +1,5 @@
 <?php include 'connection.php';
 
-
 function length($inputTxt, $length)
 {
     $userInput = $inputTxt;
@@ -54,13 +53,51 @@ if (empty(test_input($_POST['lname']))) {
     $lname = test_input($_POST['lname']);
 }
 
+/*if (empty(test_input($_POST['CountryCode']))) {
+    $errors = "error-complete all fields";
+    echo "<script> alert('error-complete all fields')</script>";
+    echo "<script> window.history.go(-1);</script>";
+} else {*/
+    $countryCode = test_input($_POST['CountryCode']);
+
 
 if (empty(test_input($_POST['contact']))) {
     $errors = "error-complete all fields";
     echo "<script> alert('error-complete all fields')</script>";
     echo "<script> window.history.go(-1);</script>";
 } else {
-    $contact = test_input($_POST['contact']);
+
+
+// set API Access Key
+    $access_key = 'd904bc71477177d932f63f655a8cde9a';
+
+// set phone number
+    $phone_number = test_input($_POST['contact']);
+
+    $country_code=$countryCode;
+
+// Initialize CURL:
+    $ch = curl_init('http://apilayer.net/api/validate?access_key='.$access_key.'&number='.$phone_number.'& country_code ='.$country_code.'');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+// Store the data:
+    $json = curl_exec($ch);
+    curl_close($ch);
+
+// Decode JSON response:
+    $validationResult = json_decode($json, true);
+
+// Access and use your preferred validation result objects
+    if($validationResult['valid']=='true'){
+        $contact = test_input($_POST['contact']);
+    }else{
+        echo "<script> alert('Invalid contact number')</script>";
+    }
+    //$validationResult['country_code'];
+    //$validationResult['carrier'];
+
+
+    //$contact = test_input($_POST['contact']);
 }
 
 if (test_input(empty($_POST['country']))) {
@@ -151,8 +188,49 @@ if (empty(test_input($_POST['w_name']))) {
 } else {
     $wName = test_input($_POST['w_name']);
 }
+/*if (empty(test_input($_POST['w_CountryCode']))) {
+    $errors = "error-complete all fields";
+    echo "<script> alert('error-work tel number')</script>";
+    echo "<script> window.history.go(-1);</script>";
+} else {*/
+    $wCountryCode = test_input($_POST['w_CountryCode']);
+
 
 if (empty(test_input($_POST['w_tel']))) {
+    $errors = "error-complete all fields";
+    echo "<script> alert('error-complete all fields')</script>";
+    echo "<script> window.history.go(-1);</script>";
+} else {
+
+
+// set API Access Key
+    $access_key = 'd904bc71477177d932f63f655a8cde9a';
+
+// set phone number
+    $phone_number = test_input($_POST['w_tel']);
+
+    $w_country_code = $wCountryCode;
+
+// Initialize CURL:
+    $ch = curl_init('http://apilayer.net/api/validate?access_key=' . $access_key . '&number=' . $phone_number . '&country_code=' . $w_country_code . '');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+// Store the data:
+    $json = curl_exec($ch);
+    curl_close($ch);
+
+// Decode JSON response:
+    $validationResult = json_decode($json, true);
+
+// Access and use your preferred validation result objects
+    if ($validationResult['valid'] == 'true') {
+        $wContact = test_input($_POST['w_tel']);
+    } else {
+        echo "<script> alert('Invalid contact number')</script>";
+    }
+}
+
+/*if (empty(test_input($_POST['w_tel']))) {
     $errors = "error-complete all fields";
     echo "<script> alert('error-complete company contact')</script>";
     echo "<script> window.history.go(-1);</script>";
@@ -160,7 +238,7 @@ if (empty(test_input($_POST['w_tel']))) {
     $wContact = test_input($_POST['w_tel']);
 }
 
-
+*/
 if (test_input(empty($_POST['exp']))) {
     $errors = "error-complete all fields";
     echo "<script> alert('error-complete all fields')</script>";
@@ -177,6 +255,7 @@ if (test_input(empty($_POST['w_position']))) {
 } else {
     $position = test_input($_POST['w_position']);
 }
+
 $type = 'lu';
 
 
