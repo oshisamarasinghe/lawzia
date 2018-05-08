@@ -64,18 +64,23 @@ include '../../backend/lawyer-info.php';
                         <li class="collection-item dismissable">
                             <p>Select an Image and make your profile professional</p>
                             <form action="" enctype="multipart/form-data" method="post">
-                                <!--div class="file-field input-field">
-                                    <input class="file-path validate" type="text" />
-                                    <div class="btn">
+                                <div class="file-field input-field">
+                                    <input class="file-path validate " type="text"/>
+                                    <div class="btn waves-light waves-effect  cyan">
                                         <span>File</span>
-                                        <input type="file" />
+                                        <input type="file" name="image" id="image"/>
                                     </div>
-                                </div-->
-                                <input name="image" id="image" type="file"/>
-                                <div id="raised-buttons" class="section">
-                                    <button type="submit" class="waves-light waves-effect" name="insert">
-                                        Upload
-                                    </button>
+                                </div>
+                                <!--input name="image" id="image" type="file"/-->
+                                <p>Upload the Image </p>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <!--div id="raised-buttons" class="section"-->
+                                        <button type="submit" class=" btn waves-light waves-effect cyan"
+                                                name="insert">
+                                            Upload
+                                        </button>
+                                    </div>
                                 </div>
                             </form>
                         </li>
@@ -1415,7 +1420,7 @@ if (isset($_POST['insert'])) {
         echo "<script>alert('You cant upload file of this type')</script>";
     }
 
-    /**echo "<script>alert('successful')</script>";
+    /*echo "<script>alert('successful')</script>";
      * $image = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
      * $query = "INSERT INTO image(image) VALUES('$image') ";
      * if ($is_query_run = mysqli_query($connection, $query)) {

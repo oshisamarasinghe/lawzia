@@ -23,17 +23,27 @@
 <?php include '../header-footer/loading.php';
 include '../header-footer/header-user.php'; ?>
 <?php include '../../backend/connection.php';
-$username=$_GET['username'];
-$query="SELECT * FROM lawyer WHERE username='".$username."'";
+$lawyerName=$_GET['username'];
+$query="SELECT * FROM lawyer WHERE username='".$lawyerName."'";
+
+
 if ($is_query_run = mysqli_query($connection, $query)) {
     while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
-        $Name = $row['username'];
-        $country =$row['country'];
+        $fName = $row['fName'];
+        $lName = $row['lName'];
+        $country = $row['country'];
         $email = $row['email'];
+        $company = $row['workCompany'];
+        $experience = $row['workExperience'];
+        $wEmail = $row['workEmail'];
+        $wContact = $row['workContact'];
+        $street = $row['workAddStreet'];
+        $city=$row['workAddCity'];
+        $wCountry=$row['WorkAddCountry'];
 
     }
 }
-        $profileImage = "SELECT Image FROM userimage WHERE username='" . $username . "'";
+        $profileImage = "SELECT Image FROM userimage WHERE username='" . $lawyerName . "'";
         if($is_query_run = mysqli_query($connection, $profileImage)) {
             while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
                 $pImage = $row['Image'];
@@ -47,16 +57,15 @@ if ($is_query_run = mysqli_query($connection, $query)) {
 
 <div id="profile-page" class="section">
     <div id="profile-page-content" class="row">
-        <div class="row">
-            <div class="col s12 m12">
-                <div id="profile-page-wall-share" class="row">
-                    <ul id="projects-collection" class="collection style" >
-                        <li class="collection-item">
+        <div class="row z-depth-2">
+            <div class="col s12 m12 l6">
+                <div class="col s7">
                             <?php
                             if (empty($pImage)) {
                             echo '
+                            
                             <figure class="card-profile-image">
-                                <img src="../../images/user-profile-pic.png"alt="profile image" class="circle z-depth-2 "
+                                <img src="../../images/user-profile-pic.png"alt="profile image"height="200" width="200" class="circle z-depth-2 "
                                      id="profileImage">
                             </figure>
 
@@ -68,7 +77,7 @@ if ($is_query_run = mysqli_query($connection, $query)) {
 
                             echo '
                             <figure class="card-profile-image">
-                                <img src="data:image/jpeg;base64,' . base64_encode($pImage) . '" height="130" width="130" alt="profile image" class="circle z-depth-2 "
+                                <img src="data:image/jpeg;base64,' . base64_encode($pImage) . '" height="200" width="200" alt="profile image" class="circle z-depth-2 "
                                      id="profileImage">
                             </figure>
 
@@ -76,29 +85,28 @@ if ($is_query_run = mysqli_query($connection, $query)) {
 
                             }
                             ?>
+                </div>
 
+
+                            <h5 class="regular" > <?= $fName."  " .$lName ?> </h5>
+                            <h6 class="cyan-text" ><?= $country ?> | <?= $email ?></h6>
                             <p class="collections-title"><i
-                                        class="mdi-action-perm-identity cyan-text text-darken-2"></i>Name : <?= $Name ?> </p>
-                            <p class="collections-title"><i
-                                        class="mdi-action-wallet-travel cyan-text text-darken-2"></i>work experience
+                                        class="mdi-action-wallet-travel cyan-text text-darken-2"></i><?=$experience?> experience in
                             </p>
-                            <p class="collections-title"><i class="mdi-action-assessment cyan-text text-darken-2"></i>Areas
-                                of practise </p>
-                            <p class="collections-title"><i
-                                        class="mdi-social-location-city cyan-text text-darken-2"></i>Country :<?= $country ?></p>
-                            <p class="collections-title"><i class="mdi-communication-email cyan-text text-darken-2"></i>Email
-                                Address : <?= $email ?></p>
-                            <p class="collections-title"><i
-                                        class="mdi-action-account-balance-wallet cyan-text text-darken-2"></i>Work
-                                Place</p>
-                        </li>
+                            <h6><?=$company?><br>
+                                <br>
+                                <?=$street?>,<br>
+                                <?=$city?>,<br>
+                                <?=$wCountry?></h6>
 
-                    </ul>
+
+
+
                 </div>
             </div>
         </div>
     </div>
-</div>
+
 
 
 <!-- insert footer-->

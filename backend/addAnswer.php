@@ -41,6 +41,7 @@ try {
 
     mysqli_autocommit($connection, FALSE);
     mysqli_query($connection, $query);
+
     mysqli_commit($connection);
 
 
@@ -57,6 +58,7 @@ try {
     }
     mysqli_autocommit($connection, false);
     mysqli_query($connection, "INSERT INTO qa(qID,aID)VALUES('$qId','$answerId')");
+    mysqli_query($connection, "INSERT INTO answervote(aID,voteUpCount,voteDownCount)VALUES('$answerId',0,0)");
     mysqli_commit($connection);
     echo '<script>alert("your answer submitted successfully")</script>';
     echo "<script> window.history.go(-2);</script>";

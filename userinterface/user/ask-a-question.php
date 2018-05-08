@@ -10,7 +10,7 @@
 
     <link href="../../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="../../css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
-    <!-- Custome CSS-->
+    <!-- Custom CSS-->
     <link href="../../css/custom-style.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="../../css/style-horizontal.css" type="text/css" rel="stylesheet" media="screen,projection">
 
@@ -443,9 +443,11 @@ include '../header-footer/header-user.php'; ?>
                                 </select>
                             </div>
                         </div>
+                        <div class="row">
                         <div class="input-field col s12">
-                            <input id="title" type="text"  placeholder="give a specific title" name="title">
+                            <textarea id="title"   class="materialize-textarea" placeholder="give a specific title" name="title" maxlength="500"></textarea>
                             <label for="title" class="active">Question Title</label>
+                        </div>
                         </div>
 
                         <div class="row">
@@ -454,6 +456,7 @@ include '../header-footer/header-user.php'; ?>
                                           name="question"></textarea>
                                 <label for="message">Type Your Question Here</label>
                             </div>
+                        </div>
                             <div class="row">
                                 <div class="input-field col s12">
                                     <button class="btn cyan waves-effect waves-light right" type="submit" name="action">
@@ -462,7 +465,7 @@ include '../header-footer/header-user.php'; ?>
                                     </button>
                                 </div>
                             </div>
-                        </div>
+
                 </form>
             </div>
         </div>

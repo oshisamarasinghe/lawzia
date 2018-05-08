@@ -121,6 +121,9 @@ include '../header-footer/nav-lawyer.php'; ?>
                         Answers
                     </div>
                     <div class="collapsible-body cyan lighten-5">
+                        <div class="row">
+                            <div class="col s12 m12 l12">
+                                <div class="card-panel">
                         <p>
                             <?php include '../../backend/connection.php';
                             $answer_list = "SELECT * FROM answer where aUser='" . $username . "'";
@@ -151,7 +154,10 @@ include '../header-footer/nav-lawyer.php'; ?>
                             }
                             ?>
                         </p>
+                       </div>
+                     </div>
                     </div>
+                  </div>
                 </li>
                 <li>
                     <div class="collapsible-header cyan white-text"><i class="mdi-action-face-unlock"></i>Your Badges

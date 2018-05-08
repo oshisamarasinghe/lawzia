@@ -70,16 +70,16 @@ if ($is_query_run = mysqli_query($connection, $question)) {
                                 
                                 <p class=" ultra-small">'.$cat.' - '. $country . '</p>
                                 <p class="ultra-small black-text" >' . $date . ' </p>
+                               </div>
+                             </li>
+                          </ul>
+                      </div>
+                                <div class="model-email-content grey lighten-3">
                                 
-                                <div class="model-email-content">
-                                
-                                <h5 class="cyan-text">' . $title . '</h5>
+                                <h5 class="teal-text darken-3">Question : ' . $title . '</h5>
                                 <p> ' . $description . '</p>
                                 </div>
-                            </div>
-                        </li>
-                     </ul>
-                  </div>
+                        
                </div>';
         } else {
 
@@ -94,16 +94,16 @@ if ($is_query_run = mysqli_query($connection, $question)) {
                                 
                                 <p class=" ultra-small">'.$cat.' - '. $country . '</p>
                                 <p class="ultra-small black-text" >' . $date . ' </p>
-                                
-                                <div class="model-email-content">
+                             </div>
+                           </li>
+                         </ul>
+                       </div>
+                                <div class="model-email-content grey lighten-3">
                                
-                                <h5 class="cyan-text">'.$title.'</h5>
+                                <h5 class="teal-text darken-3">Question : '.$title.'</h5>
                                 <p> ' . $description . '</p>
                                 </div>
-                            </div>
-                        </li>
-                     </ul>
-                  </div>
+                         
                </div>';
         }
 
@@ -136,16 +136,18 @@ if ($is_inside_query_run = mysqli_query($connection, $answers)) {
                         <li class="collection-item avatar teal lighten-4">
                             <div class="col s7">
                                 <img src="../../images/user-profile-pic.png" alt="" class="circle">
-                                <span class="title black-text"><b>' . $aUser . '</b></span>
-                                <p class=" ultra-small">' . $aDate . ' </p>
+                                <span class="title black-text">' . $aUser . '</span>
+                                <p class=" ultra-small">Answered on ' . $aDate . ' </p>
+                              </div>
+                            </li>
+                         </ul>
+                      </div>
                                 
-                                <div class="model-email-content">
+                                <div class="model-email-content teal lighten-5">
                                 <p class="small"> ' . $aDescription . '</p>
                                 
                             </div>
-                        </li> 
-                      </ul>
-                     </div>
+                        
                    </div>
                 ';
         } else {
@@ -157,17 +159,19 @@ if ($is_inside_query_run = mysqli_query($connection, $answers)) {
                             <div class="col s7">
                                 <img src="data:image/jpeg;base64,' . base64_encode($data) . '" height="130" width="130" alt="profile image" class="circle z-depth-2 "
                  id="profileImage">
-                                <span class="title black-text"><b>' . $aUser . '</b></span>
-                                <p class=" ultra-small">' . $aDate . ' </p>
-                                <p class="secondary-content teal-text darken-3"><i class="mdi-action-thumb-up"></i> </p>
-                               
-                                <div class="model-email-content">
-                                <p class="small"> ' . $aDescription . '</p>
+                                <span class="title black-text">' . $aUser . '</span>
+                                <p class=" ultra-small">Answered on ' . $aDate . ' </p>
                                 
+                               </div>
+                             </li>
+                           </ul>
+                         </div>
+                                <div class="model-email-content teal lighten-5">
+                                <p class="small"> ' . $aDescription . '</p>
+                                <a href="" class=" teal-text darken-3"><i class="mdi-action-thumb-up"></i> </a>
+                                <a class=" teal-text darken-3"><i class="mdi-action-thumb-down"></i> </a>
                             </div>
-                        </li>   
-                       </ul>
-                      </div>
+                        
                      </div>
                 ';
         }

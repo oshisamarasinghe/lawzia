@@ -1,5 +1,6 @@
 <?php include "connection.php";
 session_start();
+echo 'hello in the question';
 
 $username = $_SESSION['username'];
 function length($inputTxt, $length)
@@ -62,5 +63,6 @@ try {
     header("location:../userinterface/user/QA-user.php");
 
 } catch (Exception $e) {
+    echo "<script> alert($e)</script>";
     $connection->rollback();
 }

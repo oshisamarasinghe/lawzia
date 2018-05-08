@@ -1,4 +1,4 @@
-<?php include '../../backend/connection.php';
+<!--?php include '../../backend/connection.php';
 session_start();
 $username = $_SESSION['username'];
 function length($inputTxt, $length)
@@ -34,9 +34,9 @@ if (empty(test_input($_POST['category']))) {
 
 } else {
     $qCategory = test_input($_POST['category']);
-}
+}*/
 
-?>
+?-->
 
 
 
@@ -67,7 +67,7 @@ if (empty(test_input($_POST['category']))) {
 <!-- Page Loading -->
 <?php include '../header-footer/loading.php';
 include '../header-footer/nav-lawyer.php'; ?>
-<div class="tabs tab-profile z-depth-1 red">
+<!--div class="tabs tab-profile z-depth-1 red">
     <div class="col s12 offset-m10">
         <p class="white-text waves-effect waves-light">  <?= $qCountry ?>/<?= $qCategory ?></p>
     </div>
@@ -88,12 +88,12 @@ if (!isset($_GET['page'])) {
     $page_no = $_GET['page'];
 }
 $this_page_first_result = ($page_no - 1) * $results_per_page;
-if ($qCategory == "All") {
+/*if ($qCategory == "All") {
     $results_in_this_page = "SELECT * FROM question WHERE qCountry='" . $qCountry . "' ORDER BY qID DESC LIMIT " . $this_page_first_result . ',' . $results_per_page;
 } else {
     $results_in_this_page = "SELECT * FROM question  WHERE qCountry='" . $qCountry . "' AND qCategory='" . $qCategory . "'ORDER BY qID DESC LIMIT " . $this_page_first_result . ',' . $results_per_page;
-}
-//$results_in_this_page="SELECT * FROM question  ORDER BY qID DESC LIMIT ".$this_page_first_result.','.$results_per_page;
+}*/
+$results_in_this_page="SELECT * FROM question  ORDER BY qID DESC LIMIT ".$this_page_first_result.','.$results_per_page;
 
 if ($is_query_run = mysqli_query($connection, $results_in_this_page)) {
 
@@ -108,9 +108,9 @@ if ($is_query_run = mysqli_query($connection, $results_in_this_page)) {
         $title = $row['qTitle'];
 
         //relevant user profile image
-        $relevant_Lawyer_image = "SELECT Image FROM userimage WHERE username='" . $user . "' ";
-        if ($is_query_run = mysqli_query($connection, $relevant_Lawyer_image)) {
-            while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
+        $relevant_user_image = "SELECT Image FROM userimage WHERE username='" . $user . "' ";
+        if ($is_relevant_user_image_query_run = mysqli_query($connection, $relevant_user_image)) {
+            while ($row = mysqli_fetch_array($is_relevant_user_image_query_run, MYSQL_ASSOC)) {
                 $data = $row['Image'];
 
             }
@@ -121,25 +121,23 @@ if ($is_query_run = mysqli_query($connection, $results_in_this_page)) {
                             <ul class="collection grey lighten-2">
                                 <li class="collection-item avatar grey lighten-2">
                                     <div class="col s7">
-                                <img src="../../images/user-profile-pic.png" alt="" class="circle">
-                                
-                                <span class="title black-text">' . $user . '</span>
-                                <p class=" ultra-small">' . $country . '</p>
-                                <p class="ultra-small"> ' . $date . ' </p>
-                               
-                                <div class="model-email-content">
-                                <h5 class="cyan-text">' . $title . '</h5>
-                                <p> ' . $description . '</p>
-                                
-                                
-                                </div>
+                                        <img src="../../images/user-profile-pic.png" alt="" class="circle">
+                                        
+                                        <span class="title black-text">' . $user . '</span>
+                                        <p class=" ultra-small">' . $country . '</p>
+                                        <p class="ultra-small"> ' . $date . ' </p>
+                                    </div>
+                                 </li>
+                            </ul>
+                        </div>
+                        <div class="model-email-content grey lighten-3">
+                             <p class="cyan-text">Question : ' . $title . '</p>
+                             <p> ' . $description . '</p>
+                       
                       
-                                <p><a href="addAnswer.php?question_id=' . $qId . '">add answer </a> 
-                                <br><a href="question-page-lawyer.php?question_id=' . $qId . '" >view answers</a> </p>
-                            </div>
-                            </li>
-                        </ul>
-                  </div>
+                                <p><a href="addAnswer.php?question_id=' . $qId . '" class="red-text">add answer </a> 
+                                <a href="question-page-lawyer.php?question_id=' . $qId . '" class="green-text" >view answers</a> </p>
+                        </div> 
                 </div>';
 
         }else{
@@ -148,25 +146,25 @@ if ($is_query_run = mysqli_query($connection, $results_in_this_page)) {
                             <ul class="collection grey lighten-2">
                                 <li class="collection-item avatar grey lighten-2">
                                     <div class="col s7">
-                                <img src="data:image/jpeg;base64,' . base64_encode($data) . '" height="130" width="130" alt="profile image" class="circle z-depth-2 "
-                 id="profileImage">
-                                <span class="title black-text">' . $user . '</span>
-                                <p class=" ultra-small">' . $country . '</p>
-                                <p class="ultra-small"> ' . $date . ' </p>
-                               
-                                <div class="model-email-content">
-                                <h5 class="cyan-text">' . $title . '</h5>
+                                        <img src="data:image/jpeg;base64,' . base64_encode($data) . '" height="130" width="130" alt="profile image" class="circle z-depth-2 "
+                         id="profileImage">
+                                        <span class="title black-text">' . $user . '</span>
+                                        <p class=" ultra-small">' . $country . '</p>
+                                        <p class="ultra-small"> ' . $date . ' </p>
+                                    </div>
+                                 </li>
+                               </ul>
+                             </div>
+                             <div class="model-email-content grey lighten-3">
+                                <p class="cyan-text">Question : ' . $title . '</p>
                                 <p> ' . $description . '</p>
-                                
-                                
-                                </div>
+                                   
+                             
                       
-                                <p><a href="addAnswer.php?question_id=' . $qId . '">add answer </a> 
-                                <br><a href="question-page-lawyer.php?question_id=' . $qId . '" >view answers</a> </p>
-                            </div>
-                            </li>
-                        </ul>
-                  </div>
+                                <p><a href="addAnswer.php?question_id=' . $qId . '" class="red-text">add answer </a> 
+                                <a href="question-page-lawyer.php?question_id=' . $qId . '" class="green-text" >view answers</a> </p>
+                       </div>
+                        
                 </div>';
 
         }
@@ -177,15 +175,18 @@ if ($is_query_run = mysqli_query($connection, $results_in_this_page)) {
 }
 echo '
   
-  <ul class="pagination"> ';
-for ($page = 1; $page <= $no_of_pages; $page++) {
-    if ($page == $page_no)
-        echo '<li><a class="active" href="QA-lawyer.php?page=' . $page . '">' . $page . '</a></li>';
-    else
-        echo '<li><a href="QA-lawyer.php?page=' . $page . '">' . $page . '</a></li>';
+  <ul class="pagination"> 
+    <li class="disabled"><a href="#!"><i class="mdi-navigation-chevron-left"></i></a></li>';
+    for ($page = 1; $page <= $no_of_pages; $page++) {
+        if ($page == $page_no)
+            echo '<li><a class="active waves-effect cyan" href="QA-lawyer.php?page=' . $page . '">' . $page . '</a></li>';
+        else
+        echo '<li><a class="waves-effect " href="QA-lawyer.php?page=' . $page . '">' . $page . '</a></li>';
 
-}
-echo '</ul>';
+    }
+echo '
+    <li class="disabled"><a href="#!"><i class="mdi-navigation-chevron-right"></i></a></li>
+   </ul>';
 ?>
 
 

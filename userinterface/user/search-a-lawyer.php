@@ -30,7 +30,7 @@ include '../header-footer/header-user.php'; ?>
         <div class="card-panel z-depth-2 ">
             <h3 class="header2" align="center">SEARCH-A-LAWYER</h3>
             <div class="row">
-                <form class="col s6 offset-m3" action="view-lawyer-list.php" method="post">
+                <form class="col s6 offset-m3" action="lawyers_list.php" method="post">
                     <div class="row">
                         <div class="row">
                             <h6>Select the country</h6>
@@ -377,6 +377,7 @@ include '../header-footer/header-user.php'; ?>
                             </div>
                         </div>
                 </form>
+
             </div>
         </div>
     </div>
