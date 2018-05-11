@@ -8,7 +8,7 @@
                     </a>
                 </li>
                 <li >
-                    <a href="../lawyer/lawyer-first-profile.php" class="white-text">
+                    <a href="../lawyer/lawyer-profile.php" class="white-text">
                         Profile
                     </a>
                 </li>

@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,9 +23,10 @@
           media="screen,projection">
     <link href="../../js/plugins/data-tables/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet"
           media="screen,projection">
-    <link href="../../js/plugins/chartist-js/chartist.min.css" type="text/css" rel="stylesheet"
-          media="screen,projection">
-    <!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+          type="text/css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 
 </head>
 
@@ -40,10 +39,11 @@ include '../header-footer/header-user.php'; ?>
 
 <!--question-->
 <?php include '../../backend/connection.php';
-session_start();
+include 'vote.php';
+
 $questionID = $_GET['question_id'];
 
-$username=$_SESSION['username'];
+$username = $_SESSION['username'];
 
 $question = "SELECT * FROM question WHERE qID='$questionID'";
 
@@ -55,7 +55,7 @@ if ($is_query_run = mysqli_query($connection, $question)) {
         $qId = $qData['qID'];
         $country = $qData['qCountry'];
         $cat = $qData['qCategory'];
-        $title=$qData['qTitle'];
+        $title = $qData['qTitle'];
 
         //relevant user profile image
         $relevant_user_image = "SELECT Image FROM userimage WHERE username='" . $user . "' ";
@@ -65,7 +65,7 @@ if ($is_query_run = mysqli_query($connection, $question)) {
 
             }
         }
-        if(empty($data)){
+        if (empty($data)) {
             echo '<div class="row">
                  <div class="col s12 m12 l12  " >
                      <ul class="collection grey lighten-2">
@@ -74,7 +74,7 @@ if ($is_query_run = mysqli_query($connection, $question)) {
                                 <img src="../../images/user-profile-pic.png" alt="" class="circle">
                                 <span class="title black-text">' . $user . '</span>
                                 
-                                <p class=" ultra-small">'.$cat.' - '. $country . ' </p>
+                                <p class=" ultra-small">' . $cat . ' - ' . $country . ' </p>
                                 <p class="ultra-small">' . $date . '</p>
                               
                                </div>
@@ -83,14 +83,14 @@ if ($is_query_run = mysqli_query($connection, $question)) {
                             </div>
                                 
                                 <div class="model-email-content grey lighten-3">
-                                <h5 class=" teal-text darken-3">Question : '.$title.'</h5>
+                                <h5 class=" teal-text darken-3">Question : ' . $title . '</h5>
                                
                                 <p> ' . $description . '</p>
                                 </div>
                          
                </div>';
 
-        }else{
+        } else {
             echo '<div class="row">
                  <div class="col s12 m12 l12  " >
                      <ul class="collection grey lighten-2">
@@ -100,7 +100,7 @@ if ($is_query_run = mysqli_query($connection, $question)) {
                  id="profileImage">
                                 <span class="title black-text">' . $user . '</span>
                                 
-                                <p class=" ultra-small">'.$cat.' - '. $country . ' </p>
+                                <p class=" ultra-small">' . $cat . ' - ' . $country . ' </p>
                                 <p class="ultra-small">' . $date . '</p>
                               
                                </div>
@@ -109,7 +109,7 @@ if ($is_query_run = mysqli_query($connection, $question)) {
                             </div>
                                 
                                 <div class="model-email-content grey lighten-3">
-                                <h5 class=" teal-text darken-3">Question : '.$title.'</h5>
+                                <h5 class=" teal-text darken-3">Question : ' . $title . '</h5>
                                
                                 <p> ' . $description . '</p>
                                 </div>
@@ -180,36 +180,40 @@ if ($is_inside_query_run = mysqli_query($connection, $answers)) {
                          </div>
                          <div class="model-email-content teal lighten-5">
                                 <p class="small"> ' . $aDescription . '</p>
-                                
-                            </div>
+                                <br>
+                            
                         
-                   </div>';
+                   ';
 
 
             //checking whether the user has already liked the answer;
 
-            $like_query =mysqli_query($connection,"SELECT * FROM likes WHERE username='".$username."' AND aID='".$aId."'") ;
-            $unlike_query =mysqli_query($connection,"SELECT * FROM unlikes WHERE username='".$username."' AND aID='".$aId."'") ;
+            $like_query = mysqli_query($connection, "SELECT * FROM likes WHERE username='" . $username . "' AND aID='" . $aId . "'");
+            $unlike_query = mysqli_query($connection, "SELECT * FROM unlikes WHERE username='" . $username . "' AND aID='" . $aId . "'");
 
-            $tot_votes=mysqli_query($connection,"SELECT * FROM answervote WHERE aID='".$aId."'") ;
-            $tot=mysqli_fetch_array($tot_votes);
-            $tot_likes=$tot['voteUpCount'];
-            $tot_unlikes=$tot['voteDownCount'];
+            $tot_votes = mysqli_query($connection, "SELECT * FROM answervote WHERE aID='" . $aId . "'");
+            $tot = mysqli_fetch_array($tot_votes);
+            $tot_likes = $tot['voteUpCount'];
+            $tot_unlikes = $tot['voteDownCount'];
+
+
+            //user has already like the post
 
             if (mysqli_num_rows($like_query) == 1) {
 
-                //user has already like the post
-            echo'   <i class="mdi-action-thumb-up teal-text" ></i>' .$tot_likes.'
-                    <i class="mdi-action-thumb-down grey-text" onclick=like_to_unlike("'.$aId.'")></i> '.$tot_unlikes.'
-                    ';
+                echo ' <i class="mdi-action-thumb-up teal-text" id="liked"></i> <button id="like">';echo getLikes($aId);echo'</button>';
+                echo ' <i class="mdi-action-thumb-down grey-text" id="Dislike" onclick=like_to_unlike("' . $aId . '")></i>';echo getUnLikes($aId);
 
-            } else if(mysqli_num_rows($unlike_query) == 1) {
-             echo ' <i class="mdi-action-thumb-up grey-text" onclick=unlike_to_like("'.$aId.'")></i>'.$tot_likes.'
-                    <i class="mdi-action-thumb-down teal-text" ></i>'.$tot_unlikes.' ';
-            }else{
-                echo ' <i class="mdi-action-thumb-up grey-text"  onclick=liked("'.$aId.'")></i>'.$tot_likes.'
-                        <i class="mdi-action-thumb-down grey-text" onclick=unLiked("'.$aId.'")></i> '.$tot_unlikes.'';
+
+            } else if (mysqli_num_rows($unlike_query) == 1) {
+                echo ' <i class="mdi-action-thumb-up grey-text"  id="unDislike" onclick=unlike_to_like("' . $aId . '")></i>';echo getLikes($aId);
+                echo'  <i class="mdi-action-thumb-down teal-text" id="unliked" ></i>';echo getUnLikes($aId);
+            } else {
+                echo ' <i class="mdi-action-thumb-up grey-text" id="Like" onclick=liked("' . $aId . '")></i>';echo getLikes($aId);
+                echo ' <i class="mdi-action-thumb-down grey-text" id="Unlike" onclick=unLiked("' . $aId . '")></i>';echo getUnLikes($aId);
             }
+            echo '    </div>
+                    </div>';
         }
     }
 }
@@ -223,6 +227,7 @@ if ($is_inside_query_run = mysqli_query($connection, $answers)) {
 
 <!-- jQuery Library -->
 <script type="text/javascript" src="../../js/jquery-1.11.2.min.js"></script>
+
 <!--materialize js-->
 <script type="text/javascript" src="../../js/materialize.js"></script>
 <!--prism-->
@@ -234,88 +239,8 @@ if ($is_inside_query_run = mysqli_query($connection, $answers)) {
 <!--script type="text/javascript" src="../js/plugins/data-tables/data-tables-script.js"></script-->
 <script type="text/javascript" src="../../js/plugins.js"></script>
 
-<!--script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script>
 
-function liked( answerId){
-
-    var anID=answerId
-    alert("i m here babies"+ anID);
-    $.ajax({
-        url: 'vote.php?liked='+ 1 +'&postid='+anID+'',
-        type: 'post',
-        data: {
-            'liked': 1,
-            'postid':anID
-        },
-        success: function(){
-           alert("inside ");
-        },
-        error: function () {
-            alert("error");
-        }
-    });
-}
-
-function unLiked(answerId){
-    var anID=answerId
-    alert("i m here to unlike"+ anID);
-    $.ajax({
-        url: 'vote.php?unLiked='+ 1 +'&postid='+anID+'',
-        type: 'post',
-        data: {
-            'unLiked': 1,
-            'postid':anID
-        },
-        success: function(){
-            alert("unlike successful ");
-        },
-        error: function () {
-            alert("unlike error");
-        }
-    });
-
-}
-function like_to_unlike( answerId){
-
-    var anID=answerId
-    alert("like -> unlike"+ anID);
-    $.ajax({
-        url: 'vote.php?like_unlike='+ 1 +'&postID='+anID+'',
-        type: 'post',
-        data: {
-            'liked': 1,
-            'postID':anID
-        },
-        success: function(){
-            alert("like-> unlike successful");
-        },
-        error: function () {
-            alert("like-> unlike error");
-        }
-    });
-}
-function unlike_to_like(answerId){
-    var anID=answerId
-    alert("unlike -> like"+ anID);
-    $.ajax({
-        url: 'vote.php?unlike_like='+ 1 +'&postID='+ anID +'',
-        type: 'post',
-        data: {
-            'unLiked': 1,
-            'postID':anID
-        },
-        success: function(){
-            alert("unlike-> like successful ");
-        },
-        error: function () {
-            alert("unlike-> like error");
-        }
-    });
-
-}
-
-</script>
+<script type="text/javascript " src="../../js/custom/user-likes.js"></script>
 
 </body>
 </html>

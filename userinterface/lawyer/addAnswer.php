@@ -24,8 +24,7 @@ session_start();
     <link href="../../css/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="../../js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet"
           media="screen,projection">
-    <link href="../../js/plugins/chartist-js/chartist.min.css" type="text/css" rel="stylesheet"
-          media="screen,projection">
+
 </head>
 
 <body class="white">
@@ -49,8 +48,8 @@ if ($is_query_run = mysqli_query($connection, $questions)) {
         $user = $row['qUser'];
         $qId = $row['qID'];
         $country = $row['qCountry'];
-        $cat=$row['qCategory'];
-        $title=$row['qTitle'];
+        $cat = $row['qCategory'];
+        $title = $row['qTitle'];
 
         //relevant user profile image
         $relevant_Lawyer_image = "SELECT Image FROM userimage WHERE username='" . $user . "' ";
@@ -61,7 +60,7 @@ if ($is_query_run = mysqli_query($connection, $questions)) {
             }
         }
 
-        if(empty($data)){
+        if (empty($data)) {
             echo '<div class="row">
                  <div class="col s12 m12 l12  " >
                      <ul class="collection grey lighten-2">
@@ -69,20 +68,24 @@ if ($is_query_run = mysqli_query($connection, $questions)) {
                             <div class="col s7">
                                 <img src="../../images/user-profile-pic.png" alt="" class="circle">
                                 <span class="title black-text">' . $user . '</span>
-                                <p class=" ultra-small">'.$cat.' - '. $country . '</p>
-                                <p class="ultra-small black-text" >' . $date . ' </p>
                                 
-                                <div class="model-email-content">
-                                <h5 class="cyan-text">'.$title.'</h5>
+                                <p class=" ultra-small">' . $cat . ' - ' . $country . ' </p>
+                                <p class="ultra-small">' . $date . '</p>
+                              
+                               </div>
+                               </li>
+                               </ul>
+                            </div>
+                                
+                                <div class="model-email-content grey lighten-3">
+                                <h5 class=" teal-text darken-3">Question : ' . $title . '</h5>
+                               
                                 <p> ' . $description . '</p>
                                 </div>
-                            </div>
-                        </li>
-                     </ul>
-                  </div>
+                         
                </div>';
 
-        }else{
+        } else {
             echo '<div class="row">
                  <div class="col s12 m12 l12  " >
                      <ul class="collection grey lighten-2">
@@ -91,22 +94,26 @@ if ($is_query_run = mysqli_query($connection, $questions)) {
                                 <img src="data:image/jpeg;base64,' . base64_encode($data) . '" height="130" width="130" alt="profile image" class="circle z-depth-2 "
                  id="profileImage">
                                 <span class="title black-text">' . $user . '</span>
-                                <p class=" ultra-small">'.$cat.' - '. $country . '</p>
-                                <p class="ultra-small black-text" >' . $date . ' </p>
                                 
-                                <div class="model-email-content">
-                                <h5 class="cyan-text">'.$title.'</h5>
+                                <p class=" ultra-small">' . $cat . ' - ' . $country . ' </p>
+                                <p class="ultra-small">' . $date . '</p>
+                              
+                               </div>
+                               </li>
+                               </ul>
+                            </div>
+                                
+                                <div class="model-email-content grey lighten-3">
+                                <h5 class=" teal-text darken-3">Question : ' . $title . '</h5>
+                               
                                 <p> ' . $description . '</p>
                                 </div>
-                            </div>
-                        </li>
-                     </ul>
-                  </div>
+                         
                </div>';
 
         }
 
-        echo'
+        echo '
                 <div class="row">
                     <div class="col s12  " >
                         <form  action="../../backend/addAnswer.php" method="post" >

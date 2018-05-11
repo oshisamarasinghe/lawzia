@@ -28,7 +28,7 @@ if ((isset($_POST["username"])) && (isset($_POST["password"]))) {
                     header("location: ../userinterface/user/user-profile.php");
                 } else if ($user_type == 'lu') {
                     $_SESSION['username'] = $username;
-                    header("location: ../userinterface/lawyer/lawyer-first-profile.php");
+                    header("location: ../userinterface/lawyer/lawyer-profile.php");
                 }
 
             } else {

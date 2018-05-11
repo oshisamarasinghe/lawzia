@@ -88,11 +88,13 @@ if (!isset($_GET['page'])) {
     $page_no = $_GET['page'];
 }
 $this_page_first_result = ($page_no - 1) * $results_per_page;
+
 /*if ($qCategory == "All") {
     $results_in_this_page = "SELECT * FROM question WHERE qCountry='" . $qCountry . "' ORDER BY qID DESC LIMIT " . $this_page_first_result . ',' . $results_per_page;
 } else {
     $results_in_this_page = "SELECT * FROM question  WHERE qCountry='" . $qCountry . "' AND qCategory='" . $qCategory . "'ORDER BY qID DESC LIMIT " . $this_page_first_result . ',' . $results_per_page;
 }*/
+
 $results_in_this_page="SELECT * FROM question  ORDER BY qID DESC LIMIT ".$this_page_first_result.','.$results_per_page;
 
 if ($is_query_run = mysqli_query($connection, $results_in_this_page)) {

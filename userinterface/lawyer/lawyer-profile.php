@@ -19,8 +19,7 @@ include '../../backend/lawyer-info.php';
     <link href="../../css/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="../../js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet"
           media="screen,projection">
-    <link href="../../js/plugins/chartist-js/chartist.min.css" type="text/css" rel="stylesheet"
-          media="screen,projection">
+
 </head>
 
 <body class="white">
@@ -146,7 +145,7 @@ include '../header-footer/nav-lawyer.php'; ?>
 
                                             $count++;
                                             echo '<a class="cyan-text col s12 offset-10" 
-                                                     href="question-page-lawyer.php?question_id=' . $qNo . '">' . $count . ' .Answered  question no:
+                                                     href="question-page-lawyer.php?question_id=' . $qNo . '"><i class="mdi-action-question-answer"></i>' . $count . ' .Answered  question no:
                                                      ' . $qNo . '  of category  ' . $qCat . ' asked by ' . $qUser . '  on :' . $aDate . ' </a><br>';
                                         }
                                     }
@@ -164,9 +163,7 @@ include '../header-footer/nav-lawyer.php'; ?>
 
                     </div>
                     <div class="collapsible-body cyan lighten-5">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commodo consequat.
+                        <p>
                         </p>
                     </div>
                 </li>
@@ -176,75 +173,6 @@ include '../header-footer/nav-lawyer.php'; ?>
         </div>
     </div>
 </div>
-
-<!--div id="profile-page-content" class="row">
-        <div id="work-collections">
-            <div class="row">
-                <div class="col s12 ">
-                    <div class="tabs tab-profile z-depth-1 light-blue">
-                        <div class="col s12">
-                            <p class="white-text waves-effect waves-light">LAWZIA PROFILE</p>
-                        </div>
-                    </div>
-                    <ul id="projects-collection" class="collection">
-                        <li class="collection-item">
-                            <div class="row">
-                                <div class="col s6">
-                                    <p class="collections-title">Your Answers</p>
-                                    <p class="collections-content">Check the list of questions and answers </p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="collection-item">
-                            <div class="row">
-                                <div class="col s6">
-                                    <p class="collections-title">Edit Biography </p>
-                                    <p class="collections-content"></p>
-                                    <form method="post" action="lawyer-profile-update.php">
-                                        <button class="btn-flat waves-effect pink accent-2 white-text" type="submit" name="action">
-                                            UPDATE WORK PROFILE
-                                            <i class="mdi-content-send right"></i>
-                                        </button>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="collection-item">
-                            <div class="row">
-                                <div class="col s6">
-                                    <p class="collections-title">Contact No</p>
-                                    <p class="collections-content"><?= $contact ?></p>
-                                </div>
-                            </div>
-                        </li>
-
-                    </ul>
-                </div>
-
-                <!-- task-card >
-                <ul-- id="profile-page-about-feed" class="collection z-depth-1">
-
-                    <li class="collection-item ">
-                        <span class="title">Answer new Questions</span>
-                        <br> <span class="ultra-small">select the relevant country and category</span>
-
-                    </li>
-                    <li class="collection-item ">
-                        <span class="title">How to earn badges</span>
-                        <br> <span class="ultra-small">Go to the link and see</span><br>
-                    </li>
-                    <li class="collection-item ">
-                        <span class="title">Update your Professional Profile</span>
-                        <br><span class="ultra-small">update your work profile</span>
-                        <br><span class="ultra-small">update profile Image and make your profile public</span>
-                        <br>
-                        <form method="post" action="lawyer-profile-update.php">
-                            <button class="btn-flat waves-effect pink accent-2 white-text" type="submit" name="action">
-                                UPDATE WORK PROFILE
-                                <i class="mdi-content-send right"></i>
-                            </button>
-                    </li>
-                </ul-->
-
 
 <!-- FOOTER -->
 <!--?php include '../header-footer/footer.php'; ?>

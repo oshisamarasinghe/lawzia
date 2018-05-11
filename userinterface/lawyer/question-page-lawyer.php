@@ -1,7 +1,3 @@
-<?php include '../../backend/connection.php';
-session_start();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,13 +31,14 @@ include '../header-footer/nav-lawyer.php'; ?>
 
 <!--question-->
 <?php include '../../backend/connection.php';
+include '../user/vote.php';
 $questionID = $_GET['question_id'];
 
 $question = "SELECT * FROM question WHERE qID='$questionID'";
 
 if ($is_query_run = mysqli_query($connection, $question)) {
 
-    while ($qData = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
+    while ($qData = mysqli_fetch_array($is_query_run, MYSQLI_ASSOC)) {
         $description = $qData['qDescription'];
         $date = $qData['qDate'];
         $user = $qData['qUser'];
@@ -53,7 +50,7 @@ if ($is_query_run = mysqli_query($connection, $question)) {
         //relevant user profile image
         $relevant_Lawyer_image = "SELECT Image FROM userimage WHERE username='" . $user . "' ";
         if ($is_query_run = mysqli_query($connection, $relevant_Lawyer_image)) {
-            while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
+            while ($row = mysqli_fetch_array($is_query_run, MYSQLI_ASSOC)) {
                 $data = $row['Image'];
 
             }
@@ -68,7 +65,7 @@ if ($is_query_run = mysqli_query($connection, $question)) {
                                 <img src="../../images/user-profile-pic.png" alt="" class="circle">
                                 <span class="title black-text">' . $user . '</span>
                                 
-                                <p class=" ultra-small">'.$cat.' - '. $country . '</p>
+                                <p class=" ultra-small">' . $cat . ' - ' . $country . '</p>
                                 <p class="ultra-small black-text" >' . $date . ' </p>
                                </div>
                              </li>
@@ -92,7 +89,7 @@ if ($is_query_run = mysqli_query($connection, $question)) {
                  id="profileImage">
                                 <span class="title black-text">' . $user . '</span>
                                 
-                                <p class=" ultra-small">'.$cat.' - '. $country . '</p>
+                                <p class=" ultra-small">' . $cat . ' - ' . $country . '</p>
                                 <p class="ultra-small black-text" >' . $date . ' </p>
                              </div>
                            </li>
@@ -100,7 +97,7 @@ if ($is_query_run = mysqli_query($connection, $question)) {
                        </div>
                                 <div class="model-email-content grey lighten-3">
                                
-                                <h5 class="teal-text darken-3">Question : '.$title.'</h5>
+                                <h5 class="teal-text darken-3">Question : ' . $title . '</h5>
                                 <p> ' . $description . '</p>
                                 </div>
                          
@@ -145,11 +142,7 @@ if ($is_inside_query_run = mysqli_query($connection, $answers)) {
                                 
                                 <div class="model-email-content teal lighten-5">
                                 <p class="small"> ' . $aDescription . '</p>
-                                
-                            </div>
-                        
-                   </div>
-                ';
+                     ';
         } else {
             echo '<div class="row">
                     <div class="col s12 m12 l12 " >
@@ -167,17 +160,24 @@ if ($is_inside_query_run = mysqli_query($connection, $answers)) {
                            </ul>
                          </div>
                                 <div class="model-email-content teal lighten-5">
-                                <p class="small"> ' . $aDescription . '</p>
-                                <a href="" class=" teal-text darken-3"><i class="mdi-action-thumb-up"></i> </a>
-                                <a class=" teal-text darken-3"><i class="mdi-action-thumb-down"></i> </a>
-                            </div>
-                        
-                     </div>
-                ';
+                                    <p class="small"> ' . $aDescription . '</p><br> ';
+
+
         }
+        echo '<i class="mdi-action-thumb-up teal-text darken-3"></i>';
+        echo getLikes($aId);
+        echo '<i class="mdi-action-thumb-down teal-text darken-3"></i>';
+        echo getUnLikes($aId);
+
+        echo '          
+                        </div>
+                  </div>
+                ';
+
     }
 
 }
+
 
 ?>
 

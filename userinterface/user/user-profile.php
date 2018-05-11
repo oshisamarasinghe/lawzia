@@ -113,45 +113,22 @@ include '../header-footer/header-user.php'; ?>
                         Personal Profile Update
                     </div>
                     <div class="collapsible-body cyan lighten-5">
-                        <p>It is always better to keep your profile updated<br></p>
+                        <p><i class="mdi-action-"></i>It is always better to keep your profile updated<br></p>
                         <div class="row">
                             <div class="col s12 m12 l12">
                                 <div class="card-panel">
                                     <div class="row">
-                                        <form class="col s12" method="post"
-                                              action="../../backend/user-profile-update.php">
-                                            <h4 class="header2">Profile Forum</h4>
-                                            <div class="row">
-                                                <div class="input-field col s4">
-                                                    <i class="mdi-action-account-circle prefix"></i>
-                                                    <input id="icon_username " type="text" value="<?= $username ?>">
-                                                    <label class="active" for="icon_username">Username</label>
-                                                </div>
-                                                <div class="input-field col s4">
-                                                    <i class="mdi-communication-email prefix"></i>
-                                                    <input id="icon_email" type="email" value="<?= $email ?>">
-                                                    <label class="active" for="icon_email">Email</label>
-                                                </div>
-                                                <div class="input-field col s4">
-                                                    <div class="input-field col s12">
-                                                        <button class="btn cyan waves-effect waves-light" type="submit"
-                                                                name="action">Update
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
+                                        <p><i class="mdi-action-lock"></i><b>want to change password ?</b> <br>
+                                            <a class="cyan-text" href="../change-password.php">Reset Password</a></p>
                                 </div>
                             </div>
                         </div>
-                        <p><b>want to change password ?</b> <br>
-                            <a class="cyan-text" href="../change-password.php">Reset Password</a></p>
-                        <p><b>Change profile Image</b> </p>
+                     </div>
+
                         <div class="row">
                             <div class="col s12 m12 l12">
                                 <div class="card-panel">
-                                    <p>Select an Image </p>
+                                    <p><i class="mdi-image-photo-camera"<b>Change profile Image</b><p>Select an Image </p>
                                     <form action="" enctype="multipart/form-data" method="post">
                                         <div class="file-field input-field">
                                             <input class="file-path validate " type="text"/>
@@ -165,8 +142,7 @@ include '../header-footer/header-user.php'; ?>
                                         <div class="row">
                                             <div class="input-field col s12">
                                                 <!--div id="raised-buttons" class="section"-->
-                                                <button type="submit" class=" btn waves-light waves-effect cyan"
-                                                        name="insert">
+                                                <button type="submit" class=" btn waves-light waves-effect cyan" name="insert"><i class="mdi-file-file-upload"></i>
                                                     Upload
                                                 </button>
                                             </div>
@@ -300,7 +276,7 @@ if (isset($_POST['insert'])) {
                     mysqli_query($connection, $query);
                     mysqli_commit($connection);
                     echo "<script>alert('upload successful')</script>";
-                    header("location: user-profile.php");
+                    echo "<script> window.history.go(-1);</script>";
 
                 } catch (Exception $e) {
                     $connection->rollback();
