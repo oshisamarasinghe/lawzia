@@ -1327,12 +1327,12 @@ include '../../backend/lawyer-info.php';
     <!--materialize js-->
     <script type="text/javascript" src="../../js/materialize.js"></script>
     <!--prism-->
-    <script type="text/javascript" src="../../js/prism.js"></script>
+    <script type="text/javascript" src="../../js/prism-new.js"></script>
     <!--scrollbar-->
     <script type="text/javascript" src="../../js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <!-- chartist -->
     <script type="text/javascript" src="../../js/plugins/chartist-js/chartist.min.js"></script>
-    <script type="text/javascript" src="../../js/plugins.js"></script>
+    <script type="text/javascript" src="../../js/plugins-new.js"></script>
     <script>
         $(document).ready(function () {
             $('#insert').click(function () {

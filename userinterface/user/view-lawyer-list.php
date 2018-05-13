@@ -112,13 +112,13 @@ if ($is_query_run = mysqli_query($connection, $lawyer_country)) {
 <!--materialize js-->
 <script type="text/javascript" src="../../js/materialize.js"></script>
 <!--prism-->
-<script type="text/javascript" src="../../js/prism.js"></script>
+<script type="text/javascript" src="../../js/prism-new.js"></script>
 <!--scrollbar-->
 <script type="text/javascript" src="../../js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <!-- data-tables -->
 <script type="text/javascript" src="../../js/plugins/data-tables/js/jquery.dataTables.min.js"></script>
 <!--script type="text/javascript" src="../js/plugins/data-tables/data-tables-script.js"></script-->
-<script type="text/javascript" src="../../js/plugins.js"></script>
+<script type="text/javascript" src="../../js/plugins-new.js"></script>
 </body>
 </html>
 

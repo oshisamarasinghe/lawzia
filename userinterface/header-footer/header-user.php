@@ -14,18 +14,21 @@
                     </a>
                 </li>
                 <li>
-                    <a class="white-text" href="../user/QA-user.php">
-                        <span>Question & Answer</span>
+                    <a class="dropdown-menu white-text" href="#!" data-activates="QAdropdown">
+                        <span>Question & Answer<i class="mdi-navigation-arrow-drop-down right"></i></span>
                     </a>
+                    <!--a class="white-text" href="../user/QA-user.php">
+                        <span>Question & Answer</span>
+                    </a-->
                 </li>
                 <li>
                     <a class="white-text" href="../user/ask-a-question.php">
-                        <span>Ask-A-Lawyer</span>
+                        <span>Ask a Lawyer</span>
                     </a>
                 </li>
                 <li>
                     <a class="white-text" href="../user/search-a-lawyer.php">
-                        <span>Search-A-Lawyer</span>
+                        <span>Find a Lawyer</span>
                     </a>
                 </li>
             </ul>
@@ -43,5 +46,11 @@
             </ul>
         </div>
     </nav>
+
+    <!-- QAdropdown -->
+    <ul id="QAdropdown" class="dropdown-content dropdown-horizontal-list">
+        <li><a href="../user/all-questions-user.php" class="cyan-text">All Questions</a></li>
+        <li><a href="../user/country-questions.php" class="cyan-text">Questions of Your Country</a></li>
+    </ul>
 </header>
 <!-- END HEADER -->

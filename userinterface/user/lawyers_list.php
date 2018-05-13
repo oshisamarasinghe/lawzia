@@ -24,10 +24,11 @@
 include '../header-footer/header-user.php'; ?>
 <?php include '../../backend/connection.php';
 
-$country = $_POST['country'];
+$country= $_GET['country'];
+
 //$lawyer_country = "SELECT * FROM lawyer WHERE country='$country'";
 
-$results_per_page = 3;
+$results_per_page = 1;
 $lawyer_country= "SELECT * FROM lawyer WHERE country='$country'";
 $result = mysqli_query($connection, $lawyer_country);
 $no_of_results = mysqli_num_rows($result);
@@ -132,9 +133,9 @@ echo '
     <li class="disabled"><i class="mdi-navigation-chevron-left"></i></li>';
 for ($page = 1; $page <= $no_of_pages; $page++) {
     if ($page == $page_no)
-        echo '<li><a class="active waves-effect cyan" href="lawyers_list.php?page=' . $page . '&country='.$country.'">' . $page . '</a></li>';
+        echo '<li><a class="active waves-effect cyan" href="lawyers_list.php?page=' . $page . '&country='.urlencode($country).'">' . $page . '</a></li>';
     else
-        echo '<li><a class="waves-effect " href="lawyers_list.php?page=' . $page . ' &country='.$country.'">' . $page . '</a></li>';
+        echo '<li><a class="waves-effect " href="lawyers_list.php?page=' . $page . '&country='.urlencode($country).'">' . $page . '</a></li>';
 
 }
 echo '
@@ -143,15 +144,16 @@ echo '
 ?>
 
 
+
 <!-- jQuery Library -->
 <script type="text/javascript" src="../../js/jquery-1.11.2.min.js"></script>
 <!--materialize js-->
 <script type="text/javascript" src="../../js/materialize.js"></script>
 <!--prism-->
-<script type="text/javascript" src="../../js/prism.js"></script>
+<script type="text/javascript" src="../../js/prism-new.js"></script>
 <!--scrollbar-->
 <script type="text/javascript" src="../../js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-<script type="text/javascript" src="../../js/plugins.js"></script>
+<script type="text/javascript" src="../../js/plugins-new.js"></script>
 
 
 </body>

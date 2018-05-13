@@ -128,7 +128,7 @@ include '../header-footer/header-user.php'; ?>
                         <div class="row">
                             <div class="col s12 m12 l12">
                                 <div class="card-panel">
-                                    <p><i class="mdi-image-photo-camera"<b>Change profile Image</b><p>Select an Image </p>
+                                    <p><i class="mdi-image-photo-camera"></i><b>Change profile Image</b><p>Select an Image </p>
                                     <form action="" enctype="multipart/form-data" method="post">
                                         <div class="file-field input-field">
                                             <input class="file-path validate " type="text"/>
@@ -154,7 +154,7 @@ include '../header-footer/header-user.php'; ?>
                     </div>
                 </li>
                 <li>
-                    <div class="collapsible-header cyan white-text  "><i class="mdi-action-question-answer"></i> Your
+                    <div class="collapsible-header cyan white-text active "><i class="mdi-action-question-answer"></i> Your
                         Questions (<?= $data['queCount'] ?>)
                     </div>
 
@@ -186,6 +186,17 @@ include '../header-footer/header-user.php'; ?>
             </ul>
         </div>
     </div>
+</div>
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large red">
+        <i class="large mdi-communication-live-help"></i>
+    </a>
+    <ul>
+        <li><a href="css-helpers.html" class="btn-floating yellow darken-1"><i class="mdi-action-pageview"></i></a></li>
+        <li><a href="app-widget.html" class="btn-floating yellow darken-1"><i class="large mdi-device-now-widgets"></i></a></li>
+        <li><a href="app-calendar.html" class="btn-floating green"><i class="large mdi-editor-insert-invitation"></i></a></li>
+        <li><a href="app-email.html" class="btn-floating blue"><i class="large mdi-communication-email"></i></a></li>
+    </ul>
 </div>
 
 

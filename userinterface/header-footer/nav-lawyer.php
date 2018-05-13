@@ -13,8 +13,8 @@
                     </a>
                 </li>
                 <li>
-                    <a class="white-text" href="../lawyer/QA-lawyer.php">
-                        <span>Question & Answer</span>
+                    <a class="dropdown-menu white-text" href="#!" data-activates="QAdropdown">
+                        <span>Question & Answer<i class="mdi-navigation-arrow-drop-down right"></i></span>
                     </a>
                 </li>
 
@@ -33,5 +33,10 @@
             </ul>
         </div>
     </nav>
+    <!-- QAdropdown -->
+    <ul id="QAdropdown" class="dropdown-content dropdown-horizontal-list">
+        <li><a href="../lawyer/all-questions-lawyer.php" class="cyan-text">All Questions</a></li>
+        <li><a href="../lawyer/country-questions-lawyer.php" class="cyan-text">Questions of Your Country</a></li>
+    </ul>
 </header>
 <!-- END HEADER -->

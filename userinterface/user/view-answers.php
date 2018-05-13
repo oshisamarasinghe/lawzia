@@ -14,19 +14,13 @@
     <link href="../../css/custom-style.css" type="text/css" rel="stylesheet" media="screen,projection">
 
     <link href="../../css/style-horizontal.css" type="text/css" rel="stylesheet" media="screen,projection">
-    <link href="https://cdn.datatables.net/1.10.6/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet"
-          media="screen,projection">
+
 
     <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
     <link href="../../css/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="../../js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet"
           media="screen,projection">
-    <link href="../../js/plugins/data-tables/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet"
-          media="screen,projection">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-          type="text/css">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 
 </head>
 
@@ -201,7 +195,7 @@ if ($is_inside_query_run = mysqli_query($connection, $answers)) {
 
             if (mysqli_num_rows($like_query) == 1) {
 
-                echo ' <i class="mdi-action-thumb-up teal-text" id="liked"></i> <button id="like">';echo getLikes($aId);echo'</button>';
+                echo ' <i class="mdi-action-thumb-up teal-text" id="liked"></i><span class="like">';echo getLikes($aId);echo'</span>';
                 echo ' <i class="mdi-action-thumb-down grey-text" id="Dislike" onclick=like_to_unlike("' . $aId . '")></i>';echo getUnLikes($aId);
 
 
@@ -231,13 +225,11 @@ if ($is_inside_query_run = mysqli_query($connection, $answers)) {
 <!--materialize js-->
 <script type="text/javascript" src="../../js/materialize.js"></script>
 <!--prism-->
-<script type="text/javascript" src="../../js/prism.js"></script>
+<script type="text/javascript" src="../../js/prism-new.js"></script>
 <!--scrollbar-->
 <script type="text/javascript" src="../../js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-<!-- data-tables -->
-<script type="text/javascript" src="../../js/plugins/data-tables/js/jquery.dataTables.min.js"></script>
-<!--script type="text/javascript" src="../js/plugins/data-tables/data-tables-script.js"></script-->
-<script type="text/javascript" src="../../js/plugins.js"></script>
+
+<script type="text/javascript" src="../../js/plugins-new.js"></script>
 
 
 <script type="text/javascript " src="../../js/custom/user-likes.js"></script>

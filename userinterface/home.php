@@ -24,7 +24,7 @@
         <div class="nav-wrapper">
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li>
-                    <a href=".../user/user-profile.php" class="white-text">
+                    <a href="" class="white-text">
                         About Us
                     </a>
                 </li>
@@ -96,11 +96,11 @@
 <!--materialize js-->
 <script type="text/javascript" src="../js/materialize.js"></script>
 <!--prism-->
-<script type="text/javascript" src="../js/prism.js"></script>
+<script type="text/javascript" src="../js/prism-new.js"></script>
 <!--scrollbar-->
 <script type="text/javascript" src="../js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
-<script type="text/javascript" src="../js/plugins.js"></script>
+<script type="text/javascript" src="../js/plugins-new.js"></script>
 
 <!-- Toast Notification -->
 <script type="text/javascript">

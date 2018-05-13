@@ -114,25 +114,25 @@ if ($is_query_run = mysqli_query($connection, $questions)) {
         }
 
         echo '
-                <div class="row">
-                    <div class="col s12  " >
-                        <form  action="../../backend/addAnswer.php" method="post" >
-                            <ul class="collection">
-                                <div>
-                                    <a class="collection-item active cyan">Type your Answer Here</a>
+               
+                    <div class="col s12 " >
+                        <div class="card-panel z-depth-2 ">
+                            <form  action="../../backend/addAnswer.php" method="post" >
+                            
+                                
+                                     <div class="row">
+                                        <div class="input-field col s12">
+                                             <textarea id="message5" class= "materialize-textarea white" length="1000" rows="10" name="answer" ></textarea>
+                                            <input type="hidden" name="question_id" value="' . $qId . '">
+                                            <label for="answer">Type Your Answer Here</label>
+                                        </div>
+                                        <button class="btn cyan waves-effect waves-light left" type="submit" name="submitAnswer">Post Your answer
+                                            <i class="mdi-content-send right"></i>
+                                        </button>
                                 </div>
-                                <li class="collection-item avatar">
-                                    <div class="input-field col s12">
-                                         <textarea id="message5" class= "materialize-textarea white" length="1000" rows="10" name="answer" ></textarea>
-                                        <input type="hidden" name="question_id" value="' . $qId . '">
-                                    </div>
-                                    <button class="btn cyan waves-effect waves-light left" type="submit" name="submitAnswer">Post Your answer
-                                        <i class="mdi-content-send right"></i>
-                                    </button>
-                                </li>
-                            </ul>
-                        </form>
-                    </div>
+                            
+                            </form>
+                    
                  </div>
             </div>
           
@@ -151,7 +151,7 @@ if ($is_query_run = mysqli_query($connection, $questions)) {
 <!--materialize js-->
 <script type="text/javascript" src="../../js/materialize.js"></script>
 <!--prism-->
-<script type="text/javascript" src="../../js/prism.js"></script>
+<script type="text/javascript" src="../../js/prism-new.js"></script>
 <!--scrollbar-->
 <script type="text/javascript" src="../../js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
@@ -159,7 +159,7 @@ if ($is_query_run = mysqli_query($connection, $questions)) {
 <script type="text/javascript" src="../../js/custom/addNewElement.js"></script>
 
 <!--plugins.js - Some Specific JS codes for Plugin Settings-->
-<script type="text/javascript" src="../../js/plugins.js"></script>
+<script type="text/javascript" src="../../js/plugins-new.js"></script>
 
 
 </body>

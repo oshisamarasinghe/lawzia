@@ -14,6 +14,7 @@ if ((isset($_POST["username"])) && (isset($_POST["password"]))) {
     $password = md5($password);
     session_start();
     $_SESSION['username'] = $username;
+
     /** @var TYPE_NAME $query */
     $query = "SELECT * FROM userauthentication WHERE username='" . $username . "'";
 
@@ -24,9 +25,18 @@ if ((isset($_POST["username"])) && (isset($_POST["password"]))) {
                 $user_type = $row['usertype'];
                 if ($user_type == 'gu') {
 
+                    $user_country=mysqli_query($connection,"SELECT country FROM generaluser WHERE username='".$username."'");
+                    $res=mysqli_fetch_assoc($user_country);
+                    $_SESSION['country']=$res['country'];
+
                     $_SESSION['username'] = $username;
                     header("location: ../userinterface/user/user-profile.php");
                 } else if ($user_type == 'lu') {
+
+                    $user_country=mysqli_query($connection,"SELECT country FROM lawyer WHERE username='".$username."'");
+                    $res=mysqli_fetch_assoc($user_country);
+                    $_SESSION['country']=$res['country'];
+
                     $_SESSION['username'] = $username;
                     header("location: ../userinterface/lawyer/lawyer-profile.php");
                 }

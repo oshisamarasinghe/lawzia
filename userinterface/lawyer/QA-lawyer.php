@@ -1,45 +1,3 @@
-<!--?php include '../../backend/connection.php';
-session_start();
-$username = $_SESSION['username'];
-function length($inputTxt, $length)
-{
-    $userInput = $inputTxt;
-    if (strlen($userInput) == $length) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-//validate data
-function test_input($data)
-{
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
-
-$errors = "";
-if (empty(test_input($_POST['country']))) {
-    $errors = "error-complete all fields";
-    echo "<script> alert('error-complete all fields')</script>";
-} else {
-    $qCountry = test_input($_POST['country']);
-}
-
-if (empty(test_input($_POST['category']))) {
-    $errors = "error-complete all fields";
-    echo "<script> alert('error-complete all fields')</script>";
-
-} else {
-    $qCategory = test_input($_POST['category']);
-}*/
-
-?-->
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,150 +7,194 @@ if (empty(test_input($_POST['category']))) {
 
     <!-- CORE CSS-->
     <link rel="stylesheet" href="../../INDEX/assets/css/navmenu/styles.css">
+
     <link href="../../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="../../css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
     <!-- Custom CSS-->
     <link href="../../css/custom-style.css" type="text/css" rel="stylesheet" media="screen,projection">
 
     <link href="../../css/style-horizontal.css" type="text/css" rel="stylesheet" media="screen,projection">
-
+    <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
     <link href="../../css/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="../../js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet"
           media="screen,projection">
-
-
+    <link href="../../js/plugins/chartist-js/chartist.min.css" type="text/css" rel="stylesheet"
+          media="screen,projection">
 </head>
 
 <body class="white">
+
 <!-- Page Loading -->
 <?php include '../header-footer/loading.php';
 include '../header-footer/nav-lawyer.php'; ?>
-<!--div class="tabs tab-profile z-depth-1 red">
-    <div class="col s12 offset-m10">
-        <p class="white-text waves-effect waves-light">  <?= $qCountry ?>/<?= $qCategory ?></p>
-    </div>
-</div>
+
 
 <!--question-->
 <?php include '../../backend/connection.php';
+include '../user/vote.php';
+$questionID = $_GET['question_id'];
 
-$results_per_page = 5;
-$questions = "SELECT * FROM question ORDER BY qID DESC ";
-$result = mysqli_query($connection, $questions);
-$no_of_results = mysqli_num_rows($result);
-$no_of_pages = ceil($no_of_results / $results_per_page);
+$question = "SELECT * FROM question WHERE qID='$questionID'";
 
-if (!isset($_GET['page'])) {
-    $page_no = 1;
-} else {
-    $page_no = $_GET['page'];
-}
-$this_page_first_result = ($page_no - 1) * $results_per_page;
+if ($is_query_run = mysqli_query($connection, $question)) {
 
-/*if ($qCategory == "All") {
-    $results_in_this_page = "SELECT * FROM question WHERE qCountry='" . $qCountry . "' ORDER BY qID DESC LIMIT " . $this_page_first_result . ',' . $results_per_page;
-} else {
-    $results_in_this_page = "SELECT * FROM question  WHERE qCountry='" . $qCountry . "' AND qCategory='" . $qCategory . "'ORDER BY qID DESC LIMIT " . $this_page_first_result . ',' . $results_per_page;
-}*/
-
-$results_in_this_page="SELECT * FROM question  ORDER BY qID DESC LIMIT ".$this_page_first_result.','.$results_per_page;
-
-if ($is_query_run = mysqli_query($connection, $results_in_this_page)) {
-
-
-    while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
-        $description = $row['qDescription'];
-        $date = $row['qDate'];
-        $user = $row['qUser'];
-        $qId = $row['qID'];
-        $cat = $row['qCategory'];
-        $country = $row['qCountry'];
-        $title = $row['qTitle'];
+    while ($qData = mysqli_fetch_array($is_query_run, MYSQLI_ASSOC)) {
+        $description = $qData['qDescription'];
+        $date = $qData['qDate'];
+        $user = $qData['qUser'];
+        $qId = $qData['qID'];
+        $country = $qData['qCountry'];
+        $cat = $qData['qCategory'];
+        $title = $qData['qTitle'];
 
         //relevant user profile image
-        $relevant_user_image = "SELECT Image FROM userimage WHERE username='" . $user . "' ";
-        if ($is_relevant_user_image_query_run = mysqli_query($connection, $relevant_user_image)) {
-            while ($row = mysqli_fetch_array($is_relevant_user_image_query_run, MYSQL_ASSOC)) {
+        $relevant_Lawyer_image = "SELECT Image FROM userimage WHERE username='" . $user . "' ";
+        if ($is_query_run = mysqli_query($connection, $relevant_Lawyer_image)) {
+            while ($row = mysqli_fetch_array($is_query_run, MYSQLI_ASSOC)) {
                 $data = $row['Image'];
 
             }
         }
-        if(empty($data)){
-            echo '<div class="row">
-                        <div class="col s12 m12 l12 " >
-                            <ul class="collection grey lighten-2">
-                                <li class="collection-item avatar grey lighten-2">
-                                    <div class="col s7">
-                                        <img src="../../images/user-profile-pic.png" alt="" class="circle">
-                                        
-                                        <span class="title black-text">' . $user . '</span>
-                                        <p class=" ultra-small">' . $country . '</p>
-                                        <p class="ultra-small"> ' . $date . ' </p>
-                                    </div>
-                                 </li>
-                            </ul>
-                        </div>
-                        <div class="model-email-content grey lighten-3">
-                             <p class="cyan-text">Question : ' . $title . '</p>
-                             <p> ' . $description . '</p>
-                       
-                      
-                                <p><a href="addAnswer.php?question_id=' . $qId . '" class="red-text">add answer </a> 
-                                <a href="question-page-lawyer.php?question_id=' . $qId . '" class="green-text" >view answers</a> </p>
-                        </div> 
-                </div>';
 
-        }else{
+        if (empty($data)) {
             echo '<div class="row">
-                        <div class="col s12 m12 l12 " >
-                            <ul class="collection grey lighten-2">
-                                <li class="collection-item avatar grey lighten-2">
-                                    <div class="col s7">
-                                        <img src="data:image/jpeg;base64,' . base64_encode($data) . '" height="130" width="130" alt="profile image" class="circle z-depth-2 "
-                         id="profileImage">
-                                        <span class="title black-text">' . $user . '</span>
-                                        <p class=" ultra-small">' . $country . '</p>
-                                        <p class="ultra-small"> ' . $date . ' </p>
-                                    </div>
-                                 </li>
-                               </ul>
-                             </div>
-                             <div class="model-email-content grey lighten-3">
-                                <p class="cyan-text">Question : ' . $title . '</p>
+                 <div class="col s12 m12 l12  " >
+                     <ul class="collection grey lighten-2">
+                         <li class="collection-item avatar grey lighten-2">
+                            <div class="col s7">
+                                <img src="../../images/user-profile-pic.png" alt="" class="circle">
+                                <span class="title black-text">' . $user . '</span>
+                                
+                                <p class=" ultra-small">' . $cat . ' - ' . $country . '</p>
+                                <p class="ultra-small black-text" >' . $date . ' </p>
+                               </div>
+                             </li>
+                          </ul>
+                      </div>
+                                <div class="model-email-content grey lighten-3">
+                                
+                                <h5 class="teal-text darken-3">Question : ' . $title . '</h5>
                                 <p> ' . $description . '</p>
-                                   
-                             
-                      
-                                <p><a href="addAnswer.php?question_id=' . $qId . '" class="red-text">add answer </a> 
-                                <a href="question-page-lawyer.php?question_id=' . $qId . '" class="green-text" >view answers</a> </p>
-                       </div>
+                                </div>
                         
-                </div>';
+               </div>';
+        } else {
 
+            echo '<div class="row">
+                 <div class="col s12 m12 l12  " >
+                     <ul class="collection grey lighten-2">
+                         <li class="collection-item avatar grey lighten-2">
+                            <div class="col s7">
+                                <img src="data:image/jpeg;base64,' . base64_encode($data) . '" height="130" width="130" alt="profile image" class="circle z-depth-2 "
+                 id="profileImage">
+                                <span class="title black-text">' . $user . '</span>
+                                
+                                <p class=" ultra-small">' . $cat . ' - ' . $country . '</p>
+                                <p class="ultra-small black-text" >' . $date . ' </p>
+                             </div>
+                           </li>
+                         </ul>
+                       </div>
+                                <div class="model-email-content grey lighten-3">
+                               
+                                <h5 class="teal-text darken-3">Question : ' . $title . '</h5>
+                                <p> ' . $description . '</p>
+                                </div>
+                         
+               </div>';
         }
 
+    }
+}
+
+
+$answers = "SELECT * FROM answer NATURAL JOIN qa WHERE qID='$questionID' ORDER BY aID DESC";
+if ($is_inside_query_run = mysqli_query($connection, $answers)) {
+
+
+    while ($in_row = mysqli_fetch_array($is_inside_query_run, MYSQL_ASSOC)) {
+        $aDescription = $in_row['aDescription'];
+        $aDate = $in_row['aDate'];
+        $aUser = $in_row['aUser'];
+        $aId = $in_row['aID'];
+
+        //relevant lawyer profile image
+        $relevant_Lawyer_image = "SELECT Image FROM userimage WHERE username='" . $aUser . "' ";
+        if ($is_query_run = mysqli_query($connection, $relevant_Lawyer_image)) {
+            while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
+                $data = $row['Image'];
+
+            }
+        }
+        //lawyers reputation count
+        $load_query = mysqli_query($connection, "SELECT COUNT (bID)as rep FROM badge  NATURAL JOIN lawyerbadge   WHERE username = '" . $aUser . "'");
+        $bCount = mysqli_fetch_array($load_query);
+        $count = $bCount['rep'];
+
+        if (empty($data)) {
+            echo '<div class="row">
+                    <div class="col s12 m12 l12 " >
+                     <ul class="collection teal lighten-4">
+                        <li class="collection-item avatar teal lighten-4">
+                            <div class="col s7">
+                                <img src="../../images/user-profile-pic.png" alt="" class="circle">
+                                <span class="title black-text">' . $aUser . '</span>
+                                 <p class=" ultra-small">Answered on ' . $aDate . ' </p>
+                              </div>
+                            </li>
+                         </ul>
+                      </div>
+                    <div class="model-email-content teal lighten-5">
+                   <p class="small"> ' . $aDescription . '</p>
+                     ';
+        } else {
+            echo '<div class="row">
+                    <div class="col s12 m12 l12 " >
+                     <ul class="collection teal lighten-4">
+                        <li class="collection-item avatar teal lighten-4">
+                        
+                            <div class="col s7">
+                                <img src="data:image/jpeg;base64,' . base64_encode($data) . '" height="130" width="130" alt="profile image" class="circle z-depth-2 "
+                 id="profileImage">
+                                <span class="title black-text">' . $aUser . ' | ' . $count . '</span>
+                                
+                                <p class=" ultra-small">Answered on ' . $aDate . ' </p>
+                                
+                               </div>
+                             </li>
+                           </ul>
+                         </div>
+                                <div class="model-email-content teal lighten-5">
+                                    <p class="small"> ' . $aDescription . '</p><br> ';
+
+
+        }
+        echo '<i class="mdi-action-thumb-up teal-text darken-3"></i>';
+        echo getLikes($aId);
+        echo '<i class="mdi-action-thumb-down teal-text darken-3"></i>';
+        echo getUnLikes($aId);
+
+        echo '          
+                        </div>
+                  </div>
+               <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+                    <a class="btn-floating btn-large teal darken-1" href="addAnswer.php?question_id=' . $questionID . '">
+                    <i class="large mdi-editor-mode-comment"></i>
+                    </a>
+                </div>
+               
+               
+                ';
 
     }
 
 }
-echo '
-  
-  <ul class="pagination"> 
-    <li class="disabled"><a href="#!"><i class="mdi-navigation-chevron-left"></i></a></li>';
-    for ($page = 1; $page <= $no_of_pages; $page++) {
-        if ($page == $page_no)
-            echo '<li><a class="active waves-effect cyan" href="QA-lawyer.php?page=' . $page . '">' . $page . '</a></li>';
-        else
-        echo '<li><a class="waves-effect " href="QA-lawyer.php?page=' . $page . '">' . $page . '</a></li>';
 
-    }
-echo '
-    <li class="disabled"><a href="#!"><i class="mdi-navigation-chevron-right"></i></a></li>
-   </ul>';
+
 ?>
 
 
-<!--FOOTER-->
+<!-- insert footer-->
 <!--?php include '../header-footer/footer.php';
 ?>
 
@@ -201,13 +203,12 @@ echo '
 <!--materialize js-->
 <script type="text/javascript" src="../../js/materialize.js"></script>
 <!--prism-->
-<script type="text/javascript" src="../../js/prism.js"></script>
+<script type="text/javascript" src="../../js/prism-new.js"></script>
 <!--scrollbar-->
 <script type="text/javascript" src="../../js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
-<script type="text/javascript" src="../../js/plugins.js"></script>
+<script type="text/javascript" src="../../js/plugins-new.js"></script>
 
 
 </body>
 </html>
-

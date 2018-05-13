@@ -23,7 +23,7 @@ if (isset($_POST['liked'])) {
     $point_query=mysqli_query($connection,"SELECT points FROM lawyer  WHERE username='".$lawyer_name."'");
     $point_result=mysqli_fetch_array($point_query);
 
-    $points=$point_result['points']+1;
+    $points=(int)$point_result['points']+1;
 
 
 
@@ -55,16 +55,37 @@ if (isset($_POST['unLiked'])) {
     $answerId = $_POST['postid'];
     $result = mysqli_query($connection, "SELECT * FROM answervote WHERE aID='" . $answerId . "'");
     $row = mysqli_fetch_array($result);
-    $nDown = $row['voteDownCount'] + 1;
+    $nDown = (int)$row['voteDownCount'] + 1;
+    $nUp=(int)$row['voteUpCount'];
+
+    $law_query = mysqli_query($connection, "SELECT aUser FROM answer WHERE aID='" . $answerId . "'");
+    $law = mysqli_fetch_array($law_query);
+    $lawyer_name=$law['aUser'];
+
+    $point_query=mysqli_query($connection,"SELECT points FROM lawyer  WHERE username='".$lawyer_name."'");
+    $point_result=mysqli_fetch_array($point_query);
+
+    $points=(int)$point_result['points']-1;
 
     try{
         mysqli_autocommit($connection,FALSE);
+        mysqli_query($connection,"UPDATE lawyer SET points='$points' WHERE username='".$lawyer_name."'");
         mysqli_query($connection, "INSERT INTO unlikes(username,aID) VALUES ('$username','$answerId')");
         mysqli_query($connection, "UPDATE answervote SET voteDownCount='$nDown' WHERE aID ='" . $answerId . "'");
         mysqli_commit($connection);
     }catch(Exception $e){
         $connection->rollback();
     }
+    $ratings=array();
+
+    $ratings=[
+        "likes" => $nUp,
+        "unlikes"=> $nDown
+
+    ];
+
+    echo json_encode($ratings);
+
 
 
     exit();
@@ -76,8 +97,18 @@ if (isset($_POST['like_unlike'])) {
     $nUp = $row['voteUpCount'] - 1;
     $nDown = $row['voteDownCount'] + 1;
 
+    $law_query = mysqli_query($connection, "SELECT aUser FROM answer WHERE aID='" . $answerId . "'");
+    $law = mysqli_fetch_array($law_query);
+    $lawyer_name=$law['aUser'];
+
+    $point_query=mysqli_query($connection,"SELECT points FROM lawyer  WHERE username='".$lawyer_name."'");
+    $point_result=mysqli_fetch_array($point_query);
+
+    $points=(int)$point_result['points']-2;
+
     try{
         mysqli_autocommit($connection,FALSE);
+        mysqli_query($connection,"UPDATE lawyer SET points='$points' WHERE username='".$lawyer_name."'");
         mysqli_query($connection, "DELETE FROM  likes WHERE username='" . $username . "'AND aID='" . $answerId . "' ");
         mysqli_query($connection, "INSERT INTO unlikes(username,aID) VALUES ('$username','$answerId')");
         mysqli_query($connection, "UPDATE answervote SET voteUpCount='$nUp' ,voteDownCount='$nDown' WHERE aID ='" . $answerId . "'");
@@ -85,6 +116,16 @@ if (isset($_POST['like_unlike'])) {
     }catch(Exception $e){
     $connection->rollback();
     }
+    $ratings=array();
+
+    $ratings=[
+        "likes" => $nUp,
+        "unlikes"=> $nDown
+
+    ];
+
+    echo json_encode($ratings);
+
 
     exit();
 }
@@ -95,8 +136,18 @@ if (isset($_POST['unlike_like'])) {
     $row = mysqli_fetch_array($result);
     $nDown = $row['voteDownCount'] - 1;
     $nUp = $row['voteUpCount'] + 1;
+
+    $law_query = mysqli_query($connection, "SELECT aUser FROM answer WHERE aID='" . $answerId . "'");
+    $law = mysqli_fetch_array($law_query);
+    $lawyer_name=$law['aUser'];
+
+    $point_query=mysqli_query($connection,"SELECT points FROM lawyer  WHERE username='".$lawyer_name."'");
+    $point_result=mysqli_fetch_array($point_query);
+
+    $points=(int)$point_result['points']+2;
     try{
         mysqli_autocommit($connection,FALSE);
+        mysqli_query($connection,"UPDATE lawyer SET points='$points' WHERE username='".$lawyer_name."'");
         mysqli_query($connection, "DELETE FROM  unlikes WHERE username='" . $username . "'AND aID='" . $answerId . "' ");
         mysqli_query($connection, "INSERT INTO likes(username,aID) VALUES ('$username','$answerId')");
         mysqli_query($connection, "UPDATE answervote SET voteUpCount='$nUp' ,voteDownCount='$nDown' WHERE aID ='" . $answerId . "'");
@@ -104,6 +155,16 @@ if (isset($_POST['unlike_like'])) {
     }catch(Exception $e){
     $connection->rollback();
     }
+    $ratings=array();
+
+    $ratings=[
+        "likes" => $nUp,
+        "unlikes"=> $nDown
+
+    ];
+
+    echo json_encode($ratings);
+
 
 
     exit();

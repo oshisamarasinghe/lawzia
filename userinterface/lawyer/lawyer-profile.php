@@ -1,5 +1,7 @@
 <?php
 include '../../backend/lawyer-info.php';
+include '../../backend/badge-load.php';
+include '../../backend/lawyers-badges.php';
 
 ?>
 <!DOCTYPE html>
@@ -123,48 +125,65 @@ include '../header-footer/nav-lawyer.php'; ?>
                         <div class="row">
                             <div class="col s12 m12 l12">
                                 <div class="card-panel">
-                        <p>
-                            <?php include '../../backend/connection.php';
-                            $answer_list = "SELECT * FROM answer where aUser='" . $username . "'";
-                            $count = 0;
-                            if ($is_query_run = mysqli_query($connection, $answer_list)) {
+                                    <p>
+                                        <?php
+                                        $answer_list = "SELECT * FROM answer where aUser='" . $username . "'";
+                                        $count = 0;
+                                        if ($is_query_run = mysqli_query($connection, $answer_list)) {
 
-                                while ($row = mysqli_fetch_array($is_query_run, MYSQLI_ASSOC)) {
-                                    $aId = $row['aID'];
-                                    $aDate = $row['aDate'];
-                                    $aDes = $row['aDescription'];
+                                            while ($row = mysqli_fetch_array($is_query_run, MYSQLI_ASSOC)) {
+                                                $aId = $row['aID'];
+                                                $aDate = $row['aDate'];
 
-                                    $qa = "SELECT * FROM qa NATURAL JOIN question WHERE aID='" . $aId . "'";
-                                    if ($qa_query_run = mysqli_query($connection, $qa)) {
+                                                $qa = "SELECT * FROM qa NATURAL JOIN question WHERE aID='" . $aId . "'";
+                                                if ($qa_query_run = mysqli_query($connection, $qa)) {
 
-                                        while ($in_row = mysqli_fetch_array($qa_query_run, MYSQLI_ASSOC)) {
-                                            $qCat = $in_row['qCategory'];
-                                            $qDate = $in_row['qDate'];
-                                            $qUser = $in_row['qUser'];
-                                            $qNo = $in_row['qID'];
+                                                    while ($in_row = mysqli_fetch_array($qa_query_run, MYSQLI_ASSOC)) {
+                                                        $title = $in_row['qTitle'];
+                                                        $qNo = $in_row['qID'];
 
-                                            $count++;
-                                            echo '<a class="cyan-text col s12 offset-10" 
-                                                     href="question-page-lawyer.php?question_id=' . $qNo . '"><i class="mdi-action-question-answer"></i>' . $count . ' .Answered  question no:
-                                                     ' . $qNo . '  of category  ' . $qCat . ' asked by ' . $qUser . '  on :' . $aDate . ' </a><br>';
+                                                        $count++;
+                                                        echo '<a class="cyan-text col s12 offset-10" 
+                                                     href="QA-lawyer.php?question_id=' . $qNo . '"><i class="mdi-action-question-answer"></i>' . $count . ' :
+                                                     ' . $title . ' </a><br>';
+                                                    }
+                                                }
+                                            }
                                         }
-                                    }
-                                }
-                            }
-                            ?>
-                        </p>
-                       </div>
-                     </div>
+                                        ?>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </li>
                 <li>
                     <div class="collapsible-header cyan white-text"><i class="mdi-action-face-unlock"></i>Your Badges
 
                     </div>
                     <div class="collapsible-body cyan lighten-5">
-                        <p>
-                        </p>
+                        <div class="row">
+                            <div class="col s12 m12 l12">
+                                <div class="card-panel">
+
+                                    <div class="row">
+                                        <?php
+                                        $load_query = "SELECT * FROM badge  NATURAL JOIN lawyerbadge   WHERE username = '" . $username . "'";
+
+                                        $badge_q = mysqli_query($connection, $load_query);
+                                        while ($badges = mysqli_fetch_array($badge_q, MYSQLI_ASSOC)) {
+                                            echo '<div class="col s12 m6 l3">
+                                            
+                                                <img src="data:image/jpeg;base64,' . base64_encode($badges['bImage']) . '" height="130" width="130" alt="profile image" 
+                                                     id="image" class="tooltipped " data-position="right" data-delay="50" data-tooltip="' . $badges['bDescription'] . '">
+                                            
+                                        </div>';
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </li>
 
@@ -183,11 +202,11 @@ include '../header-footer/nav-lawyer.php'; ?>
 <!--materialize js-->
 <script type="text/javascript" src="../../js/materialize.js"></script>
 <!--prism-->
-<script type="text/javascript" src="../../js/prism.js"></script>
+<script type="text/javascript" src="../../js/prism-new.js"></script>
 <!--scrollbar-->
 <script type="text/javascript" src="../../js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <!--plugins.js - Some Specific JS codes for Plugin Settings-->
-<script type="text/javascript" src="../../js/plugins.js"></script>
+<script type="text/javascript" src="../../js/plugins-new.js"></script>
 
 
 </body>

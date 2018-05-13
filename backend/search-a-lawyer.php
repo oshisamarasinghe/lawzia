@@ -27,9 +27,8 @@ if (test_input(empty($_POST['country']))) {
 } else {
     $country = test_input($_POST['country']);
 }
-echo 'im here';
-$_SESSION['country'] = $country;
-header("location:../userinterface/user/view-lawyer-list.php");
+
+header("location:../userinterface/user/lawyers_list.php?country=" . urlencode($country));
 
 
 

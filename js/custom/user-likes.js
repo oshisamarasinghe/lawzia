@@ -5,7 +5,7 @@ function liked(answerId) {
 
     var anID = answerId;
     var clickedIcon = $('#Like');
-    var nextIcon=$('#like')
+    //var nextIcon=$('#like')
 
     $.ajax({
         dataType:'json',
@@ -21,11 +21,12 @@ function liked(answerId) {
 
             alert(results.likes);
 
+
             clickedIcon.removeClass();
             clickedIcon.addClass('mdi-action-thumb-up teal-text');
-            nextIcon.val(results.likes);
+            //nextIcon.val(results.likes);
 
-           // clickedIcon.siblings('span.likes').text(results.likes);
+           clickedIcon.siblings('span.likes').html(results.likes);
 
 
 
@@ -39,7 +40,7 @@ function liked(answerId) {
 function unLiked(answerId) {
     var anID = answerId;
     var clickedIcon = $('#Unlike');
-    alert("i m here to unlike" + anID);
+
 
     $.ajax({
         dataType:'json',
@@ -49,7 +50,10 @@ function unLiked(answerId) {
             'unLiked': 1,
             'postid': anID
         },
-        success: function () {
+        success: function (results) {
+
+
+            alert(results);
             clickedIcon.removeClass();
             clickedIcon.addClass('mdi-action-thumb-down teal-text');
             alert("unlike successful ");
@@ -67,13 +71,17 @@ function like_to_unlike(answerId) {
     var currentIcon=$('#liked');
     alert("like -> unlike" + anID);
     $.ajax({
-        url: 'vote.php?like_unlike=' + 1 + '&postID=' + anID + '',
+        dataType:'json',
+        url: 'vote.php',
         type: 'post',
         data: {
             'like_unlike': 1,
             'postID': anID
         },
-        success: function () {
+        success: function (results) {
+
+
+            alert(results);
             currentIcon.removeClass();
             currentIcon.addClass('mdi-action-thumb-up grey-text');
             clickedIcon.removeClass();
@@ -92,13 +100,17 @@ function unlike_to_like(answerId) {
 
     alert("unlike -> like" + anID);
     $.ajax({
-        url: 'vote.php?unlike_like=' + 1 + '&postID=' + anID + '',
+        dataType:'json',
+        url: 'vote.php',
         type: 'post',
         data: {
             'unlike_like': 1,
             'postID': anID
         },
-        success: function () {
+        success: function (results) {
+
+
+            alert(results);
             currentIcon.removeClass();
             currentIcon.addClass('mdi-action-thumb-down grey-text');
             clickedIcon.removeClass();

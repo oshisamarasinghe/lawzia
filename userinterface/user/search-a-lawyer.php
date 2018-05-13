@@ -28,9 +28,9 @@ include '../header-footer/header-user.php'; ?>
 <div class="row">
     <div class="col s12 m12 l12 ">
         <div class="card-panel z-depth-2 ">
-            <h3 class="header2" align="center">SEARCH-A-LAWYER</h3>
+            <h3 class="header2" align="center">Find a Lawyer</h3>
             <div class="row">
-                <form class="col s6 offset-m3" action="lawyers_list.php" method="post">
+                <form class="col s6 offset-m3" action="../../backend/search-a-lawyer.php" method="post">
                     <div class="row">
                         <div class="row">
                             <h6>Select the country</h6>
@@ -381,6 +381,9 @@ include '../header-footer/header-user.php'; ?>
             </div>
         </div>
     </div>
+</div>
+
+
 
     <!-- insert footer-->
     <!--?php include '../header-footer/footer.php';
@@ -391,12 +394,12 @@ include '../header-footer/header-user.php'; ?>
     <!--materialize js-->
     <script type="text/javascript" src="../../js/materialize.js"></script>
     <!--prism-->
-    <script type="text/javascript" src="../../js/prism.js"></script>
+    <script type="text/javascript" src="../../js/prism-new.js"></script>
     <!--scrollbar-->
     <script type="text/javascript" src="../../js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
     <!--plugins.js - Some Specific JS codes for Plugin Settings-->
-    <script type="text/javascript" src="../../js/plugins.js"></script>
+    <script type="text/javascript" src="../../js/plugins-new.js"></script>
 
 
 </body>
