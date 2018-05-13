@@ -151,7 +151,7 @@ if ($is_query_run = mysqli_query($connection, $questions)) {
 <!--materialize js-->
 <script type="text/javascript" src="../../js/materialize.js"></script>
 <!--prism-->
-<script type="text/javascript" src="../../js/prism-new.js"></script>
+<script type="text/javascript" src="../../js/prism.js"></script>
 <!--scrollbar-->
 <script type="text/javascript" src="../../js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
@@ -159,7 +159,7 @@ if ($is_query_run = mysqli_query($connection, $questions)) {
 <script type="text/javascript" src="../../js/custom/addNewElement.js"></script>
 
 <!--plugins.js - Some Specific JS codes for Plugin Settings-->
-<script type="text/javascript" src="../../js/plugins-new.js"></script>
+<script type="text/javascript" src="../../js/plugins.js"></script>
 
 
 </body>

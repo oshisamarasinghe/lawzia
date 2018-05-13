@@ -86,6 +86,7 @@ if ($is_query_run = mysqli_query($connection, $lawyer_country)) {
 
 
 
+
         echo '
                      <div class="row z-depth-1">
                          <div class="col s12 m7 l0">
@@ -121,9 +122,14 @@ if ($is_query_run = mysqli_query($connection, $lawyer_country)) {
                 ' . $city . ',<br>
                 ' . $wCountry . '<br></h6>
                 <h6 class="indigo-text darken-3" > '.$wEmail.' | '.$wContact.' </h6>
-            </div>
-         </div>';
-    }
+        
+                    </div>
+                 </div>';
+        }
+
+
+
+
 
 
 }
@@ -150,10 +156,10 @@ echo '
 <!--materialize js-->
 <script type="text/javascript" src="../../js/materialize.js"></script>
 <!--prism-->
-<script type="text/javascript" src="../../js/prism-new.js"></script>
+<script type="text/javascript" src="../../js/prism.js"></script>
 <!--scrollbar-->
 <script type="text/javascript" src="../../js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-<script type="text/javascript" src="../../js/plugins-new.js"></script>
+<script type="text/javascript" src="../../js/plugins.js"></script>
 
 
 </body>

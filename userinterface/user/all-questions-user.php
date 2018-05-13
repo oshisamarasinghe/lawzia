@@ -71,14 +71,22 @@ if ($is_query_run = mysqli_query($connection, $results_in_this_page)) {
 
             }
         }
-        if (empty($data)) {
+
+        //check availability of answers
+        $relevant_answers = "SELECT COUNT(*) as ansCount FROM qa WHERE qID='" . $qId . "'";
+        $result = mysqli_fetch_array(mysqli_query($connection, $relevant_answers));
+        $rep = $result['ansCount'];
+
             echo '<div class="row">
                         <div class="col s8 m12 l12 " >
                             <ul class="collection grey lighten-2">
                                 <li class="collection-item avatar grey lighten-2">
-                                    <div class="col s7">
-                                        <img src="../../images/user-profile-pic.png" alt="" class="circle">
-                                        <span class="title black-text">' . $user . '</span>
+                                    <div class="col s7">';
+        if (empty($data)) { echo ' <img src="../../images/user-profile-pic.png" alt="" class="circle">';
+        }else{
+                echo'<img src="data:image/jpeg;base64,' . base64_encode($data) . '" height="130" width="130" alt="profile image" class="circle z-depth-2 "
+                         id="profileImage"/>';}
+                         echo'      <span class="title black-text">' . $user . '</span>
                                         <p class=" ultra-small">' . $country . '</p>
                                         <p class="ultra-small"> ' . $date . ' </p>
                                     </div>
@@ -87,39 +95,17 @@ if ($is_query_run = mysqli_query($connection, $results_in_this_page)) {
                          </div>
                          <div class="model-email-content grey lighten-3">
                                 <p class="cyan-text ">Question : ' . $title . '</p>
-                                <p>' . $description . '</p>
-                                <p><a href="view-answers.php?question_id=' . $qId . '" class="secondary-content red-text">view answers</a> </p>
-                         </div>
-                     </div>
-                           
-                     ';
-        } else {
-            echo '<div class="row">
-                        <div class="col s8 m12 l12 " >
-                            <ul class="collection grey lighten-2">
-                                <li class="collection-item avatar grey lighten-2">
-                                    <div class="col s7">
-                                        <img src="data:image/jpeg;base64,' . base64_encode($data) . '" height="130" width="130" alt="profile image" class="circle z-depth-2 "
-                         id="profileImage"/>
-                                        <span class="title black-text">' . $user . '</span>
-                                        <p class=" ultra-small">' . $country . '</p>
-                                        <p class="ultra-small"> ' . $date . ' </p>
-                                    </div>
-                                </li>
-                            </ul>
-                          </div>
-                          <div class="model-email-content grey lighten-3">
-                              <p class="cyan-text ">Question : ' . $title . '</p>
-                              <p>' . $description . '</p>
-                               <p><a href="view-answers.php?question_id=' . $qId . '" class="secondary-content red-text">view answers</a> </p>
-                         </div>
-                     </div>
-                           
-                     ';
+                                <p>' . $description . '</p>';
+
+        if($rep==0){echo'<p class="secondary-content red-text">'.$rep.' answers</p>';
+        }else{echo'<p><a href="view-answers.php?question_id=' . $qId . '" class="secondary-content red-text">'.$rep.' answers</a> </p>
+                         ';}
+                            echo'
+                                </div>
+                            </div>
+                           ';
         }
 
-
-    }
 
 }
 echo '
@@ -155,11 +141,11 @@ echo '
 <!--materialize js-->
 <script type="text/javascript" src="../../js/materialize.js"></script>
 <!--prism-->
-<script type="text/javascript" src="../../js/prism-new.js"></script>
+<script type="text/javascript" src="../../js/prism.js"></script>
 <!--scrollbar-->
 <script type="text/javascript" src="../../js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
-<script type="text/javascript" src="../../js/plugins-new.js"></script>
+<script type="text/javascript" src="../../js/plugins.js"></script>
 
 
 </body>

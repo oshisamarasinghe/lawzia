@@ -59,60 +59,44 @@ if ($is_query_run = mysqli_query($connection, $question)) {
 
             }
         }
+
+        echo ' <div class="row">
+                 <div class="col s12 m12 l12  " >
+                     <ul class="collection grey lighten-2">
+                         <li class="collection-item avatar grey lighten-2">
+                            <div class="col s7">';
+
         if (empty($data)) {
-            echo '<div class="row">
-                 <div class="col s12 m12 l12  " >
-                     <ul class="collection grey lighten-2">
-                         <li class="collection-item avatar grey lighten-2">
-                            <div class="col s7">
-                                <img src="../../images/user-profile-pic.png" alt="" class="circle">
-                                <span class="title black-text">' . $user . '</span>
-                                
-                                <p class=" ultra-small">' . $cat . ' - ' . $country . ' </p>
-                                <p class="ultra-small">' . $date . '</p>
-                              
-                               </div>
-                               </li>
-                               </ul>
-                            </div>
-                                
-                                <div class="model-email-content grey lighten-3">
-                                <h5 class=" teal-text darken-3">Question : ' . $title . '</h5>
-                               
-                                <p> ' . $description . '</p>
-                                </div>
-                         
-               </div>';
-
+            echo '<img src="../../images/user-profile-pic.png" alt="" class="circle">';
         } else {
-            echo '<div class="row">
-                 <div class="col s12 m12 l12  " >
-                     <ul class="collection grey lighten-2">
-                         <li class="collection-item avatar grey lighten-2">
-                            <div class="col s7">
-                                <img src="data:image/jpeg;base64,' . base64_encode($data) . '" height="130" width="130" alt="profile image" class="circle z-depth-2 "
-                 id="profileImage">
-                                <span class="title black-text">' . $user . '</span>
-                                
-                                <p class=" ultra-small">' . $cat . ' - ' . $country . ' </p>
-                                <p class="ultra-small">' . $date . '</p>
-                              
-                               </div>
-                               </li>
-                               </ul>
-                            </div>
-                                
-                                <div class="model-email-content grey lighten-3">
-                                <h5 class=" teal-text darken-3">Question : ' . $title . '</h5>
-                               
-                                <p> ' . $description . '</p>
-                                </div>
-                         
-               </div>';
-
+            echo '<img src="data:image/jpeg;base64,' . base64_encode($data) . '" height="130" width="130" alt="profile image" class="circle z-depth-2 "
+                 id="profileImage">';
         }
+        echo '
 
-    }
+                                
+              <span class="title black-text">' . $user . '</span>
+                   <p class=" ultra-small">' . $cat . ' - ' . $country . ' </p>
+                       <p class="ultra-small">' . $date . '</p>
+                        </div>
+                    </li>
+               </ul>
+              </div>
+              <div class="model-email-content grey lighten-3">
+                 <h5 class=" teal-text darken-3">Question : ' . $title . '</h5>
+                     <p> ' . $description . '</p>
+                     
+                    
+              </div>
+              
+          </div>
+            
+            
+            
+            ';
+         }
+
+
 }
 
 $answers = "SELECT * FROM answer NATURAL JOIN qa WHERE  qID='$questionID'";//all answers to relevant question
@@ -195,23 +179,30 @@ if ($is_inside_query_run = mysqli_query($connection, $answers)) {
 
             if (mysqli_num_rows($like_query) == 1) {
 
-                echo ' <i class="mdi-action-thumb-up teal-text" id="liked"></i>';echo getLikes($aId);echo'</span>';
-                echo ' <i class="mdi-action-thumb-down grey-text" id="Dislike" onclick=like_to_unlike("' . $aId . '")></i>';echo getUnLikes($aId);
+                echo ' <i class="mdi-action-thumb-up teal-text" id="liked"></i><span class="like">';
+                echo getLikes($aId);
+                echo '</span>';
+                echo ' <i class="mdi-action-thumb-down grey-text" id="Dislike" onclick=like_to_unlike("' . $aId . '")></i>';
+                echo getUnLikes($aId);
 
 
             } else if (mysqli_num_rows($unlike_query) == 1) {
-                echo ' <i class="mdi-action-thumb-up grey-text"  id="unDislike" onclick=unlike_to_like("' . $aId . '")></i>';echo getLikes($aId);
-                echo'  <i class="mdi-action-thumb-down teal-text" id="unliked" ></i>';echo getUnLikes($aId);
+                echo ' <i class="mdi-action-thumb-up grey-text"  id="unDislike" onclick=unlike_to_like("' . $aId . '")></i>';
+                echo getLikes($aId);
+                echo '  <i class="mdi-action-thumb-down teal-text" id="unliked" ></i>';
+                echo getUnLikes($aId);
             } else {
-                echo ' <i class="mdi-action-thumb-up grey-text" id="Like" onclick=liked("' . $aId . '")></i><span class="like">';echo getLikes($aId);echo'</span>';
-                echo ' <i class="mdi-action-thumb-down grey-text" id="Unlike" onclick=unLiked("' . $aId . '")></i>';echo getUnLikes($aId);
+                echo ' <i class="mdi-action-thumb-up grey-text" id="Like" onclick=liked("' . $aId . '")></i>';
+                echo getLikes($aId);
+                echo ' <i class="mdi-action-thumb-down grey-text" id="Unlike" onclick=unLiked("' . $aId . '")></i>';
+                echo getUnLikes($aId);
             }
             echo '    </div>
                     </div>';
         }
     }
 }
-
+echo '';
 
 ?>
 

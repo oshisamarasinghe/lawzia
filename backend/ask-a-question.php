@@ -59,8 +59,8 @@ try {
     mysqli_query($connection, "INSERT INTO question( qTitle,qDescription, qUser, qCategory, qDate,qCountry )
 				VALUES('$title','$description','$username','$category',now(),'$country')");
     mysqli_commit($connection);
-    echo "<script> alert('your question submitted sucessfully')</script>";
-    header("location:../userinterface/user/QA-user.php");
+    //echo "<script> alert('your question submitted successfully')</script>";
+    header("location:../userinterface/user/all-questions-user.php");
 
 } catch (Exception $e) {
     echo "<script> alert($e)</script>";

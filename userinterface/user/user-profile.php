@@ -129,7 +129,7 @@ include '../header-footer/header-user.php'; ?>
                             <div class="col s12 m12 l12">
                                 <div class="card-panel">
                                     <p><i class="mdi-image-photo-camera"></i><b>Change profile Image</b><p>Select an Image </p>
-                                    <form action="" enctype="multipart/form-data" method="post">
+                                    <form action="../../backend/upload.php" enctype="multipart/form-data" method="post">
                                         <div class="file-field input-field">
                                             <input class="file-path validate " type="text"/>
                                             <div class="btn waves-light waves-effect  cyan">
@@ -164,16 +164,16 @@ include '../header-footer/header-user.php'; ?>
                                 <div class="card-panel">
                         <p>Click on the question to view details</p>
                         <?php include '../../backend/connection.php';
-                        $question_list = "SELECT * FROM question where qUser='" . $username . "'";
+                        $question_list = "SELECT * FROM question where qUser='" . $username . "'order by qID  DESC";
 
                         if ($is_query_run = mysqli_query($connection, $question_list)) {
 
                             while ($row = mysqli_fetch_array($is_query_run, MYSQLI_ASSOC)) {
                                 $qNo = $row['qID'];
-                                $qCat = $row['qCategory'];
-                                $qDate = $row['qDate'];
+                                $qtitle = $row['qTitle'];
+                                //$qDate = $row['qDate'];
 
-                                echo '<a class="cyan-text col s12 offset-10"  href="view-answers.php?question_id=' . $qNo . '">Question No: ' . $qNo . ' asked on  :' . $qDate . '  of category  ' . $qCat . '</a><br>
+                                echo '<a class="cyan-text col s12 offset-10"  href="view-answers.php?question_id=' . $qNo . '"><i class="mdi-action-question-answer"></i>' . $qtitle . '  </a><br>
                                           
                                     ';
 
@@ -187,17 +187,7 @@ include '../header-footer/header-user.php'; ?>
         </div>
     </div>
 </div>
-<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-    <a class="btn-floating btn-large red">
-        <i class="large mdi-communication-live-help"></i>
-    </a>
-    <ul>
-        <li><a href="css-helpers.html" class="btn-floating yellow darken-1"><i class="mdi-action-pageview"></i></a></li>
-        <li><a href="app-widget.html" class="btn-floating yellow darken-1"><i class="large mdi-device-now-widgets"></i></a></li>
-        <li><a href="app-calendar.html" class="btn-floating green"><i class="large mdi-editor-insert-invitation"></i></a></li>
-        <li><a href="app-email.html" class="btn-floating blue"><i class="large mdi-communication-email"></i></a></li>
-    </ul>
-</div>
+
 
 
 

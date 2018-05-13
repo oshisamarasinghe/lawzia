@@ -32,7 +32,7 @@ session_start();
 $user_country = $_SESSION['country'];
 
 $results_per_page = 5;
-$questions = "SELECT * FROM question WHERE qCountry='".$user_country."'ORDER BY qID DESC ";
+$questions = "SELECT * FROM question WHERE qCountry='" . $user_country . "'ORDER BY qID DESC ";
 $result = mysqli_query($connection, $questions);
 $no_of_results = mysqli_num_rows($result);
 $no_of_pages = ceil($no_of_results / $results_per_page);
@@ -45,7 +45,7 @@ if (!isset($_GET['page'])) {
 
 $this_page_first_result = ($page_no - 1) * $results_per_page;
 
-$results_in_this_page = "SELECT * FROM question WHERE qCountry='".$user_country."'  ORDER BY qID DESC LIMIT " . $this_page_first_result . ',' . $results_per_page;
+$results_in_this_page = "SELECT * FROM question WHERE qCountry='" . $user_country . "'  ORDER BY qID DESC LIMIT " . $this_page_first_result . ',' . $results_per_page;
 
 
 if ($is_query_run = mysqli_query($connection, $results_in_this_page)) {
@@ -158,11 +158,11 @@ echo '
 <!--materialize js-->
 <script type="text/javascript" src="../../js/materialize.js"></script>
 <!--prism-->
-<script type="text/javascript" src="../../js/prism-new.js"></script>
+<script type="text/javascript" src="../../js/prism.js"></script>
 <!--scrollbar-->
 <script type="text/javascript" src="../../js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
-<script type="text/javascript" src="../../js/plugins-new.js"></script>
+<script type="text/javascript" src="../../js/plugins.js"></script>
 
 
 </body>

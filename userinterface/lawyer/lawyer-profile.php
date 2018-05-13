@@ -172,10 +172,10 @@ include '../header-footer/nav-lawyer.php'; ?>
 
                                         $badge_q = mysqli_query($connection, $load_query);
                                         while ($badges = mysqli_fetch_array($badge_q, MYSQLI_ASSOC)) {
-                                            echo '<div class="col s12 m6 l3">
+                                            echo '<div class="col s12 m2 ">
                                             
                                                 <img src="data:image/jpeg;base64,' . base64_encode($badges['bImage']) . '" height="130" width="130" alt="profile image" 
-                                                     id="image" class="tooltipped " data-position="right" data-delay="50" data-tooltip="' . $badges['bDescription'] . '">
+                                                     id="image" class="tooltipped " data-position="bottom" data-delay="50" data-tooltip="' . $badges['bDescription'] . '">
                                             
                                         </div>';
                                         }
@@ -193,6 +193,7 @@ include '../header-footer/nav-lawyer.php'; ?>
     </div>
 </div>
 
+
 <!-- FOOTER -->
 <!--?php include '../header-footer/footer.php'; ?>
 
@@ -202,11 +203,11 @@ include '../header-footer/nav-lawyer.php'; ?>
 <!--materialize js-->
 <script type="text/javascript" src="../../js/materialize.js"></script>
 <!--prism-->
-<script type="text/javascript" src="../../js/prism-new.js"></script>
+<script type="text/javascript" src="../../js/prism.js"></script>
 <!--scrollbar-->
 <script type="text/javascript" src="../../js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <!--plugins.js - Some Specific JS codes for Plugin Settings-->
-<script type="text/javascript" src="../../js/plugins-new.js"></script>
+<script type="text/javascript" src="../../js/plugins.js"></script>
 
 
 </body>

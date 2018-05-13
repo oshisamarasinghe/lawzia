@@ -266,6 +266,7 @@ try {
 workAddCity, workAddCountry, workEmail, workContact)
 				VALUES('$username','$email','$country','$fname','$lname','$contact','$title','$position','$wName','$exp','$wStreet','$wCity',
 				'$wCountry','$wEmail','$wContact')");
+    //mysqli_query($connection, "INSERT INTO lawyerbadge(bID,username)VALUES('first','$username')");
     mysqli_commit($connection);
     session_start();
     $_SESSION['username'] = $username;

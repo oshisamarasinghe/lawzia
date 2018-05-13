@@ -8,8 +8,8 @@ function liked(answerId) {
     //var nextIcon=$('#like')
 
     $.ajax({
-        dataType:'json',
-        url: 'vote.php' ,
+        dataType: 'json',
+        url: 'vote.php',
         type: 'post',
         data: {
             'liked': 1,
@@ -23,11 +23,10 @@ function liked(answerId) {
 
 
             clickedIcon.removeClass();
-            clickedIcon.addClass('mdi-action-thumb-up teal-text');
+            clickedIcon.addClass('mdi-action-thumb-up teal-text floating btn');
             //nextIcon.val(results.likes);
 
-           clickedIcon.siblings('span.likes').html(results.likes);
-
+            //clickedIcon.siblings('span.like').text(results.likes);
 
 
         },
@@ -43,7 +42,7 @@ function unLiked(answerId) {
 
 
     $.ajax({
-        dataType:'json',
+        dataType: 'json',
         url: 'vote.php',
         type: 'post',
         data: {
@@ -67,11 +66,11 @@ function unLiked(answerId) {
 function like_to_unlike(answerId) {
 
     var anID = answerId;
-    var clickedIcon=$('#Dislike');
-    var currentIcon=$('#liked');
+    var clickedIcon = $('#Dislike');
+    var currentIcon = $('#liked');
     alert("like -> unlike" + anID);
     $.ajax({
-        dataType:'json',
+        dataType: 'json',
         url: 'vote.php',
         type: 'post',
         data: {
@@ -95,12 +94,12 @@ function like_to_unlike(answerId) {
 }
 function unlike_to_like(answerId) {
     var anID = answerId;
-    var clickedIcon=$('#unDislike');
-    var currentIcon=$('#unliked');
+    var clickedIcon = $('#unDislike');
+    var currentIcon = $('#unliked');
 
     alert("unlike -> like" + anID);
     $.ajax({
-        dataType:'json',
+        dataType: 'json',
         url: 'vote.php',
         type: 'post',
         data: {

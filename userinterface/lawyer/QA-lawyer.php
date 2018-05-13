@@ -126,49 +126,41 @@ if ($is_inside_query_run = mysqli_query($connection, $answers)) {
 
             }
         }
-        //lawyers reputation count
-        $load_query = mysqli_query($connection, "SELECT COUNT (bID)as rep FROM badge  NATURAL JOIN lawyerbadge   WHERE username = '" . $aUser . "'");
-        $bCount = mysqli_fetch_array($load_query);
-        $count = $bCount['rep'];
+        //lawyers point count
+        $load_query = mysqli_query($connection, "SELECT points FROM lawyer WHERE username = '" . $aUser . "'");
+        $pointCount = mysqli_fetch_array($load_query);
+        $count = $pointCount['points'];
 
-        if (empty($data)) {
-            echo '<div class="row">
+
+        echo '<div class="row">
                     <div class="col s12 m12 l12 " >
                      <ul class="collection teal lighten-4">
-                        <li class="collection-item avatar teal lighten-4">
-                            <div class="col s7">
-                                <img src="../../images/user-profile-pic.png" alt="" class="circle">
-                                <span class="title black-text">' . $aUser . '</span>
-                                 <p class=" ultra-small">Answered on ' . $aDate . ' </p>
-                              </div>
+                        <li class="collection-item avatar teal lighten-4">';
+        if (empty($data)) {
+            echo ' <div class="col s7">
+                     <img src="../../images/user-profile-pic.png" alt="" class="circle">
+                          <span class="title black-text">' . $aUser . '</span>
+                              <p class=" ultra-small">Answered on ' . $aDate . ' </p>
+                   </div>';
+        } else {
+            echo '  <div class="col s7">
+                        <img src="data:image/jpeg;base64,' . base64_encode($data) . '" height="130" width="130" alt="profile image" class="circle z-depth-2 "
+                 id="profileImage">
+                        <span class="title black-text">' . $aUser . ' 
+                         </span>
+                         <p class="ultra-small"> ' . $count . ' points</p>
+                                
+                         <p class=" ultra-small">Answered on ' . $aDate . ' </p>
+                     </div>';
+        }
+        echo '
                             </li>
                          </ul>
                       </div>
                     <div class="model-email-content teal lighten-5">
                    <p class="small"> ' . $aDescription . '</p>
                      ';
-        } else {
-            echo '<div class="row">
-                    <div class="col s12 m12 l12 " >
-                     <ul class="collection teal lighten-4">
-                        <li class="collection-item avatar teal lighten-4">
-                        
-                            <div class="col s7">
-                                <img src="data:image/jpeg;base64,' . base64_encode($data) . '" height="130" width="130" alt="profile image" class="circle z-depth-2 "
-                 id="profileImage">
-                                <span class="title black-text">' . $aUser . ' | ' . $count . '</span>
-                                
-                                <p class=" ultra-small">Answered on ' . $aDate . ' </p>
-                                
-                               </div>
-                             </li>
-                           </ul>
-                         </div>
-                                <div class="model-email-content teal lighten-5">
-                                    <p class="small"> ' . $aDescription . '</p><br> ';
 
-
-        }
         echo '<i class="mdi-action-thumb-up teal-text darken-3"></i>';
         echo getLikes($aId);
         echo '<i class="mdi-action-thumb-down teal-text darken-3"></i>';
@@ -176,17 +168,31 @@ if ($is_inside_query_run = mysqli_query($connection, $answers)) {
 
         echo '          
                         </div>
-                  </div>
-               <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-                    <a class="btn-floating btn-large teal darken-1" href="addAnswer.php?question_id=' . $questionID . '">
-                    <i class="large mdi-editor-mode-comment"></i>
-                    </a>
-                </div>
-               
-               
-                ';
+                  </div>';
+
 
     }
+    echo '  <div class="col s12 grey lighten-1 " >
+                        <div class="card-panel  z-depth-2 ">
+                            <form  action="../../backend/addAnswer.php" method="post" >
+                            
+                                
+                                     <div class="row ">
+                                        <div class="input-field col s12">
+                                             <textarea id="message5" class= "materialize-textarea white" length="1000" rows="10" name="answer" ></textarea>
+                                            <input type="hidden" name="question_id" value="' . $qId . '">
+                                            <label for="answer">Type Your Answer Here</label>
+                                        </div>
+                                        <button class="btn cyan waves-effect waves-light left" type="submit" name="submitAnswer">Post Your answer
+                                            <i class="mdi-content-send right"></i>
+                                        </button>
+                                </div>
+                            
+                            </form>
+                    
+                 </div>
+            </div>
+        ';
 
 }
 
@@ -203,11 +209,11 @@ if ($is_inside_query_run = mysqli_query($connection, $answers)) {
 <!--materialize js-->
 <script type="text/javascript" src="../../js/materialize.js"></script>
 <!--prism-->
-<script type="text/javascript" src="../../js/prism-new.js"></script>
+<script type="text/javascript" src="../../js/prism.js"></script>
 <!--scrollbar-->
 <script type="text/javascript" src="../../js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
-<script type="text/javascript" src="../../js/plugins-new.js"></script>
+<script type="text/javascript" src="../../js/plugins.js"></script>
 
 
 </body>
