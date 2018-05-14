@@ -26,8 +26,6 @@ function addBadges($user_points)
 {
     global $connection;
     global $username;
-    $badge_list = array();
-
 
     $badge_array = array();
 
@@ -40,20 +38,24 @@ function addBadges($user_points)
          echo $value.'<br />';
 
      }*/
-    if ($user_points >= 100) {
+    if ($user_points >= 500) {
 
-        if ((!in_array('fourth', $badge_array))) {
-            $newBadge = 'fourth';
+        if ((!in_array('5fifth', $badge_array))) {
+            $newBadge = '5fifth';
         }
-    } elseif ($user_points > 49) {
-        if ((!in_array('third', $badge_array))) {
-            $newBadge = 'third';
+    } elseif ($user_points >= 100) {
+        if ((!in_array('4fourth', $badge_array))) {
+            $newBadge = '4fourth';
         }
-    } elseif ($user_points > 9) {
-        if ((!in_array('second', $badge_array))) {
-            $newBadge = 'second';
+    } elseif ($user_points >=50) {
+        if ((!in_array('3third', $badge_array))) {
+            $newBadge = '3third';
         }
-    }
+    }elseif ($user_points > 9) {
+            if ((!in_array('2second', $badge_array))) {
+                $newBadge = '2second';
+            }
+        }
 
     if (!empty($newBadge)) {
         //echo $newBadge;

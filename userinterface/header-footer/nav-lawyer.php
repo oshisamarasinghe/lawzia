@@ -17,6 +17,16 @@
                         <span>Question & Answer<i class="mdi-navigation-arrow-drop-down right"></i></span>
                     </a>
                 </li>
+                <li >
+                    <a href="../lawyer/leaderBoard.php" class="white-text">
+                        Leader Board
+                    </a>
+                </li>
+                <li >
+                    <a href="../lawyer/badges.php" class="white-text">
+                        Badges
+                    </a>
+                </li>
 
             </ul>
 

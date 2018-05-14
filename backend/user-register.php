@@ -26,10 +26,6 @@ if(empty(test_input($_POST['name']))){
     $errors="error-complete all fields";
     echo "<script> alert('error-complete all fields')</script>";
     echo "<script> window.history.go(-1);</script>";
-}else if(ctype_alpha(test_input($_POST['name']))== false ){
-    $errors="Invalid Username";
-    echo "<script> alert('Invalid username')</script>";
-    echo "<script> window.history.go(-1);</script>";
 }else{
     $username=test_input($_POST['name']);
 }

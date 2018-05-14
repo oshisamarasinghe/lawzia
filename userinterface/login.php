@@ -12,7 +12,7 @@
 
     <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="../css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
-    <!-- Custome CSS-->
+    <!-- Custom CSS-->
     <link href="../css/custom-style.css" type="text/css" rel="stylesheet" media="screen,projection">
     <!-- CSS style Horizontal Nav (Layout 03)-->
     <link href="../css/style-horizontal.css" type="text/css" rel="stylesheet" media="screen,projection">

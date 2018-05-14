@@ -1,9 +1,4 @@
-<?php
-include '../../backend/lawyer-info.php';
-include '../../backend/badge-load.php';
-include '../../backend/lawyers-badges.php';
-
-?>
+<?php include '../../backend/lawyer-info.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -122,9 +117,7 @@ include '../header-footer/nav-lawyer.php'; ?>
                         Answers
                     </div>
                     <div class="collapsible-body cyan lighten-5">
-                        <div class="row">
-                            <div class="col s12 m12 l12">
-                                <div class="card-panel">
+
                                     <p>
                                         <?php
                                         $answer_list = "SELECT * FROM answer where aUser='" . $username . "'";
@@ -143,50 +136,23 @@ include '../header-footer/nav-lawyer.php'; ?>
                                                         $qNo = $in_row['qID'];
 
                                                         $count++;
-                                                        echo '<a class="cyan-text col s12 offset-10" 
+                                                        echo '
+                                                        <div class="row">
+                                                            <div class="col s12 m12 l12">
+                                                                <div class="card-panel">
+                                                        <a class="black-text col s12 offset-10" 
                                                      href="QA-lawyer.php?question_id=' . $qNo . '"><i class="mdi-action-question-answer"></i>' . $count . ' :
-                                                     ' . $title . ' </a><br>';
+                                                     ' . $title . ' </a><br>
+                                                     </div>
+                                                </div>
+                                            </div>';
                                                     }
                                                 }
                                             }
                                         }
                                         ?>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="collapsible-header cyan white-text"><i class="mdi-action-face-unlock"></i>Your Badges
-
-                    </div>
-                    <div class="collapsible-body cyan lighten-5">
-                        <div class="row">
-                            <div class="col s12 m12 l12">
-                                <div class="card-panel">
-
-                                    <div class="row">
-                                        <?php
-                                        $load_query = "SELECT * FROM badge  NATURAL JOIN lawyerbadge   WHERE username = '" . $username . "'";
-
-                                        $badge_q = mysqli_query($connection, $load_query);
-                                        while ($badges = mysqli_fetch_array($badge_q, MYSQLI_ASSOC)) {
-                                            echo '<div class="col s12 m2 ">
-                                            
-                                                <img src="data:image/jpeg;base64,' . base64_encode($badges['bImage']) . '" height="130" width="130" alt="profile image" 
-                                                     id="image" class="tooltipped " data-position="bottom" data-delay="50" data-tooltip="' . $badges['bDescription'] . '">
-                                            
-                                        </div>';
-                                        }
-                                        ?>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-
+                        </li>
             </ul>
 
         </div>

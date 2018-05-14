@@ -124,10 +124,6 @@ if (empty(test_input($_POST['username']))) {
     $errors = "error-complete all fields";
     echo "<script> alert('error-complete all fields')</script>";
     echo "<script> window.history.go(-1);</script>";
-} else if (ctype_alpha(test_input($_POST['username'])) == false) {
-    $errors = "Invalid username";
-    echo "<script> alert('Invalid username')</script>";
-    echo "<script> window.history.go(-1);</script>";
 } else {
     $username = test_input($_POST['username']);
 }
@@ -135,10 +131,6 @@ if (empty(test_input($_POST['username']))) {
 if (empty(test_input($_POST['password']))) {
     $errors = "error-complete all fields";
     echo "<script> alert('error-complete all fields')</script>";
-    echo "<script> window.history.go(-1);</script>";
-} else if (ctype_alpha(test_input($_POST['password'])) == false) {
-    $errors = "Invalid password";
-    echo "<script> alert('Invalid Password')</script>";
     echo "<script> window.history.go(-1);</script>";
 } else {
     $password_text = test_input($_POST['password']);

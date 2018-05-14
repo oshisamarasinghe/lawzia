@@ -79,9 +79,9 @@
             <br>
         <span class="center-align">  <a class="black-text text-lighten-2"><b>OUR SERVICES TO YOU</b><br>
                 <ul>
-                    <li>ASK- A- LAWYER</li>
-                    <li>SEARCH- A- LAWYER</li>
-                    <li>ANSWER- A- QUESTION</li>
+                    <li>Ask a Lawyer</li>
+                    <li>Find a Lawyer</li>
+                    <li>Answer a Question</li>
 
                 </ul></a></span>
         </div>
@@ -103,7 +103,7 @@
 <script type="text/javascript" src="../js/plugins.js"></script>
 
 <!-- Toast Notification -->
-<script type="text/javascript">
+<!--script type="text/javascript">
     // Toast Notification
     $(window).load(function() {
         setTimeout(function() {
@@ -114,7 +114,7 @@
         }, 5000);
 
     });
-    </script>
+    </script-->
 
 </body>
 </html>

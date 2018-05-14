@@ -112,7 +112,7 @@ $answers = "SELECT * FROM answer NATURAL JOIN qa WHERE qID='$questionID' ORDER B
 if ($is_inside_query_run = mysqli_query($connection, $answers)) {
 
 
-    while ($in_row = mysqli_fetch_array($is_inside_query_run, MYSQL_ASSOC)) {
+    while ($in_row = mysqli_fetch_array($is_inside_query_run, MYSQLI_ASSOC)) {
         $aDescription = $in_row['aDescription'];
         $aDate = $in_row['aDate'];
         $aUser = $in_row['aUser'];
@@ -121,15 +121,11 @@ if ($is_inside_query_run = mysqli_query($connection, $answers)) {
         //relevant lawyer profile image
         $relevant_Lawyer_image = "SELECT Image FROM userimage WHERE username='" . $aUser . "' ";
         if ($is_query_run = mysqli_query($connection, $relevant_Lawyer_image)) {
-            while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
+            while ($row = mysqli_fetch_array($is_query_run, MYSQLI_ASSOC)) {
                 $data = $row['Image'];
 
             }
         }
-        //lawyers point count
-        $load_query = mysqli_query($connection, "SELECT points FROM lawyer WHERE username = '" . $aUser . "'");
-        $pointCount = mysqli_fetch_array($load_query);
-        $count = $pointCount['points'];
 
 
         echo '<div class="row">
@@ -139,21 +135,22 @@ if ($is_inside_query_run = mysqli_query($connection, $answers)) {
         if (empty($data)) {
             echo ' <div class="col s7">
                      <img src="../../images/user-profile-pic.png" alt="" class="circle">
-                          <span class="title black-text">' . $aUser . '</span>
-                              <p class=" ultra-small">Answered on ' . $aDate . ' </p>
-                   </div>';
+                          <span class="title black-text">' . $aUser . '</span>';
+
         } else {
             echo '  <div class="col s7">
                         <img src="data:image/jpeg;base64,' . base64_encode($data) . '" height="130" width="130" alt="profile image" class="circle z-depth-2 "
                  id="profileImage">
                         <span class="title black-text">' . $aUser . ' 
-                         </span>
-                         <p class="ultra-small"> ' . $count . ' points</p>
+                         </span>';
+         }
+
+
+              echo'
+           
                                 
                          <p class=" ultra-small">Answered on ' . $aDate . ' </p>
-                     </div>';
-        }
-        echo '
+                     </div>
                             </li>
                          </ul>
                       </div>
@@ -170,7 +167,7 @@ if ($is_inside_query_run = mysqli_query($connection, $answers)) {
                         </div>
                   </div>';
 
-
+        }
     }
     echo '  <div class="col s12 grey lighten-1 " >
                         <div class="card-panel  z-depth-2 ">
@@ -194,7 +191,7 @@ if ($is_inside_query_run = mysqli_query($connection, $answers)) {
             </div>
         ';
 
-}
+
 
 
 ?>

@@ -20,6 +20,7 @@ if ($is_lawyer_details_query_run = mysqli_query($connection, $lawyer_details)) {
         $street = $row['workAddStreet'];
         $city=$row['workAddCity'];
         $wCountry=$row['WorkAddCountry'];
+        $points=$row['points'];
 
     }
 }

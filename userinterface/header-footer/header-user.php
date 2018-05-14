@@ -31,6 +31,11 @@
                         <span>Find a Lawyer</span>
                     </a>
                 </li>
+                <li>
+                    <a class="white-text" href="../user/top-lawyers.php">
+                        <span>Lawyers LeaderBoard</span>
+                    </a>
+                </li>
             </ul>
 
             <ul class="right hide-on-med-and-down">
