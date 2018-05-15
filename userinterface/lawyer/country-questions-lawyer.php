@@ -1,44 +1,3 @@
-<!--?php include '../../backend/connection.php';
-session_start();
-$username = $_SESSION['username'];
-function length($inputTxt, $length)
-{
-    $userInput = $inputTxt;
-    if (strlen($userInput) == $length) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-//validate data
-function test_input($data)
-{
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
-
-$errors = "";
-if (empty(test_input($_POST['country']))) {
-    $errors = "error-complete all fields";
-    echo "<script> alert('error-complete all fields')</script>";
-} else {
-    $qCountry = test_input($_POST['country']);
-}
-
-if (empty(test_input($_POST['category']))) {
-    $errors = "error-complete all fields";
-    echo "<script> alert('error-complete all fields')</script>";
-
-} else {
-    $qCategory = test_input($_POST['category']);
-}*/
-
-?-->
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,7 +23,7 @@ if (empty(test_input($_POST['category']))) {
 
 <body class="white">
 <!-- Page Loading -->
-<?php include '../header-footer/loading.php';
+<?php
 include '../header-footer/nav-lawyer.php'; ?>
 
 
@@ -90,7 +49,7 @@ $results_in_this_page = "SELECT * FROM question WHERE qCountry= '" . $user_count
 if ($is_query_run = mysqli_query($connection, $results_in_this_page)) {
 
 
-    while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
+    while ($row = mysqli_fetch_array($is_query_run, MYSQLI_ASSOC)) {
         $description = $row['qDescription'];
         $date = $row['qDate'];
         $user = $row['qUser'];
@@ -102,7 +61,7 @@ if ($is_query_run = mysqli_query($connection, $results_in_this_page)) {
         //relevant user profile image
         $relevant_user_image = "SELECT Image FROM userimage WHERE username='" . $user . "' ";
         if ($is_relevant_user_image_query_run = mysqli_query($connection, $relevant_user_image)) {
-            while ($row = mysqli_fetch_array($is_relevant_user_image_query_run, MYSQL_ASSOC)) {
+            while ($row = mysqli_fetch_array($is_relevant_user_image_query_run, MYSQLI_ASSOC)) {
                 $data = $row['Image'];
 
             }

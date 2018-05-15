@@ -53,52 +53,6 @@ if (empty(test_input($_POST['lname']))) {
     $lname = test_input($_POST['lname']);
 }
 
-/*if (empty(test_input($_POST['CountryCode']))) {
-    $errors = "error-complete all fields";
-    echo "<script> alert('error-complete all fields')</script>";
-    echo "<script> window.history.go(-1);</script>";
-} else {*/
-    $countryCode = test_input($_POST['CountryCode']);
-
-
-if (empty(test_input($_POST['contact']))) {
-    $errors = "error-complete all fields";
-    echo "<script> alert('error-complete all fields')</script>";
-    echo "<script> window.history.go(-1);</script>";
-} else {
-
-
-// set API Access Key
-    $access_key = 'd904bc71477177d932f63f655a8cde9a';
-
-// set phone number
-    $phone_number = test_input($_POST['contact']);
-
-    $country_code=$countryCode;
-
-// Initialize CURL:
-    $ch = curl_init('http://apilayer.net/api/validate?access_key='.$access_key.'&number='.$phone_number.'& country_code ='.$country_code.'');
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-// Store the data:
-    $json = curl_exec($ch);
-    curl_close($ch);
-
-// Decode JSON response:
-    $validationResult = json_decode($json, true);
-
-// Access and use your preferred validation result objects
-    if($validationResult['valid']=='true'){
-        $contact = test_input($_POST['contact']);
-    }else{
-        echo "<script> alert('Invalid contact number')</script>";
-    }
-    //$validationResult['country_code'];
-    //$validationResult['carrier'];
-
-
-    //$contact = test_input($_POST['contact']);
-}
 
 if (test_input(empty($_POST['country']))) {
     $errors = "error-complete all fields";
@@ -125,7 +79,7 @@ if (empty(test_input($_POST['username']))) {
     echo "<script> alert('error-complete all fields')</script>";
     echo "<script> window.history.go(-1);</script>";
 } else {
-    $username = test_input($_POST['username']);
+    $name = test_input($_POST['username']);
 }
 
 if (empty(test_input($_POST['password']))) {
@@ -185,7 +139,7 @@ if (empty(test_input($_POST['w_name']))) {
     echo "<script> alert('error-work tel number')</script>";
     echo "<script> window.history.go(-1);</script>";
 } else {*/
-    $wCountryCode = test_input($_POST['w_CountryCode']);
+$wCountryCode = test_input($_POST['w_CountryCode']);
 
 
 if (empty(test_input($_POST['w_tel']))) {
@@ -251,14 +205,33 @@ if (test_input(empty($_POST['w_position']))) {
 $type = 'lu';
 
 
+//checking the validity of username
+$all_users = "SELECT username FROM userauthentication WHERE username='" . $name . "'";
+$all = mysqli_query($connection, $all_users);
+
+if (mysqli_num_rows($all) > 0) {
+    $errors = "error--name";
+    echo "<script> alert('username already being used')</script>";
+    echo "<script> window.history.go(-1);</script>";
+
+} else {
+    $username = $name;
+}
+
+//prepared statements
+$userAuthenticationStmt = $connection->prepare("INSERT INTO userauthentication(username, password,usertype ) VALUES (?, ?, ?)");
+$userAuthenticationStmt->bind_param("sss", $username, $password, $type);
+
+$lawyerStmt = $connection->prepare("INSERT INTO lawyer(username, email, country, fName, lName, title, workPosition, workCompany, workExperience, workAddStreet,
+workAddCity, workAddCountry, workEmail, workContact) VALUES (?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+$lawyerStmt->bind_param("sssssssssssssss", $username, $email, $country, $fname, $lname,
+    $title, $position, $wName, $exp, $wStreet, $wCity, $wCountry, $wEmail, $wContact);
+
 try {
     mysqli_autocommit($connection, FALSE);
-    mysqli_query($connection, "INSERT INTO userauthentication(username, password,usertype )VALUES('$username','$password','$type')");
-    mysqli_query($connection, "INSERT INTO lawyer(username, email, country, fName, lName, contact, title, workPosition, workCompany, workExperience, workAddStreet,
-workAddCity, workAddCountry, workEmail, workContact)
-				VALUES('$username','$email','$country','$fname','$lname','$contact','$title','$position','$wName','$exp','$wStreet','$wCity',
-				'$wCountry','$wEmail','$wContact')");
-    //mysqli_query($connection, "INSERT INTO lawyerbadge(bID,username)VALUES('first','$username')");
+    $userAuthenticationStmt->execute();
+    $lawyerStmt->execute();
     mysqli_commit($connection);
     session_start();
     $_SESSION['username'] = $username;

@@ -3,7 +3,6 @@ session_start();
 $username = $_SESSION['username'];
 
 
-
 if (isset($_POST['insert'])) {
     $file = $_FILES['image'];
     $fileName = $_FILES['image']['name'];
@@ -19,7 +18,7 @@ if (isset($_POST['insert'])) {
 
     $profileImage = "SELECT Image FROM userimage WHERE username='" . $username . "'";
     if ($is_query_run = mysqli_query($connection, $profileImage)) {
-        while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
+        while ($row = mysqli_fetch_array($is_query_run, MYSQLI_ASSOC)) {
             $pImage = $row['Image'];
 
         }
@@ -65,4 +64,4 @@ if (isset($_POST['insert'])) {
         echo "<script>alert('You cant upload file of this type')</script>";
     }
 }
-    ?>
+?>

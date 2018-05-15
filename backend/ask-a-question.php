@@ -59,7 +59,7 @@ try {
     mysqli_query($connection, "INSERT INTO question( qTitle,qDescription, qUser, qCategory, qDate,qCountry )
 				VALUES('$title','$description','$username','$category',now(),'$country')");
     mysqli_commit($connection);
-    //echo "<script> alert('your question submitted successfully')</script>";
+    echo "<script> alert('Question submitted successfully')</script>";
     header("location:../userinterface/user/all-questions-user.php");
 
 } catch (Exception $e) {

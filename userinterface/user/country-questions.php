@@ -22,8 +22,7 @@
 
 <body class="white">
 <!-- Page Loading -->
-<?php include '../header-footer/loading.php';
-include '../header-footer/header-user.php'; ?>
+<?php include '../header-footer/header-user.php'; ?>
 
 <!--question-->
 <?php include '../../backend/connection.php';

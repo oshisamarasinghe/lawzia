@@ -1,10 +1,6 @@
 <?php
 include '../../backend/lawyer-info.php';
-include '../../backend/badge-load.php';
-
-
-
-?>
+include '../../backend/badge-load.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,74 +18,72 @@ include '../../backend/badge-load.php';
     <link href="../../css/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="../../js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet"
           media="screen,projection">
-    <link href="../../js/plugins/data-tables/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="../../js/plugins/data-tables/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet"
+          media="screen,projection">
 
 
 </head>
 
 <body class="white">
 <!-- Page Loading -->
-<?php include '../header-footer/loading.php';
+<?php
 include '../header-footer/nav-lawyer.php'; ?>
 
- <div class="row">
+<div class="row">
 
-        <div class="col s12">
+    <div class="col s12">
 
-            <ul class="collapsible collapsible-accordion" data-collapsible="expandable">
-                <li>
-                    <div class="collapsible-header cyan darken-4 white-text active"><i class="mdi-action-stars"></i>
-                        LeaderBoard
-                    </div>
-                    <div class="collapsible-body cyan lighten-5">
-                        <div class="row">
-                            <div class="col s12 ">
-                                <table id="data-table-row-grouping" class="display" cellspacing="0" width="100%">
-                                    <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Points</th>
-                                        <th>Country</th>
-                                        <th>Email Address</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php
-                                    $lawyers_points="SELECT * FROM lawyer ORDER BY points DESC ";
+        <ul class="collapsible collapsible-accordion" data-collapsible="expandable">
+            <li>
+                <div class="collapsible-header cyan darken-4 white-text active"><i class="mdi-action-stars"></i>
+                    LeaderBoard
+                </div>
+                <div class="collapsible-body cyan lighten-5">
+                    <div class="row">
+                        <div class="col s12 ">
+                            <table id="data-table-row-grouping" class="display" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Points</th>
+                                    <th>Country</th>
+                                    <th>Email Address</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                $lawyers_points = "SELECT * FROM lawyer ORDER BY points DESC ";
 
-                                    if($run=mysqli_query($connection,$lawyers_points)){
-                                        while($lawyer=mysqli_fetch_array($run,MYSQLI_ASSOC)){
-                                            $leadFname=$lawyer['fName'];
-                                            $leadLname=$lawyer['lName'];
-                                            $leadCountry=$lawyer['country'];
-                                            $leadPoints=$lawyer['points'];
-                                            $leadEmail=$lawyer['email'];
+                                if ($run = mysqli_query($connection, $lawyers_points)) {
+                                    while ($lawyer = mysqli_fetch_array($run, MYSQLI_ASSOC)) {
+                                        $leadFname = $lawyer['fName'];
+                                        $leadLname = $lawyer['lName'];
+                                        $leadCountry = $lawyer['country'];
+                                        $leadPoints = $lawyer['points'];
+                                        $leadEmail = $lawyer['email'];
 
-                                            echo'
+                                        echo '
                                                 <tr>
-                                                <td>'.$leadFname.'  '.$leadLname.'</td>
-                                                <td>'.$leadPoints.'</td>
-                                                <td><b>'.$leadCountry.'</b></td>
-                                                <td>'.$leadEmail.'</td>
+                                                <td>' . $leadFname . '  ' . $leadLname . '</td>
+                                                <td>' . $leadPoints . '</td>
+                                                <td><b>' . $leadCountry . '</b></td>
+                                                <td>' . $leadEmail . '</td>
                                                 </tr>
                                             ';
 
-                                        }
                                     }
-                                    ?>
-                                    </tbody>
-                                </table>
-                            </div>
+                                }?>
+                                </tbody>
+                            </table>
                         </div>
-
                     </div>
-                </li>
 
-            </ul>
-        </div>
- </div>
+                </div>
+            </li>
 
-
+        </ul>
+    </div>
+</div>
 
 
 <!-- FOOTER -->

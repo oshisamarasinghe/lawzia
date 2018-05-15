@@ -405,9 +405,6 @@
         setTimeout(function () {
             Materialize.toast('<span>SELECT YOUR AREAS OF PRACTISE </span>', 1500);
         }, 2000);
-        setTimeout(function () {
-            Materialize.toast('<span>!</span>', 3000);
-        }, 5000);
 
     });
 </script>

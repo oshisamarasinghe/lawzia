@@ -61,7 +61,7 @@ if ($username == $n_username) {
 
     if ($is_pw_query_run = mysqli_query($connection, $pw_query)) {
 
-        while ($row = mysqli_fetch_array($is_pw_query_run, MYSQL_ASSOC)) {
+        while ($row = mysqli_fetch_array($is_pw_query_run, MYSQLI_ASSOC)) {
             if (md5($old_password) == $row['password']) {
                 if ($old_password == $new_password) {
                     echo "<script>alert('Your new password is already being used')</script>";
@@ -88,8 +88,7 @@ if ($username == $n_username) {
         }
     }
 
-}
-else {
+} else {
     echo "<script>alert('Invalid Username')</script>";
 
 }

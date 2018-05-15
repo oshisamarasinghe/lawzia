@@ -26,10 +26,8 @@
 
 <body class="white">
 
-<!-- Page Loading -->
-<?php include '../header-footer/loading.php';
+<?php
 include '../header-footer/header-user.php'; ?>
-
 
 <!--question-->
 <?php include '../../backend/connection.php';
@@ -42,7 +40,7 @@ $username = $_SESSION['username'];
 $question = "SELECT * FROM question WHERE qID='$questionID'";
 
 if ($is_query_run = mysqli_query($connection, $question)) {
-    while ($qData = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
+    while ($qData = mysqli_fetch_array($is_query_run, MYSQLI_ASSOC)) {
         $description = $qData['qDescription'];
         $date = $qData['qDate'];
         $user = $qData['qUser'];
@@ -54,7 +52,7 @@ if ($is_query_run = mysqli_query($connection, $question)) {
         //relevant user profile image
         $relevant_user_image = "SELECT Image FROM userimage WHERE username='" . $user . "' ";
         if ($is_relevant_user_image_query_run = mysqli_query($connection, $relevant_user_image)) {
-            while ($row = mysqli_fetch_array($is_relevant_user_image_query_run, MYSQL_ASSOC)) {
+            while ($row = mysqli_fetch_array($is_relevant_user_image_query_run, MYSQLI_ASSOC)) {
                 $data = $row['Image'];
 
             }
@@ -119,7 +117,7 @@ $answers = "SELECT * FROM answer NATURAL JOIN qa WHERE  qID='$questionID'";//all
 if ($is_inside_query_run = mysqli_query($connection, $answers)) {
 
 
-    while ($in_row = mysqli_fetch_array($is_inside_query_run, MYSQL_ASSOC)) {
+    while ($in_row = mysqli_fetch_array($is_inside_query_run, MYSQLI_ASSOC)) {
         $aDescription = $in_row['aDescription'];
         $aDate = $in_row['aDate'];
         $aUser = $in_row['aUser'];
@@ -127,7 +125,7 @@ if ($is_inside_query_run = mysqli_query($connection, $answers)) {
 
         $relevant_Lawyer_image = "SELECT Image FROM userimage WHERE username='" . $aUser . "' ";
         if ($is_query_run = mysqli_query($connection, $relevant_Lawyer_image)) {
-            while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
+            while ($row = mysqli_fetch_array($is_query_run, MYSQLI_ASSOC)) {
                 $data = $row['Image'];
 
             }
@@ -195,16 +193,24 @@ if ($is_inside_query_run = mysqli_query($connection, $answers)) {
 
             if (mysqli_num_rows($like_query) == 1) {
 
-                echo ' <i class="mdi-action-thumb-up teal-text" id="liked"></i>';echo getLikes($aId);echo'</span>';
-                echo ' <i class="mdi-action-thumb-down grey-text" id="Dislike" onclick=like_to_unlike("' . $aId . '")></i>';echo getUnLikes($aId);
+                echo ' <i class="mdi-action-thumb-up teal-text" id="liked"></i>';
+                echo getLikes($aId);
+                echo '</span>';
+                echo ' <i class="mdi-action-thumb-down grey-text" id="Dislike" onclick=like_to_unlike("' . $aId . '")></i>';
+                echo getUnLikes($aId);
 
 
             } else if (mysqli_num_rows($unlike_query) == 1) {
-                echo ' <i class="mdi-action-thumb-up grey-text"  id="unDislike" onclick=unlike_to_like("' . $aId . '")></i>';echo getLikes($aId);
-                echo'  <i class="mdi-action-thumb-down teal-text" id="unliked" ></i>';echo getUnLikes($aId);
+                echo ' <i class="mdi-action-thumb-up grey-text"  id="unDislike" onclick=unlike_to_like("' . $aId . '")></i>';
+                echo getLikes($aId);
+                echo '  <i class="mdi-action-thumb-down teal-text" id="unliked" ></i>';
+                echo getUnLikes($aId);
             } else {
-                echo ' <i class="mdi-action-thumb-up grey-text" id="Like" onclick=liked("' . $aId . '")></i><span class="like">';echo getLikes($aId);echo'</span>';
-                echo ' <i class="mdi-action-thumb-down grey-text" id="Unlike" onclick=unLiked("' . $aId . '")></i>';echo getUnLikes($aId);
+                echo ' <i class="mdi-action-thumb-up grey-text" id="Like" onclick=liked("' . $aId . '")></i><span class="like">';
+                echo getLikes($aId);
+                echo '</span>';
+                echo ' <i class="mdi-action-thumb-down grey-text" id="Unlike" onclick=unLiked("' . $aId . '")></i>';
+                echo getUnLikes($aId);
             }
             echo '    </div>
                     </div>';

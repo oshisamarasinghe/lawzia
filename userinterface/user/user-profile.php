@@ -23,34 +23,7 @@ include '../../backend/user-profile.php';
 
 <body class="white">
 <!-- Page Loading -->
-<?php include '../header-footer/loading.php';
-include '../header-footer/header-user.php'; ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Profile Page - User | LAWZIA</title>
-
-    <link rel="icon" href="../../images/lawzia-logo.jpg" sizes="32x32">
-
-    <!-- CORE CSS-->
-    <link rel="stylesheet" href="../../INDEX/assets/css/navmenu/styles.css">
-    <link href="../../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
-    <link href="../../css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
-    <link href="../../css/custom-style.css" type="text/css" rel="stylesheet" media="screen,projection">
-    <link href="../../css/style-horizontal.css" type="text/css" rel="stylesheet" media="screen,projection">
-
-    <link href="../../css/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
-    <link href="../../js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet"
-          media="screen,projection">
-    <link href="../../js/plugins/chartist-js/chartist.min.css" type="text/css" rel="stylesheet"
-          media="screen,projection">
-</head>
-
-<body class="white">
-<!-- Page Loading -->
-<?php include '../header-footer/loading.php';
-include '../header-footer/header-user.php'; ?>
-
+<?php include '../header-footer/header-user.php'; ?>
 
 <div id="profile-page" class="section">
     <div id="profile-page-header" class="card">
@@ -120,15 +93,16 @@ include '../header-footer/header-user.php'; ?>
                                     <div class="row">
                                         <p><i class="mdi-action-lock"></i><b>want to change password ?</b> <br>
                                             <a class="cyan-text" href="../change-password.php">Reset Password</a></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                     </div>
 
                         <div class="row">
                             <div class="col s12 m12 l12">
                                 <div class="card-panel">
-                                    <p><i class="mdi-image-photo-camera"></i><b>Change profile Image</b><p>Select an Image </p>
+                                    <p><i class="mdi-image-photo-camera"></i><b>Change profile Image</b>
+                                    <p>Select an Image </p>
                                     <form action="../../backend/upload.php" enctype="multipart/form-data" method="post">
                                         <div class="file-field input-field">
                                             <input class="file-path validate " type="text"/>
@@ -142,7 +116,8 @@ include '../header-footer/header-user.php'; ?>
                                         <div class="row">
                                             <div class="input-field col s12">
                                                 <!--div id="raised-buttons" class="section"-->
-                                                <button type="submit" class=" btn waves-light waves-effect cyan" name="insert"><i class="mdi-file-file-upload"></i>
+                                                <button type="submit" class=" btn waves-light waves-effect cyan"
+                                                        name="insert"><i class="mdi-file-file-upload"></i>
                                                     Upload
                                                 </button>
                                             </div>
@@ -154,7 +129,8 @@ include '../header-footer/header-user.php'; ?>
                     </div>
                 </li>
                 <li>
-                    <div class="collapsible-header cyan white-text active "><i class="mdi-action-question-answer"></i> Your
+                    <div class="collapsible-header cyan white-text active "><i class="mdi-action-question-answer"></i>
+                        Your
                         Questions (<?= $data['queCount'] ?>)
                     </div>
 
@@ -191,8 +167,6 @@ include '../header-footer/header-user.php'; ?>
         </div>
     </div>
 </div>
-
-
 
 
 <!-- insert footer-->

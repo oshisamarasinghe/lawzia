@@ -15,7 +15,7 @@ if ((isset($_POST["username"])) && (isset($_POST["password"]))) {
     session_start();
     $_SESSION['username'] = $username;
 
-    /** @var TYPE_NAME $query */
+
     $query = "SELECT * FROM userauthentication WHERE username='" . $username . "'";
 
     if ($is_query_run = mysqli_query($connection, $query)) {

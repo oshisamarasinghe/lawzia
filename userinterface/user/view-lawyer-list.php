@@ -30,7 +30,7 @@ $country = $_POST['country'];; ?>
 <body class="white">
 <!-- Page Loading >
 
-<?php include '../header-footer/loading.php';
+<?php
 include '../header-footer/header-user.php';
 include '../../backend/connection.php';
 
@@ -46,7 +46,7 @@ if ($is_query_run = mysqli_query($connection, $lawyer_country)) {
                          <div>
                               <a class="collection-item active cyan">Lawyers-' . $country . '</a>
                          </div>';
-    while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
+    while ($row = mysqli_fetch_array($is_query_run, MYSQLI_ASSOC)) {
         $username = $row['username'];
         $fName = $row['fName'];
         $lName = $row['lName'];
@@ -55,18 +55,18 @@ if ($is_query_run = mysqli_query($connection, $lawyer_country)) {
         //relevant lawyer profile image
         $relevant_Lawyer_image = "SELECT Image FROM userimage WHERE username='" . $username . "' ";
         if ($is_inside_query_run = mysqli_query($connection, $relevant_Lawyer_image)) {
-            while ($inside_row = mysqli_fetch_array($is_inside_query_run, MYSQL_ASSOC)) {
+            while ($inside_row = mysqli_fetch_array($is_inside_query_run, MYSQLI_ASSOC)) {
                 $data = $inside_row['Image'];
 
             }
         }
-        if(empty($data)){
+        if (empty($data)) {
             echo '
                  <li class="collection-item avatar  grey lighten-5">
                             
                          <div class="col s7">
                             <img src="../../images/user-profile-pic.png" alt="" class="circle">
-                            <span class="title cyan-text">' .($fName) . " " . ($lName).'</span>
+                            <span class="title cyan-text">' . ($fName) . " " . ($lName) . '</span>
                             <a href="view-lawyer-profile.php?username=' . $username . '" class="secondary-content cyan-text"><i class="mdi-social-person"></i>view profile</a> 
                             <p >' . $email . ' </p>
                             
@@ -75,14 +75,14 @@ if ($is_query_run = mysqli_query($connection, $lawyer_country)) {
                       </li>
                        
                  ';
-        }else{
+        } else {
             echo '
                  <li class="collection-item avatar  grey lighten-5">
                             
                          <div class="col s7">
                            <img src="data:image/jpeg;base64,' . base64_encode($data) . '" height="130" width="130" alt="profile image" class="circle z-depth-2 "
                  id="profileImage">
-                            <span class="title cyan-text">' .($fName) . " " . ($lName).'</span>
+                            <span class="title cyan-text">' . ($fName) . " " . ($lName) . '</span>
                             <a href="view-lawyer-profile.php?username=' . $username . '" class="secondary-content cyan-text"><i class="mdi-social-person"></i>view profile</a> 
                             <p >' . $email . ' </p>
                             

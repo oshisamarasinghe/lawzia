@@ -20,16 +20,15 @@
 
 <body class="white">
 <!-- Page Loading -->
-<?php include '../header-footer/loading.php';
-include '../header-footer/header-user.php'; ?>
+<?php include '../header-footer/header-user.php'; ?>
 <?php include '../../backend/connection.php';
 
-$country= $_GET['country'];
+$country = $_GET['country'];
 
 //$lawyer_country = "SELECT * FROM lawyer WHERE country='$country'";
 
 $results_per_page = 1;
-$lawyer_country= "SELECT * FROM lawyer WHERE country='$country'";
+$lawyer_country = "SELECT * FROM lawyer WHERE country='$country'";
 $result = mysqli_query($connection, $lawyer_country);
 $no_of_results = mysqli_num_rows($result);
 $no_of_pages = ceil($no_of_results / $results_per_page);
@@ -42,7 +41,7 @@ if (!isset($_GET['page'])) {
 
 $this_page_first_result = ($page_no - 1) * $results_per_page;
 
-$results_in_this_page="SELECT * FROM lawyer WHERE country='$country' DESC LIMIT ".$this_page_first_result.','.$results_per_page;
+$results_in_this_page = "SELECT * FROM lawyer WHERE country='$country' DESC LIMIT " . $this_page_first_result . ',' . $results_per_page;
 
 echo '
         <div class="col s12 offset-m10">
@@ -51,7 +50,7 @@ echo '
     ';
 
 if ($is_query_run = mysqli_query($connection, $lawyer_country)) {
-    while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
+    while ($row = mysqli_fetch_array($is_query_run, MYSQLI_ASSOC)) {
         $username = $row['username'];
         $fName = $row['fName'];
         $lName = $row['lName'];
@@ -76,15 +75,13 @@ if ($is_query_run = mysqli_query($connection, $lawyer_country)) {
         }
 
         //lawyers practise areas
-        $practise_areas_query="SELECT area FROM lawyerpractisearea WHERE username='".$username."'";
-        if($area_list_query_run=mysqli_query($connection,$practise_areas_query)){
-            while($areas_row=mysqli_fetch_array($area_list_query_run,MYSQLI_ASSOC)){
-                $areas_list=$areas_row['area'];
+        $practise_areas_query = "SELECT area FROM lawyerpractisearea WHERE username='" . $username . "'";
+        if ($area_list_query_run = mysqli_query($connection, $practise_areas_query)) {
+            while ($areas_row = mysqli_fetch_array($area_list_query_run, MYSQLI_ASSOC)) {
+                $areas_list = $areas_row['area'];
             }
 
         }
-
-
 
 
         echo '
@@ -108,28 +105,24 @@ if ($is_query_run = mysqli_query($connection, $lawyer_country)) {
         echo '
                   </div>
                 <h5 class="regular" >' . $fName . '  ' . $lName . '</h5>
-                <h6 class="cyan-text" >'.$position.' | ' . $country . ' | ' . $email . '</h6>
+                <h6 class="cyan-text" >' . $position . ' | ' . $country . ' | ' . $email . '</h6>
                 <p class="collections-title"> ';
 
-                 foreach (explode(',',$areas_list) as $area ){
-                    echo $area .' | ';
-                }
-        echo'
+        foreach (explode(',', $areas_list) as $area) {
+            echo $area . ' | ';
+        }
+        echo '
                 </p>
                 <h6>' . $company . '<br>
                 <br>
                 ' . $street . ',<br>
                 ' . $city . ',<br>
                 ' . $wCountry . '<br></h6>
-                <h6 class="indigo-text darken-3" > '.$wEmail.' | '.$wContact.' </h6>
+                <h6 class="indigo-text darken-3" > ' . $wEmail . ' | ' . $wContact . ' </h6>
         
                     </div>
                  </div>';
-        }
-
-
-
-
+    }
 
 
 }
@@ -139,16 +132,15 @@ echo '
     <li class="disabled"><i class="mdi-navigation-chevron-left"></i></li>';
 for ($page = 1; $page <= $no_of_pages; $page++) {
     if ($page == $page_no)
-        echo '<li><a class="active waves-effect cyan" href="lawyers_list.php?page=' . $page . '&country='.urlencode($country).'">' . $page . '</a></li>';
+        echo '<li><a class="active waves-effect cyan" href="lawyers_list.php?page=' . $page . '&country=' . urlencode($country) . '">' . $page . '</a></li>';
     else
-        echo '<li><a class="waves-effect " href="lawyers_list.php?page=' . $page . '&country='.urlencode($country).'">' . $page . '</a></li>';
+        echo '<li><a class="waves-effect " href="lawyers_list.php?page=' . $page . '&country=' . urlencode($country) . '">' . $page . '</a></li>';
 
 }
 echo '
     <li class="disabled"><i class="mdi-navigation-chevron-right"></i></li>
    </ul>';
 ?>
-
 
 
 <!-- jQuery Library -->

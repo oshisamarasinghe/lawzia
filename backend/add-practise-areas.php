@@ -26,15 +26,15 @@ $errors = "";
 
 $areas = implode(',', $_POST['area_list']);
 
-try{
-    mysqli_autocommit($connection,FALSE);
-    mysqli_query($connection,"INSERT INTO lawyerpractisearea(username,area)VALUES('$username','$areas')");
+try {
+    mysqli_autocommit($connection, FALSE);
+    mysqli_query($connection, "INSERT INTO lawyerpractisearea(username,area)VALUES('$username','$areas')");
     mysqli_commit($connection);
     session_start();
     $_SESSION['username'] = $username;
     header("location: ../userinterface/lawyer/lawyer-profile.php");
 
 
-}catch (Exception $e){
+} catch (Exception $e) {
     $connection->rollback();
 }

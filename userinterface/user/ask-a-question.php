@@ -22,8 +22,7 @@
 
 <body class="white">
 <!-- Page Loading -->
-<?php include '../header-footer/loading.php';
-include '../header-footer/header-user.php'; ?>
+<?php include '../header-footer/header-user.php'; ?>
 
 <!--Ask-a-Question form-->
 <div class="row">
@@ -444,10 +443,11 @@ include '../header-footer/header-user.php'; ?>
                             </div>
                         </div>
                         <div class="row">
-                        <div class="input-field col s12">
-                            <textarea id="title"   class="materialize-textarea" placeholder="give a specific title" name="title" maxlength="500"></textarea>
-                            <label for="title" class="active">Question Title</label>
-                        </div>
+                            <div class="input-field col s12">
+                                <textarea id="title" class="materialize-textarea" placeholder="give a specific title"
+                                          name="title" maxlength="500"></textarea>
+                                <label for="title" class="active">Question Title</label>
+                            </div>
                         </div>
 
                         <div class="row">
@@ -457,14 +457,14 @@ include '../header-footer/header-user.php'; ?>
                                 <label for="message">Type Your Question Here</label>
                             </div>
                         </div>
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <button class="btn cyan waves-effect waves-light right" type="submit" name="action">
-                                        Submit Your Question
-                                        <i class="mdi-content-send right"></i>
-                                    </button>
-                                </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <button class="btn cyan waves-effect waves-light right" type="submit" name="action">
+                                    Submit Your Question
+                                    <i class="mdi-content-send right"></i>
+                                </button>
                             </div>
+                        </div>
 
                 </form>
             </div>

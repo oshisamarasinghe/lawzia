@@ -21,7 +21,7 @@
 
 <body class="white">
 <!-- Page Loading -->
-<?php include '../header-footer/loading.php';
+<?php
 include '../header-footer/nav-lawyer.php'; ?>
 
 
@@ -34,7 +34,7 @@ include '../header-footer/nav-lawyer.php'; ?>
         <?php
         $profileImage = "SELECT Image FROM userimage WHERE username='" . $username . "'";
         if ($is_query_run = mysqli_query($connection, $profileImage)) {
-            while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
+            while ($row = mysqli_fetch_array($is_query_run, MYSQLI_ASSOC)) {
                 $pImage = $row['Image'];
 
             }
@@ -85,7 +85,6 @@ include '../header-footer/nav-lawyer.php'; ?>
                             class="mdi-action-perm-identity cyan-text text-darken-2"></i><?= strtoupper($fName) . " " . strtoupper($lName) ?></span>
 
             </p>
-            <p><i class="mdi-action-perm-phone-msg cyan-text text-darken-2"></i> <?= $contact ?></p>
             <p><i class="mdi-communication-email cyan-text text-darken-2"></i> <?= $email ?></p>
             <p><i class="mdi-device-airplanemode-on cyan-text text-darken-2"></i><?= $country ?></p>
         </div>
@@ -118,25 +117,25 @@ include '../header-footer/nav-lawyer.php'; ?>
                     </div>
                     <div class="collapsible-body cyan lighten-5">
 
-                                    <p>
-                                        <?php
-                                        $answer_list = "SELECT * FROM answer where aUser='" . $username . "'";
-                                        $count = 0;
-                                        if ($is_query_run = mysqli_query($connection, $answer_list)) {
+                        <p>
+                            <?php
+                            $answer_list = "SELECT * FROM answer where aUser='" . $username . "'";
+                            $count = 0;
+                            if ($is_query_run = mysqli_query($connection, $answer_list)) {
 
-                                            while ($row = mysqli_fetch_array($is_query_run, MYSQLI_ASSOC)) {
-                                                $aId = $row['aID'];
-                                                $aDate = $row['aDate'];
+                                while ($row = mysqli_fetch_array($is_query_run, MYSQLI_ASSOC)) {
+                                    $aId = $row['aID'];
+                                    $aDate = $row['aDate'];
 
-                                                $qa = "SELECT * FROM qa NATURAL JOIN question WHERE aID='" . $aId . "'";
-                                                if ($qa_query_run = mysqli_query($connection, $qa)) {
+                                    $qa = "SELECT * FROM qa NATURAL JOIN question WHERE aID='" . $aId . "'";
+                                    if ($qa_query_run = mysqli_query($connection, $qa)) {
 
-                                                    while ($in_row = mysqli_fetch_array($qa_query_run, MYSQLI_ASSOC)) {
-                                                        $title = $in_row['qTitle'];
-                                                        $qNo = $in_row['qID'];
+                                        while ($in_row = mysqli_fetch_array($qa_query_run, MYSQLI_ASSOC)) {
+                                            $title = $in_row['qTitle'];
+                                            $qNo = $in_row['qID'];
 
-                                                        $count++;
-                                                        echo '
+                                            $count++;
+                                            echo '
                                                         <div class="row">
                                                             <div class="col s12 m12 l12">
                                                                 <div class="card-panel">
@@ -146,13 +145,13 @@ include '../header-footer/nav-lawyer.php'; ?>
                                                      </div>
                                                 </div>
                                             </div>';
-                                                    }
-                                                }
-                                            }
                                         }
-                                        ?>
-                                    </div>
-                        </li>
+                                    }
+                                }
+                            }
+                            ?>
+                    </div>
+                </li>
             </ul>
 
         </div>

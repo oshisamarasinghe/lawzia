@@ -25,7 +25,7 @@
 </head>
 
 <body background="../images/background-img.jpg">
-<!-- Start Page Loading -->
+<!-- Start Page Loading>
 <div id="loader-wrapper">
     <div id="loader"></div>
     <div class="loader-section section-left"></div>

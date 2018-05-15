@@ -51,14 +51,13 @@ try {
 try {
     $answer_id = "SELECT aID FROM answer ORDER BY aID DESC LIMIT 1";
     if ($is_query_run = mysqli_query($connection, $answer_id)) {
-        while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
+        while ($row = mysqli_fetch_array($is_query_run, MYSQLI_ASSOC)) {
             $answerId = $row['aID'];
 
         }
     }
     mysqli_autocommit($connection, false);
     mysqli_query($connection, "INSERT INTO qa(qID,aID)VALUES('$qId','$answerId')");
-    mysqli_query($connection, "INSERT INTO answervote(aID,voteUpCount,voteDownCount)VALUES('$answerId',0,0)");
     mysqli_commit($connection);
     echo '<script>alert("your answer submitted successfully")</script>';
     echo "<script> window.history.go(-2);</script>";

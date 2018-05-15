@@ -22,7 +22,7 @@
 
 <body class="white">
 <!-- Page Loading -->
-<?php include '../header-footer/loading.php';
+<?php
 include '../header-footer/header-user.php'; ?>
 
 
@@ -77,16 +77,18 @@ if ($is_query_run = mysqli_query($connection, $results_in_this_page)) {
         $result = mysqli_fetch_array(mysqli_query($connection, $relevant_answers));
         $rep = $result['ansCount'];
 
-            echo '<div class="row">
+        echo '<div class="row">
                         <div class="col s8 m12 l12 " >
                             <ul class="collection grey lighten-2">
                                 <li class="collection-item avatar grey lighten-2">
                                     <div class="col s7">';
-        if (empty($data)) { echo ' <img src="../../images/user-profile-pic.png" alt="" class="circle">';
-        }else{
-                echo'<img src="data:image/jpeg;base64,' . base64_encode($data) . '" height="130" width="130" alt="profile image" class="circle z-depth-2 "
-                         id="profileImage"/>';}
-                         echo'      <span class="title black-text">' . $user . '</span>
+        if (empty($data)) {
+            echo ' <img src="../../images/user-profile-pic.png" alt="" class="circle">';
+        } else {
+            echo '<img src="data:image/jpeg;base64,' . base64_encode($data) . '" height="130" width="130" alt="profile image" class="circle z-depth-2 "
+                         id="profileImage"/>';
+        }
+        echo '      <span class="title black-text">' . $user . '</span>
                                         <p class=" ultra-small">' . $country . '</p>
                                         <p class="ultra-small"> ' . $date . ' </p>
                                     </div>
@@ -97,14 +99,17 @@ if ($is_query_run = mysqli_query($connection, $results_in_this_page)) {
                                 <p class="cyan-text ">Question : ' . $title . '</p>
                                 <p>' . $description . '</p>';
 
-        if($rep==0){echo'<p class="secondary-content red-text">'.$rep.' answers</p>';
-        }else{echo'<p><a href="view-answers.php?question_id=' . $qId . '" class="secondary-content red-text">'.$rep.' answers</a> </p>
-                         ';}
-                            echo'
+        if ($rep == 0) {
+            echo '<p class="secondary-content red-text">' . $rep . ' answers</p>';
+        } else {
+            echo '<p><a href="view-answers.php?question_id=' . $qId . '" class="secondary-content red-text">' . $rep . ' answers</a> </p>
+                         ';
+        }
+        echo '
                                 </div>
                             </div>
                            ';
-        }
+    }
 
 
 }

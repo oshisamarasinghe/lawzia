@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,14 +15,15 @@
     <link href="../../css/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="../../js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet"
           media="screen,projection">
-    <link href="../../js/plugins/data-tables/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="../../js/plugins/data-tables/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet"
+          media="screen,projection">
 
 
 </head>
 
 <body class="white">
 <!-- Page Loading -->
-<?php include '../header-footer/loading.php';
+<?php
 include '../header-footer/header-user.php'; ?>
 
 <div class="row">
@@ -49,22 +49,22 @@ include '../header-footer/header-user.php'; ?>
                                 </thead>
                                 <tbody>
                                 <?php include '../../backend/connection.php';
-                                $lawyers_points="SELECT * FROM lawyer ORDER BY points DESC ";
+                                $lawyers_points = "SELECT * FROM lawyer ORDER BY points DESC ";
 
-                                if($run=mysqli_query($connection,$lawyers_points)){
-                                    while($lawyer=mysqli_fetch_array($run,MYSQLI_ASSOC)){
-                                        $leadFname=$lawyer['fName'];
-                                        $leadLname=$lawyer['lName'];
-                                        $leadCountry=$lawyer['country'];
-                                        $leadPoints=$lawyer['points'];
-                                        $leadEmail=$lawyer['email'];
+                                if ($run = mysqli_query($connection, $lawyers_points)) {
+                                    while ($lawyer = mysqli_fetch_array($run, MYSQLI_ASSOC)) {
+                                        $leadFname = $lawyer['fName'];
+                                        $leadLname = $lawyer['lName'];
+                                        $leadCountry = $lawyer['country'];
+                                        $leadPoints = $lawyer['points'];
+                                        $leadEmail = $lawyer['email'];
 
-                                        echo'
+                                        echo '
                                                 <tr>
-                                                <td>'.$leadFname.'  '.$leadLname.'</td>
-                                                <td>'.$leadPoints.'</td>
-                                                <td><b>'.$leadCountry.'</b></td>
-                                                <td>'.$leadEmail.'</td>
+                                                <td>' . $leadFname . '  ' . $leadLname . '</td>
+                                                <td>' . $leadPoints . '</td>
+                                                <td><b>' . $leadCountry . '</b></td>
+                                                <td>' . $leadEmail . '</td>
                                                 </tr>
                                             ';
 
@@ -82,8 +82,6 @@ include '../header-footer/header-user.php'; ?>
         </ul>
     </div>
 </div>
-
-
 
 
 <!-- FOOTER -->

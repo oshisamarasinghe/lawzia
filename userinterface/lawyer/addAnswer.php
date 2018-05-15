@@ -1,6 +1,4 @@
-<?php
-session_start();
-?>
+<?php session_start(); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +28,7 @@ session_start();
 <body class="white">
 
 <!-- Page Loading -->
-<?php include '../header-footer/loading.php';
+<?php
 include '../header-footer/nav-lawyer.php';
 ?>
 
@@ -42,7 +40,7 @@ $questions = "SELECT * FROM question WHERE qID='$qId'";
 
 if ($is_query_run = mysqli_query($connection, $questions)) {
 
-    while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
+    while ($row = mysqli_fetch_array($is_query_run, MYSQLI_ASSOC)) {
         $description = $row['qDescription'];
         $date = $row['qDate'];
         $user = $row['qUser'];
@@ -54,7 +52,7 @@ if ($is_query_run = mysqli_query($connection, $questions)) {
         //relevant user profile image
         $relevant_Lawyer_image = "SELECT Image FROM userimage WHERE username='" . $user . "' ";
         if ($is_query_run = mysqli_query($connection, $relevant_Lawyer_image)) {
-            while ($row = mysqli_fetch_array($is_query_run, MYSQL_ASSOC)) {
+            while ($row = mysqli_fetch_array($is_query_run, MYSQLI_ASSOC)) {
                 $data = $row['Image'];
 
             }
@@ -78,9 +76,9 @@ if ($is_query_run = mysqli_query($connection, $questions)) {
                             </div>
                                 
                                 <div class="model-email-content grey lighten-3">
-                                <h5 class=" teal-text darken-3">Question : ' . $title . '</h5>
-                               
-                                <p> ' . $description . '</p>
+                                    <h5 class=" teal-text darken-3">Question : ' . $title . '</h5>
+                                   
+                                    <p> ' . $description . '</p>
                                 </div>
                          
                </div>';

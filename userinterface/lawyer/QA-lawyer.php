@@ -25,7 +25,7 @@
 <body class="white">
 
 <!-- Page Loading -->
-<?php include '../header-footer/loading.php';
+<?php
 include '../header-footer/nav-lawyer.php'; ?>
 
 
@@ -143,10 +143,10 @@ if ($is_inside_query_run = mysqli_query($connection, $answers)) {
                  id="profileImage">
                         <span class="title black-text">' . $aUser . ' 
                          </span>';
-         }
+        }
 
 
-              echo'
+        echo '
            
                                 
                          <p class=" ultra-small">Answered on ' . $aDate . ' </p>
@@ -167,9 +167,9 @@ if ($is_inside_query_run = mysqli_query($connection, $answers)) {
                         </div>
                   </div>';
 
-        }
     }
-    echo '  <div class="col s12 grey lighten-1 " >
+}
+echo '  <div class="col s12 grey lighten-1 " >
                         <div class="card-panel  z-depth-2 ">
                             <form  action="../../backend/addAnswer.php" method="post" >
                             
@@ -190,8 +190,6 @@ if ($is_inside_query_run = mysqli_query($connection, $answers)) {
                  </div>
             </div>
         ';
-
-
 
 
 ?>

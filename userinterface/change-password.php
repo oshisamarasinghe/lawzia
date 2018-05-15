@@ -24,15 +24,6 @@
 </head>
 
 <body background="../images/background-img.jpg">
-<!-- Start Page Loading -->
-<div id="loader-wrapper">
-    <div id="loader"></div>
-    <div class="loader-section section-left"></div>
-    <div class="loader-section section-right"></div>
-</div>
-<!-- End Page Loading -->
-
-
 
 <div id="login-page" class="row">
     <div class="col s12 z-depth-4 card-panel">

@@ -103,7 +103,7 @@
 <script type="text/javascript" src="../js/plugins.js"></script>
 
 <!-- Toast Notification -->
-<!--script type="text/javascript">
+<script type="text/javascript">
     // Toast Notification
     $(window).load(function() {
         setTimeout(function() {
@@ -114,7 +114,7 @@
         }, 5000);
 
     });
-    </script-->
+    </script>
 
 </body>
 </html>

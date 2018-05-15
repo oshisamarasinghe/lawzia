@@ -21,8 +21,7 @@
 <body class="white">
 
 <!-- Page Loading -->
-<?php include '../header-footer/loading.php';
-include '../header-footer/header-user.php'; ?>
+<?php include '../header-footer/header-user.php'; ?>
 
 <!--Search a lawyer form-->
 <div class="row">
@@ -384,22 +383,21 @@ include '../header-footer/header-user.php'; ?>
 </div>
 
 
+<!-- insert footer-->
+<!--?php include '../header-footer/footer.php';
+?>
 
-    <!-- insert footer-->
-    <!--?php include '../header-footer/footer.php';
-    ?>
+<!-- jQuery Library -->
+<script type="text/javascript" src="../../js/jquery-1.11.2.min.js"></script>
+<!--materialize js-->
+<script type="text/javascript" src="../../js/materialize.js"></script>
+<!--prism-->
+<script type="text/javascript" src="../../js/prism.js"></script>
+<!--scrollbar-->
+<script type="text/javascript" src="../../js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
-    <!-- jQuery Library -->
-    <script type="text/javascript" src="../../js/jquery-1.11.2.min.js"></script>
-    <!--materialize js-->
-    <script type="text/javascript" src="../../js/materialize.js"></script>
-    <!--prism-->
-    <script type="text/javascript" src="../../js/prism.js"></script>
-    <!--scrollbar-->
-    <script type="text/javascript" src="../../js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-
-    <!--plugins.js - Some Specific JS codes for Plugin Settings-->
-    <script type="text/javascript" src="../../js/plugins.js"></script>
+<!--plugins.js - Some Specific JS codes for Plugin Settings-->
+<script type="text/javascript" src="../../js/plugins.js"></script>
 
 
 </body>

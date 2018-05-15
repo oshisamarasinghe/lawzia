@@ -26,7 +26,7 @@ include '../../backend/point-count.php';
 
 <body class="white">
 <!-- Page Loading -->
-<?php include '../header-footer/loading.php';
+<?php
 include '../header-footer/nav-lawyer.php'; ?>
 
 <div class="row">
@@ -66,7 +66,7 @@ include '../header-footer/nav-lawyer.php'; ?>
                     </div>
                 </div>
                 <div class="collapsible-header teal darken-3 white-text active"><i class="mdi-action-stars"></i>My
-                    Achievements  ( points : <?=$points?> )
+                    Achievements ( points : <?= $points ?> )
 
                 </div>
 

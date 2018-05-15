@@ -11,16 +11,15 @@ if ($is_lawyer_details_query_run = mysqli_query($connection, $lawyer_details)) {
         $lName = $row['lName'];
         $country = $row['country'];
         $email = $row['email'];
-        $contact = $row['contact'];
         $position = $row['workPosition'];
         $company = $row['workCompany'];
         $experience = $row['workExperience'];
         $wEmail = $row['workEmail'];
         $wContact = $row['workContact'];
         $street = $row['workAddStreet'];
-        $city=$row['workAddCity'];
-        $wCountry=$row['WorkAddCountry'];
-        $points=$row['points'];
+        $city = $row['workAddCity'];
+        $wCountry = $row['WorkAddCountry'];
+        $points = $row['points'];
 
     }
 }

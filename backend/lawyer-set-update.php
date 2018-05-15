@@ -1,4 +1,4 @@
-  <?php include 'connection.php';
+<?php include 'connection.php';
 session_start();
 $username = $_SESSION['username'];
 
@@ -56,13 +56,7 @@ if (empty(test_input($_POST['lname']))) {
     $lname = test_input($_POST['lname']);
 }
 
-if (empty(test_input($_POST['contact']))) {
-    $errors = "error-complete all fields";
-    echo "<script> alert('error-complete all fields')</script>";
-    //echo "<script> window.history.go(-1);</script>";
-} else {
-    $contact = test_input($_POST['contact']);
-}
+
 
 if (test_input(empty($_POST['country']))) {
     $errors = "error-complete all fields";
@@ -89,7 +83,7 @@ if (empty(test_input($_POST['email']))) {
 if (empty(test_input($_POST['w_email']))) {
     $errors = "error-complete all fields";
     echo "<script> alert('error-complete all fields')</script>";
-   // echo "<script> window.history.go(-1);</script>";
+    // echo "<script> window.history.go(-1);</script>";
 } else {
     $checkWEmail = test_input($_POST['w_email']);
     if (!filter_var($checkWEmail, FILTER_VALIDATE_EMAIL)) {
@@ -107,37 +101,37 @@ if (empty(test_input($_POST['w_position']))) {
     $wPosition = test_input($_POST['w_position']);
 }
 
-  if (empty(test_input($_POST['exp']))) {
-      $errors = "error-complete all fields";
-      echo "<script> alert('error-complete experience')</script>";
-      echo "<script> window.history.go(-1);</script>";
-  } else {
-      $experience = test_input($_POST['exp']);
-  }
+if (empty(test_input($_POST['exp']))) {
+    $errors = "error-complete all fields";
+    echo "<script> alert('error-complete experience')</script>";
+    echo "<script> window.history.go(-1);</script>";
+} else {
+    $experience = test_input($_POST['exp']);
+}
 
-  if (empty(test_input($_POST['w_street']))) {
-      $errors = "error-complete all fields";
-      echo "<script> alert('error-complete work street')</script>";
-     // echo "<script> window.history.go(-1);</script>";
-  } else {
-      $wStreet = test_input($_POST['w_street']);
-  }
+if (empty(test_input($_POST['w_street']))) {
+    $errors = "error-complete all fields";
+    echo "<script> alert('error-complete work street')</script>";
+    // echo "<script> window.history.go(-1);</script>";
+} else {
+    $wStreet = test_input($_POST['w_street']);
+}
 
-  if (empty(test_input($_POST['w_city']))) {
-      $errors = "error-complete all fields";
-      echo "<script> alert('error-complete work city')</script>";
-      //echo "<script> window.history.go(-1);</script>";
-  } else {
-      $wCity = test_input($_POST['w_city']);
-  }
+if (empty(test_input($_POST['w_city']))) {
+    $errors = "error-complete all fields";
+    echo "<script> alert('error-complete work city')</script>";
+    //echo "<script> window.history.go(-1);</script>";
+} else {
+    $wCity = test_input($_POST['w_city']);
+}
 
-  if (empty(test_input($_POST['w_country']))) {
-      $errors = "error-complete all fields";
-      echo "<script> alert('error-complete work country')</script>";
-      //echo "<script> window.history.go(-1);</script>";
-  } else {
-      $wCountry = test_input($_POST['w_country']);
-  }
+if (empty(test_input($_POST['w_country']))) {
+    $errors = "error-complete all fields";
+    echo "<script> alert('error-complete work country')</script>";
+    //echo "<script> window.history.go(-1);</script>";
+} else {
+    $wCountry = test_input($_POST['w_country']);
+}
 if (empty(test_input($_POST['w_name']))) {
     $errors = "error-complete all fields";
     echo "<script> alert('error-complete company name')</script>";
@@ -153,28 +147,24 @@ if (empty(test_input($_POST['w_tel']))) {
 } else {
     $wContact = test_input($_POST['w_tel']);
 }
-echo $experience,$wCountry,$wStreet;
+//echo $experience, $wCountry, $wStreet;
 
-    //$areas = implode(',', $_POST['area_list']);
-
-
-
+//$areas = implode(',', $_POST['area_list']);
 
 
 //Execute the query
 
-try{
+try {
 
-    mysqli_autocommit($connection,FALSE);
+    mysqli_autocommit($connection, FALSE);
     mysqli_query($connection, "UPDATE lawyer SET email='$email',fName='$fname',lName='$lname',country='$country',
-  contact='$contact',title='$title' ,workPosition='$wPosition' ,workCompany='$wName', workExperience='$experience',
+  title='$title' ,workPosition='$wPosition' ,workCompany='$wName', workExperience='$experience',
   workEmail='$wEmail',workContact='$wContact',workAddStreet='$wStreet',workAddCity='$wCity',workAddCountry='$wCountry' 
   WHERE username='" . $username . "'");
     mysqli_commit($connection);
     header("location: ../userinterface/lawyer/lawyer-profile-update.php");
 
 
-
-}catch (Exception $e){
+} catch (Exception $e) {
     $connection->rollback();
 }
